@@ -1,0 +1,121 @@
+﻿@model CWC_CMS.Models.VigilanceComplaintModel
+
+
+@using (Html.BeginForm("ViewAComplaint", "VigilanceApplicationForm", FormMethod.Get, new { @class = "form-horizontal", id = "basicForm", enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        @Html.ValidationSummary(true)
+        <!-- panel -->
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <table style="width:100%; background-color:transparent">
+                    <tr>
+                        <td>
+                            @if (Model != null)
+                            {
+                            <h4 class="panel-title">FCI Complaint Portal</h4>
+                            }
+                            else
+                            {
+                        <h4 class="panel-title">FCI Complaint Portal</h4>
+
+                            }
+                        </td>
+
+                        <td style="text-align:right">
+                            @Html.ActionLink("Back  ", "index", "VigilanceApplicationForm", new
+                   { @*OmID = "0"*@ }, new { @class = "btn btn-default btn-quirk" })
+                        </td>
+                    </tr>
+                </table>
+
+            </div>
+
+            <div class="panel-body">
+                <h4 class="panel-title" style="text-align:center">FCI Complaint Portal</h4>
+                <div style="border: dotted 1px">
+                    <br />
+
+
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">Date<span class="text-danger">*</span></label>
+                        <div class="col-sm-6">
+
+                            @Html.TextBoxFor(model => model.DateOfComplaint, new { @class = "form-control datepicker", placeholder = "Please Enter Date Of Complaint" })
+                            <span class="col-sm-3 control-label" style="color:red;margin-right:-10px"> </span>
+                            @Html.ValidationMessageFor(model => model.DateOfComplaint, "", new { @class = "text-danger" })
+
+                        </div>
+                    </div>
+                    @*<div class="form-group">
+                        <label class="col-sm-3 control-label">Complaint Against Name <span class="text-danger">*</span></label>
+                        <div class="col-sm-6">
+                            @Html.TextBoxFor(model => model.ComplaintAgainstName, new { @class = "form-control", placeholder = "" })
+
+                            <span class="col-sm-3 control-label" style="color:red;margin-right:-10px"> </span>
+                            @Html.ValidationMessageFor(model => model.ComplaintAgainstName, "", new { @class = "text-danger" })
+
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">Designation <span class="text-danger">*</span></label>
+                        <div class="col-sm-6">
+                            @Html.TextBoxFor(model => model.DesignationOfAccused, new { @class = "form-control", placeholder = "" })
+
+                            <span class="col-sm-3 control-label" style="color:red;margin-right:-10px"> </span>
+                            @Html.ValidationMessageFor(model => model.DesignationOfAccused, "", new { @class = "text-danger" })
+
+                        </div>
+                    </div>*@
+
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">Organisation<span class="text-danger">*</span></label>
+                        <div class="col-sm-6">
+                            @Html.TextBoxFor(model => model.Organisation, new { @class = "form-control", @id = "Organisation", placeholder = "", readOnly = true })
+                            @Html.ValidationMessageFor(model => model.Organisation, "", new { @class = "text-danger" })
+
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">Details<span class="text-danger">(Max 3000 Characters)*</span></label>
+                        <div class="col-sm-6">
+                            @Html.TextAreaFor(model => model.DetailsOfAllegation, new { @class = "form-control", placeholder = "" })
+
+                            @Html.ValidationMessageFor(model => model.DetailsOfAllegation, "", new { @class = "text-danger" })
+
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">Uploaded Document</label>
+                        <div class="col-sm-6">
+                            @Html.ActionLink("View Document", "pdf_View", "CWCCppTender", new { FilePath = Model.DocumentAccompanyingAllegationPath }, new { @class = "btnDocument ", target = "_blank", style = "width:100px;" })
+                        </div>
+                    </div>
+
+
+
+                    
+
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+
+}
+
+
+
+<script>
+
+    $(function () {
+        $('#Organisation').val('CENTRAL WAREHOUSING CORPN. LTD.')
+        $('.btnDocument').addClass('btn')
+        $('.btnDocument').addClass('btn-default')
+    })
+</script>

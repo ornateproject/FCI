@@ -1,0 +1,91 @@
+﻿<table class="table table-striped table-primary hover" id="datatablelist" style="width:100%">
+    <thead>
+        <tr>
+            <td class="subHeading bg-primary" width="10%" align="center">
+                Sr. No
+            </td>
+            <td class="subHeading bg-primary" width="90%" align="center">Category</td>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>1.</td>
+            <td><span><a href="#" id="FCI" class="CurriculumLinkClass">Food Grains/FCI </a></span></td>
+        </tr>
+        <tr>
+            <td>2.</td>
+            <td><span><a href="#" id="GeneralWarehousing" class="CurriculumLinkClass">General Warehousing </a></span></td>
+        </tr>
+        <tr>
+            <td>3.</td>
+            <td><span><a href="#" id="DedicatedWarehousing" class="CurriculumLinkClass">Dedicated Warehousing </a></span></td>
+        </tr>
+        <tr>
+            <td>4.</td>
+            <td><span><a href="#" id="CustomBonded" class="CurriculumLinkClass">Custom Bonded</a></span></td>
+        </tr>
+        <tr>
+            <td>5.</td>
+            <td><span><a href="#" id="Transport" class="CurriculumLinkClass">Handling & Transport </a></span></td>
+        </tr>
+        <tr>
+            <td>6.</td>
+            <td><span><a href="#" id="Rebates" class="CurriculumLinkClass">Rebates/Tariff/Revisions </a></span></td>
+        </tr>
+        <tr>
+            <td>7.</td>
+            <td><span><a href="#" id="Miscellaneous" class="CurriculumLinkClass">Miscellaneous </a></span></td>
+        </tr>
+        <tr>
+            <td>8.</td>
+            <td><span><a href="#" id="ISODocs" class="CurriculumLinkClass">FORMATS :  Agreements/ISO Docs / Registers </a></span></td>
+        </tr>
+    </tbody>
+</table>
+
+<script src="~/CssJs/dtjs.js"></script>
+<!--<script type="text/javascript">
+
+    $('.CurriculumLinkClass').on('click', function () {
+        var URL = '@Url.Action("CurriculumPartialViewLoad", "CWCCuricullum")'
+        $('#Curriculum').empty();
+        $('#Curriculum').load(URL, { CurriculumID: $(this).attr('id') })
+    });
+
+    </script>
+-->
+<script>
+   
+    var url = '@Url.Action("ViewDocument", "CWCCuricullum")'
+    var IsEmployee = '@ViewBag.IsEmployee';
+    $("td").find("a").each(function () {
+        @*@{
+
+                    var @EncodedURL = CWC_CMS.Models.CommonDAL.EncodeString($(this).attr("href"));
+                }*@
+        $(this).attr("href", window.btoa($(this).attr("href")))
+
+
+        $(this).on('click', function (event) {
+            if (IsEmployee == "Yes") {
+                event.preventDefault();
+                $('#DocumentDiv').load(url, { EncryptedString: $(this).attr("href")})
+                //window.location.href = "/CWCCuricullum/ViewDocument?EncryptedString=" + $(this).attr("href")
+                        return true;
+                    }
+                    else {
+                        alert('You are not authenticated to View this document');
+                        return false;
+                    }
+                });
+    });
+
+
+
+    @*function SecurityCheck(RedirectingLink) {
+
+        if ('@ViewBag.IsEmployee' == "Yes") {
+
+        }
+    }*@
+</script>

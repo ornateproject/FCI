@@ -1,0 +1,70 @@
+﻿<table class="table table-striped table-primary hover" id="datatablelist" style="width:100%">
+    <thead>
+        <tr>
+            <td class="bg-primary"><span>Date &#160; &#160; &#160; &#160;</span></td>
+            <td class="bg-primary"><span>Subject &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160;&#160;</span></td>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><span style="color: #000000;"><span>30.10.1996&#160;</span></span></td>
+            <td><a target="_blank" href="Docs/General%20WH%20Book%20transfer%20of%20stock.pdf"><span>Book transfer of stock from one depositor to another.</span></a></td>
+        </tr>
+        <tr>
+            <td><span>26.07.2004</span></td>
+            <td><a target="_blank" href="Docs/General%20WH%20Warehouse%20receipt%20procedure%20of%20control%20document.pdf"><span>General Warehouse receipt procedure of control document.</span></a></td>
+        </tr>
+        <tr>
+            <td><span style="color: #000000;"><span>24.10.2005</span></span></td>
+            <td><a target="_blank" href="Docs/General%20WH%20Warehouse%20Receipt%20cautionary%20Measures%20to%20be%20followed.pdf"><span>General Warehouse Receipt cautionary Measures to be followed</span></a></td>
+        </tr>
+        <tr>
+            <td><span style="color: #000000;"><span>03.03.2009&#160;</span></span></td>
+            <td><span><span style="color: #000000;">&#160;</span><a target="_blank" href="Docs/General%20Warehousing%20Open%20Storage%20Practice.pdf">Open Storage Code of Storage Practices-Reg.</a></span></td>
+        </tr>
+        <tr>
+            <td><span style="color: #000000;"><span>18.11.2009</span></span></td>
+            <td><a target="_blank" href="Docs/General%20WH%20Additional%20Capacity%20Creation.pdf"><span>&#160;Procedure for survey of centres for setting up Warehouses</span></a></td>
+        </tr>
+    </tbody>
+</table>
+
+
+
+<script src="~/CssJs/dtjs.js"></script>
+
+<script>
+   
+    var url = '@Url.Action("ViewDocument", "CWCCuricullum")'
+    var IsEmployee = '@ViewBag.IsEmployee';
+    $("td").find("a").each(function () {
+        @*@{
+
+                    var @EncodedURL = CWC_CMS.Models.CommonDAL.EncodeString($(this).attr("href"));
+                }*@
+        $(this).attr("href", window.btoa($(this).attr("href")))
+
+
+        $(this).on('click', function (event) {
+            if (IsEmployee == "Yes") {
+                event.preventDefault();
+                $('#DocumentDiv').load(url, { EncryptedString: $(this).attr("href")})
+                //window.location.href = "/CWCCuricullum/ViewDocument?EncryptedString=" + $(this).attr("href")
+                        return true;
+                    }
+                    else {
+                        alert('You are not authenticated to View this document');
+                        return false;
+                    }
+                });
+    });
+
+
+
+    @*function SecurityCheck(RedirectingLink) {
+
+        if ('@ViewBag.IsEmployee' == "Yes") {
+
+        }
+    }*@
+</script>

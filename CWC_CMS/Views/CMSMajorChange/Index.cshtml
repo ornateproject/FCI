@@ -1,0 +1,243 @@
+﻿@model CWC_CMS.Models.CMSModel
+
+
+@{
+    ViewBag.Title = "CMS";
+    Layout = "~/Views/Shared/_LayOutView_bak.cshtml";
+}
+
+<style class="RemoveOnSave">
+    .modal {
+        display: none;
+        height: 100% !important;
+        left: 0;
+        position: fixed;
+        top: 0;
+        width: 100% !important;
+    }
+
+        .modal.open {
+            display: block;
+        }
+</style>
+
+
+<script src="~/Themes/ckeditor/ckeditor.js" class="RemoveOnSave"></script>
+
+
+
+
+<script class="RemoveOnSave">
+    $(function () {
+        
+        var RootURL = $('#WebsiteRootPath').val();
+        $('.PdfLinkClass').each(function () {
+            debugger;
+            var NewHrefAttr = $(this).attr('href').replace('WebsiteRootURLXyz', RootURL);
+            $(this).attr('href', NewHrefAttr);
+            console.log($(this).attr('href'))
+        });
+        
+        $('.btnSave').on('click', function () {
+            debugger;
+            var RootURL = $('#WebsiteRootPath').val();
+            $('.PdfLinkClass').each(function () {
+                var NewHrefAttr = $(this).attr('href').replace(RootURL, 'WebsiteRootURLXyz');
+                $(this).attr('href', NewHrefAttr);
+            });
+            
+            
+            $('.RemoveOnSave').remove();
+            $('.cke_screen_reader_only').eq(0).nextAll('div').remove();
+            $('.cke_screen_reader_only').remove();
+            $('#goog-gt-tt').remove();
+            $('.goog-te-spinner-pos').remove(); 
+            $("body").prevAll().remove();
+            debugger;
+
+            var myformData = new FormData();
+            myformData.append('html', escape($('html').html()));
+            $.ajax({
+                async: false,
+                type: "POST",
+                url: "../CMSMajorChange/Encrypt",
+                contentType: false,
+                processData: false,
+                data: myformData,
+                success: function (response) {
+                    $('[name="FinalSubmitHTML"]').val(response);
+                    $('#CmsForm').submit();
+                },
+                failure: function (response) {
+                    alert('Unable to process your  request');
+                    return false;
+                }
+            });
+
+
+            
+            
+           
+            //if ($('.easyimage').length > 0) {
+            //    $('.easyimage').each(function () {
+            //        debugger;
+            //        console.log($(this).find('img').attr('src'));
+            //        var link = document.createElement('a');
+            //        link.href = $(this).find('img').attr('src');  // use realtive url 
+            //        link.download = 'MyToy.jpeg';
+            //        document.body.appendChild(link);
+            //        link.click();
+
+            //        $.ajax({
+            //            url: '/CMSMajorChange/SaveImageAndReturnItsPath',
+            //            method: 'Post',
+            //            dataType: 'json',
+            //            data: { Parameter: $(this).find('img').attr('src').toString() },
+            //            success: function (data) {
+
+            //                $(this).find('img').attr('src', data);
+            //                $('.RemoveOnSave').remove();
+            //                $('[name="FinalSubmitHTML"]').val($('html').html());
+            //                $('#CmsForm').submit();
+            //            },
+            //            error: function (err) {
+            //                alert('Error');
+            //            }
+            //        });
+            //    });
+            //}
+            //else {
+            //    $('.RemoveOnSave').remove();
+            //    $('[name="FinalSubmitHTML"]').val($('html').html());
+            //    $('#CmsForm').submit();
+            //}
+        });
+    });
+   
+</script>
+
+
+ 
+
+
+
+
+@using (Html.BeginForm("Index", "CMSMajorChange", FormMethod.Post, new { id = "CmsForm", @class = "form-horizontal" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.Raw(@Model.InitialPageHTML) 
+    @Html.TextAreaFor(model => model.FinalSubmitHTML, new { @class = "form-control" })
+    @Html.HiddenFor(model => model.PageAddress, new { @class = "form-control" })
+    <input type="hidden" id="WebsiteRootPath" value="@ViewBag.DesktopPath" class="RemoveOnSave" />
+
+
+}
+<button class="btn btn-success RemoveOnSave LiEditbtn">Edit</button>
+<button class="btn btn-success btnSave RemoveOnSave">Save Changes</button>
+<script class="RemoveOnSave">
+    $(function () {
+        $('[name="FinalSubmitHTML"]').hide();
+    });
+</script>
+
+
+<script class="RemoveOnSave">
+    $(function () {
+        console.log($('#WebsiteRootPath').val())
+        $('body').on('click', '.LiEditbtn', function () {
+            var Li = $(this).parent().eq(0);
+            $('#myModalSuccess').modal('show');
+
+            CKEDITOR.instances.EditTextbox.setData($('#editor').html())
+            //$('[name="EditTextbox"]').val(Li.text().replace('Edit', '').replace('Delete', ''));
+            $(".modelSavebtn").on('click', function () {
+
+
+                if ($.trim(CKEDITOR.instances.EditTextbox.getData()) != '') {
+
+
+                    var data = $.trim(CKEDITOR.instances.EditTextbox.getData()); 
+                    var check = true;
+                    if (data.indexOf('alert(') != -1) {
+                        check = false;
+                    }
+                    if (data.indexOf('<script>') != -1) {
+                        check = false;
+                    }
+                    if (data.indexOf('iframe') != -1) {
+                        check = false;
+                    }
+                    if (data.indexOf('<iframe>') != -1) {
+                        check = false;
+                    }
+                    if (data.indexOf('script') != -1) {
+                        check = false;
+                    }
+                    if (data.indexOf('alert') != -1) {
+                        check = false;
+                    }
+                    if (data.indexOf('video') != -1) {
+                        check = false;
+                    }
+                    if (data.indexOf('onerror') != -1) {
+                        check = false;
+                    }
+                    if (check == true) {
+                        $('#editor').html(CKEDITOR.instances.EditTextbox.getData());
+                        CKEDITOR.instances.EditTextbox.setData('');
+                        //Li.text($('[name="EditTextbox"]').val());
+                        //Li.append('<button class="btn btn-primary btn-xs RemoveOnSave LiEditbtn">Edit</button>' + '<button class="btn btn-danger btn-xs RemoveOnSave LiDeletebtn">Delete</button>');
+                        //$('[name="EditTextbox"]').val('');
+                        $('.modelClosebtn').click();
+                    }
+                    else {
+                        alert("Dear User,Please do not use Unsupport words/tags in editor like script tag,alert etc.");
+                        CKEDITOR.instances.EditTextbox.setData($('#editor').html())
+                        $('#myModalSuccess').modal('show');
+                    }
+
+                }
+            });
+        });
+
+
+        //$('body').on('click', '.LiDeletebtn', function () {
+        //    var Li = $(this).parent().eq(0);
+        //    Li.remove();
+        //});
+    });
+</script>
+
+
+
+
+
+
+
+
+<div class="modal bounceIn animated RemoveOnSave" id="myModalSuccess" role="dialog" aria-labelledby="myModaldeleteLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="myModaldeleteLabel">Make Changes Here</h4>
+            </div>
+            <div class="modal-body">
+                @Html.TextArea("EditTextbox", null, new { @class = "form-control", @id = "EditTextbox", @cols = 120, @rows = 15 })
+                <br />
+                <button type="button" class="btn btn-default modelClosebtn" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-default modelSavebtn" data-dismiss="modal">Save</button>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+        <!-- modal-content -->
+    </div>
+    <!-- modal-dialog -->
+</div>
+
+
+
+
+<script class="RemoveOnSave">CKEDITOR.replace("EditTextbox");</script>
+

@@ -1,0 +1,45 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayOutView_bak.cshtml";
+}
+
+<style>
+    .active {
+        background-color: purple;
+        color: #fff !important;
+        padding: 10px 20px;
+    }
+</style>
+<br /><br />
+
+<p><strong>&#160;</strong><a href="#" style="font-weight: bold;" id="GeneralCurriculum" class="CurriculumLinkClass">General&#160;</a><strong>&#160;&#160;&#160; </strong><a href="#" style="font-weight: bold;" id="FinanceCurriculum" class="CurriculumLinkClass">Finance&#160;</a><a href="#" style="font-weight: bold;" id="FinanceCurriculum" class="CurriculumLinkClass">&#160;&#160; </a><a href="#" style="font-weight: bold;" id="TechnicalCurriculum" class="CurriculumLinkClass">Technical</a><strong>&#160;&#160;&#160;&#160; </strong><a href="#" style="font-weight: bold;" id="MISCurriculum" class="CurriculumLinkClass">MIS</a><strong>&#160;&#160;&#160;&#160; </strong><a href="#" style="font-weight: bold;" id="VigilanceCurriculum" class="CurriculumLinkClass">Vigilance</a><strong>&#160;&#160;&#160; </strong><a href="#" style="font-weight: bold;" id="InspectionCurriculum" class="CurriculumLinkClass">Inspection</a><strong>&#160;&#160;&#160; </strong><a href="#" style="font-weight: bold;" id="CommercialCurriculum" class="CurriculumLinkClass">&#160;Commercial</a><strong> &#160;&#160;</strong><a href="#" style="font-weight: bold;" id="PurchaseCurriculum" class="CurriculumLinkClass">&#160;Purchase</a><strong>&#160;&#160;&#160; </strong><a href="#" style="font-weight: bold;" id="TradeCurriculum" class="CurriculumLinkClass">&#160;Trade Unions-2019</a><strong>&#160;&#160;&#160; </strong><a href="#" style="font-weight: bold;" id="EngineeringCurriculum" class="CurriculumLinkClass">&#160;Engineering</a><strong>&#160;&#160;&#160; </strong><a href="#" style="font-weight: bold;" id="SeniorityList" class="CurriculumLinkClass">&#160;Seniority List</a><strong>&#160;&#160;&#160; </strong><a href="#" style="font-weight: bold;" id="UpgradationList" class="CurriculumLinkClass">&#160;Upgradation</a><strong>&#160;&#160;&#160; </strong><a href="#" style="font-weight: bold;" id="MiscellaneousCategory" class="CurriculumLinkClass">&#160;Miscellaneous</a>
+<br /><br />
+
+<div id="Curriculum" class="container-fluid">
+
+</div>
+<script type="text/javascript">
+
+
+    $(function () {
+        $('.active').removeClass('active');
+        var URL = '@Url.Action("CurriculumPartialViewLoad", "CWCCuricullum")'
+        $('#Curriculum').empty();
+        $('#Curriculum').load(URL, { CurriculumID: 'GeneralCurriculum' })
+    });
+
+
+    $('.CurriculumLinkClass').on('click', function () {
+        var URL = '@Url.Action("CurriculumPartialViewLoad", "CWCCuricullum")'
+        $('#Curriculum').empty();
+        $('#Curriculum').load(URL, { CurriculumID: $(this).attr('id') });
+        $('.active').removeClass('active');
+        $(this).addClass('active');
+        //$(this).css('color', "white");
+    });
+</script>
+
+
+    
+

@@ -1,0 +1,88 @@
+﻿
+<table class="table table-striped table-primary hover" id="datatablelist" style="width:100%">
+    <thead>
+
+        <tr>
+            <td class="bg-primary"><strong><span style="font-size: medium;">Date &#160;of Circular &#160;</span></strong></td>
+            <td class="bg-primary"><strong><span style="font-size: medium;">Subject&#160;</span>&#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160;&#160;</strong></td>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>17.04.1984</td>
+            <td><a target="_blank" href="Docs/Rebate%20Reservation%20charge%20single%20party%20occupying%20multiple%20space.pdf">Central Warehouse - Reservation of space terms and conditions.</a></td>
+        </tr>
+        <tr>
+            <td>30.09.1998</td>
+            <td><a target="_blank" href="Docs/Rebate%20Tariff%20n%20Rent%20office%20space.pdf">Fixation of rent for Office Accomodation.</a></td>
+        </tr>
+        <tr>
+            <td>22.01.2010</td>
+            <td><a target="_blank" href="Docs/Rebate%20IRR%20Calculation.pdf">Methodology for evaluation of Project and and working of&#160; IRR.</a></td>
+        </tr>
+        <tr>
+            <td><span>02.01.2018</span></td>
+            <td><a target="_blank" href="Docs/Rebate%20Extension%20Pulses.pdf">Extension of the earlier discount accorded on storage charges of pulses&#160;</a></td>
+        </tr>
+        <tr>
+            <td>27.09.2018</td>
+            <td><a target="_blank" href="Docs/dop_270918.pdf">Delegation of Powers to offer Rebate.</a></td>
+        </tr>
+        <tr>
+            <td>14.12.2018</td>
+            <td><a target="_blank" href="Docs/circ_clarification_191218.pdf">Clarification on Circular No. 190</a></td>
+        </tr>
+        <tr>
+            <td>08.03.2019</td>
+            <td><span><a target="_blank" href="Docs/pdf%20Rate%20Revision%20Letter%2001.04.2019.pdf">REVISION OF TARIFF W.E.F. 01.04.2019 AT CENTRAL WAREHOUSES</a></span></td>
+        </tr>
+        <tr>
+            <td>15.05.2019</td>
+            <td><span><a target="_blank" href="Docs/tariff_rev_170519.pdf">Revision of storage charges tariff w.e.f 01.04.2019 for CW -Kasna and CW -Loni</a></span></td>
+        </tr>
+        <tr>
+            <td>31.05.2019</td>
+            <td><span><a target="_blank" href="Docs/frrates_070619.pdf">Revision of ISO containers Rail freight rates w.e.f 01.06.2019</a></span></td>
+        </tr>
+        <tr>
+            <td>31.05.2019</td>
+            <td><span><a target="_blank" href="Docs/rates_thc_070619.pdf">Revision of THC Charges ISO containers w.e.f 01.06.2019</a></span></td>
+        </tr>
+    </tbody>
+</table>
+<script src="~/CssJs/dtjs.js"></script>
+<script>
+   
+    var url = '@Url.Action("ViewDocument", "CWCCuricullum")'
+    var IsEmployee = '@ViewBag.IsEmployee';
+    $("td").find("a").each(function () {
+        @*@{
+
+                    var @EncodedURL = CWC_CMS.Models.CommonDAL.EncodeString($(this).attr("href"));
+                }*@
+        $(this).attr("href", window.btoa($(this).attr("href")))
+
+
+        $(this).on('click', function (event) {
+            if (IsEmployee == "Yes") {
+                event.preventDefault();
+                $('#DocumentDiv').load(url, { EncryptedString: $(this).attr("href")})
+                //window.location.href = "/CWCCuricullum/ViewDocument?EncryptedString=" + $(this).attr("href")
+                        return true;
+                    }
+                    else {
+                        alert('You are not authenticated to View this document');
+                        return false;
+                    }
+                });
+    });
+
+
+
+    @*function SecurityCheck(RedirectingLink) {
+
+        if ('@ViewBag.IsEmployee' == "Yes") {
+
+        }
+    }*@
+</script>

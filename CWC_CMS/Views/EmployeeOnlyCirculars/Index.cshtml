@@ -1,0 +1,39 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayOutView_bak.cshtml";
+}
+
+<style>
+    .active {
+        background-color: purple;
+        color: #fff !important;
+        padding: 10px 20px;
+    }
+</style>
+<br /><br />
+
+<p>
+    <strong>&#160;</strong>Employee Only Circulars&#160;<strong>&#160;&#160;&#160; </strong>
+    <br /><br />
+
+    <div id="Curriculum" class="container-fluid">
+
+    </div>
+    <script type="text/javascript">
+
+
+    $(function () {
+        $('.active').removeClass('active');
+        var URL = '@Url.Action("CurriculumPartialViewLoad", "CWCCuricullum")'
+        $('#Curriculum').empty();
+        $('#Curriculum').load(URL, { CurriculumID: 'EmployeeOnlyCurriculum' })
+    });
+
+
+
+    </script>
+
+
+
+

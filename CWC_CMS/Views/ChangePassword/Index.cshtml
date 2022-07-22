@@ -1,0 +1,100 @@
+﻿@using CaptchaMvc.HtmlHelpers
+@model CWC_CMS.Models.ChangePasswordModel
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutView_bak3.cshtml";
+}
+
+
+
+@using (Html.BeginForm("Create", "ChangePassword", FormMethod.Post, new { @class = "form-horizontal", id = "basicForm", enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-10 col-md-offset-1">
+                @Html.ValidationSummary(true)
+                <!-- panel -->
+
+                <div class="panel panel-primary">
+                    <div class="panel-heading">
+                        <div class="row">
+                            <div class="col-sm-5">
+
+                                <img src="https://fci.gov.in/images/logo.png" height="50" />
+                            </div>
+                            <div class="col-sm-6">
+                                <h3 class="" style="color:#fff">Complaint Portal</h3>
+                            </div>
+                            <div class="col-sm-1">
+                                @Html.ActionLink("Back  ", "index", "VigilanceApplicationForm", new
+                           { @*OmID = "0"*@ }, new { @class = "btn btn-default btn-quirk" })
+                            </div>
+                        </div>
+
+
+                    </div>
+                    <div class="panel-body">
+                        <div class="panel panel-primary" style="border: dotted 1px">
+                            <div class="panel-heading">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <h4 style="color:#ffffff">Vigilance Change Password Module</h4>
+                                    </div>
+                                </div>
+                            </div>
+                        
+                            <div class="panel-body">
+                                <div class="row">
+              
+                                    <div class="form-group">
+
+                                        <div class="col-md-5 col-md-offset-1">
+                                            <label class="control-label"><b style="font-size: 115%;">Login ID</b><span class="text-danger">*</span></label>
+                                            @Html.TextBoxFor(model => model.LoginName, new { @class = "form-control", placeholder = "Please enter Login Name" })
+                                            @Html.ValidationMessageFor(model => model.LoginName, "", new { @class = "text-danger" })
+                                        </div>
+                                        <div class="col-md-5">
+                                            <label class="control-label"><b style="font-size: 115%;">Change Password Method :</b></label>
+                                            <div class="form-group">
+                                                <div class="custom-control custom-radio custom-control-inline col-sm-6 padding5" style="padding-left:20px">
+                                                    @Html.RadioButtonFor(model => model.ChangePasswordMethod, "SecurityQuestion", new { @class = "custom-control-input", @id = "SecurityQuestion" })
+                                                    <label class="custom-control-label" for="EMDExceptionAllowed">Using Security Question</label>
+                                                </div>
+                                                <div class="custom-control custom-radio custom-control-inline col-sm-6 padding5">
+                                                    @Html.RadioButtonFor(model => model.ChangePasswordMethod, "UsingOTP", new { @class = "custom-control-input", @id = "UsingOTP" })
+                                                    <label class="custom-control-label" for="EMDExceptionNotAllowed">Using OTP</label>
+                                                    @Html.ValidationMessageFor(model => model.ChangePasswordMethod, "", new { @class = "text-danger" })
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                  
+
+
+
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+                    <div class="row">
+                        <div class="form-group">
+                            <div class="col-md-5 col-md-offset-5">
+                                
+                                    
+                                        <input type="submit" value=" Proceed " id="btnSubmit" class="btn btn-success btn-quirk btn-wide mr5" />
+                                
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+                                    }

@@ -1,0 +1,188 @@
+﻿@model IEnumerable<CWC_CMS.Models.HomeModel>
+@using SIDCUL.Models
+
+
+@{
+    ViewBag.Title = "Home";
+    Layout = "~/Views/Shared/_LayOutView_bak2.cshtml";
+}
+
+
+<script>
+    $(document).ready(function () {
+
+        $('#LogoutBtn').addClass('btn-danger')
+
+        $('#ChangePasswordBtn').addClass('btn-danger')
+        if (window.location.href.indexOf("result=Success") > -1) {
+            // $('#myModal').modal('show');
+            $.gritter.add({
+                title: ' Saved',
+                text: ' Saved Successfully !!!',
+                class_name: 'with-icon check-circle success'
+            });
+
+            $('#myModalSuccess').modal('show');
+        }
+        //if (window.location.href.indexOf("result=validation") > -1) {
+        //    // $('#myModal').modal('show');
+        //    $.gritter.add({
+        //        title: 'Failed',
+        //        text: 'Due to Unsupported data found in the request, System is unable to save the data. !!!',
+        //        class_name: 'with-icon check-circle danger'
+        //    });
+
+        //    $('#validationDailog').modal('show');
+        //}
+        
+        if('@ViewBag.ValidationMsg'!=null)
+        {
+            if('@ViewBag.ValidationMsg'=="T"){
+                $.gritter.add({
+                    title: 'Failed',
+                    text: 'Due to Unsupported data found in the request, System is unable to save the data. !!!',
+                    class_name: 'with-icon check-circle danger'
+                });
+                $('#validationDailog').modal('show');
+            }
+        }
+         
+    });
+</script>
+
+<table style="width:100%; background-color:transparent">
+    <tr>
+
+        <td>
+
+            @{
+
+                <text>
+                    @Html.EncodedActionLink("Change Password", "index", "LoginChangePassword", new { NameRef = "2" }, new { @class = "btn", @id = "ChangePasswordBtn" })
+                </text>
+
+            }
+        </td>
+        <td style="text-align:right">
+
+            @{
+
+                <text>
+                    @Html.EncodedActionLink("Logout", "LogoutFun", "Login", new { }, new { @class = "btn", @id = "LogoutBtn" })
+                </text>
+
+            }
+        </td>
+    </tr>
+</table>
+
+
+
+@{
+    <text>
+        @Html.EncodedActionLink("Add New Page", "Index", "CMSNewPage", new { }, new { @class = "btn btn-primary" })
+    </text>
+}
+
+@using (Html.BeginForm("Index", "Home", FormMethod.Get, new { @class = "form-horizontal", id = "basicForm" }))
+{
+
+    <table class="table table-striped table-primary hover" id="datatablelist">
+        <thead>
+            <tr>
+                <th>
+                    Parent Menu
+                </th>
+                <th>
+                    Menu To Edit
+                </th>
+                <th>
+                    Action
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model != null)
+            {
+                foreach (var item in Model)
+                {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ParentMenuName)
+
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.MenuName)
+                </td>
+                <td>
+                    @{
+
+
+                            <text>
+                                @Html.EncodedActionLink("Change", "Index", "CMSMajorChange", new { PageAddress = item.PageAddress, MenuName = item.MenuName }, new { @class = "btnaudit", style = "color:#326661", data_original_title = "Edit Training Category Data", data_placement = "top" })
+                            </text>
+
+                    }
+                </td>
+
+            </tr>
+                                    }
+                                }
+
+        </tbody>
+    </table>
+                        }
+
+
+
+<div class="modal bounceIn animated modelRemove" id="myModalSuccess" role="dialog" aria-labelledby="myModaldeleteLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="myModaldeleteLabel">Changes Applied Successfully</h4>
+            </div>
+            <div class="modal-body">
+                <h6>Changes Made By You Has Been Successfully Applied </h6>
+                <button type="button" class="btn btn-default modelClosebtn" data-dismiss="modal">Close</button>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+        <!-- modal-content -->
+    </div>
+    <!-- modal-dialog -->
+</div>
+<div class="modal bounceIn animated modelRemove" id="validationDailog" role="dialog" aria-labelledby="myModaldeleteLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header danger">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="myModaldeleteLabel">Message From System</h4>
+            </div>
+            <div class="modal-body">
+                <h6>Due to Unsupported scrip/data found in the request, System is unable to save the data.</h6>
+                <button type="button" class="btn btn-default modelClosebtn" data-dismiss="modal">Close</button>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+        <!-- modal-content -->
+    </div>
+    <!-- modal-dialog -->
+</div>
+
+<script>
+    $(function () {
+        $.fn.modal.Constructor.prototype.enforceFocus = function () {
+            modal_this = this
+            $(document).on('focusin.modal', function (e) {
+                if (modal_this.$element[0] !== e.target && !modal_this.$element.has(e.target).length
+                && !$(e.target.parentNode).hasClass('cke_dialog_ui_input_select')
+                && !$(e.target.parentNode).hasClass('cke_dialog_ui_input_text')) {
+                    modal_this.$element.focus()
+                }
+            })
+        };
+    });
+</script>

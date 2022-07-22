@@ -1,0 +1,183 @@
+﻿@using SIDCUL.Models
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayOutView_bak.cshtml";
+}
+
+<style type="text/css">
+
+
+
+    .dataTables_filter input {
+        background-color: #D3D3D3;
+    }
+
+    .dataTables_wrapper .dataTables_length {
+        float: left;
+    }
+
+    .dataTables_wrapper .dataTables_filter {
+        float: right;
+        text-align: right;
+    }
+
+    #datatablelist {
+
+        width:100%;
+    }
+    
+    
+</style>
+
+<script>
+
+    $(function () {
+        
+        $('#datatablelist_filter').addClass('bg-primary');
+        $('#General').on('click', function () {
+
+        });
+
+        //$('#CircularTabLink').addClass('btn-primary');
+        //$('#CircularTabLink').append("<span class='round-tabs seven' style='font-size: 70%'><b>CIRCULARS </b></span>")
+        $('a[title]').tooltip();
+    });
+
+</script>
+<meta http-equiv="content-type" content="text/html;charset=UTF-8"><!-- /Added by HTTrack -->
+
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<body style="position: relative; min-height: 100%; top: 0px;" class="">
+
+            @*<img src="staticResources/sites/default/files/styles/slider/public/22.jpg" width="100%">*@
+            <!-- Mirrored from 188.95.36.104:8080/cwc/Storage.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 20 Aug 2019 09:01:42 GMT -->
+            <!-- Added by HTTrack -->
+            
+            <style>
+
+               
+                pre {
+                    font-size: 20px !important;
+                    font-family: Arial, "Helvetica Neue", Helvetica, sans-serif !important;
+                    white-space: pre-wrap;
+                    word-wrap: break-word;
+                    text-align: justify;
+                }
+.zoom {
+  transition: transform .5s; 
+  padding: 30px;
+}
+                .zoom:hover {
+                    
+  transform: scale(1.2);
+}
+
+                .round-stats{
+	border: solid 5px #e7f3f8;
+    border-radius: 50% !important;
+    background-color:#2196f3;
+    width: 150px;
+    height: 150px;
+    vertical-align: middle;
+    text-align: center;
+    display: table-cell;
+}
+
+
+                #CircularTabLink{
+                    color: white;
+                }
+
+
+
+                
+            </style>
+
+
+
+    <br />  
+
+   
+
+    
+                
+                <div>
+
+                    <div class="col-xs-12 col-sm-12 col-md-12  ">
+                        <img src="~/images/201707060511450946185IRELBanners_EmployeeCornner.png" width="100%" class="inn-img" />
+                        </div>
+                            <div class="col-xs-8 col-sm-4 col-md-2 col-lg-2 zoom">
+                                <div class="round-stats">
+                                    <a href="https://fcidepotonline.gov.in/loginpage" title="Depot Online System" target="_blank" style="color: white;">
+                                        <p>Depot Online System</p>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="col-xs-8 col-sm-4 col-md-2 col-lg-2 zoom">
+                                <div class="round-stats orange2">
+                                    <a href="https://ind.megasoftsol.com/eHRMS/CWC/Login.aspx?cmp=CWC" title="HRMS (Payroll , Leave &CPF) " target="_blank" style="color: white;">
+
+                                        <p>HRMS</p>
+
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="col-xs-8 col-sm-4 col-md-2 col-lg-2 zoom">
+                                <div class="round-stats green2">
+                                    <a href="https://www.cwcpension.in/" title="CWC PENSION TRUST " target="_blank" style="color: white;">
+                                        <p>CWC PENSION TRUST</p>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="col-xs-8 col-sm-4 col-md-2 col-lg-2 zoom">
+                                <div class="round-stats">
+                                    <a href="/CWCViewPage?q=aRHkPwqENGlw33ullbX4y8BYQa6K1n5FHPelqCebYUbYJQKR5t9Rq6Dl3WhPJ/0k1z6rOAnt2pLEVtpiGnuYMQ=="  target="_blank" title="Employee Welfare Cell" style="color: white;">
+                                        <p>Employee Welfare Cell</p>
+                                    </a>
+                                </div>
+                            </div>
+
+                            <div class="col-xs-8 col-sm-4 col-md-2 col-lg-2 zoom">
+                                <div class="round-stats green3">
+                                    <a href="https://tally.cwcfac.com/" title="Tally ERP" target="_blank" style="color: white;">
+                                        <p>TALLY ERP</p>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="col-xs-8 col-sm-4 col-md-2 col-lg-2 zoom">
+                                <div class="round-stats green3">
+                                    @*@{
+
+
+                                        <text>
+                                            @Html.EncodedActionLink("Circulars", "Index", "CWCCuricullum", new { }, new { @class = "btn", @id = "CircularTabLink" })
+                                        </text>
+
+                                    }*@
+
+                                    <a href="https://ind.megasoftsol.com/eHRMS/CWC/Login.aspx?cmp=CWC" title="For viewing the Circulars, please login through HRMS" target="_blank" style="color: white;">
+
+                                        <p>Circulars</p>
+
+                                    </a>
+                                </div>
+                            </div>  
+                    <div class="col-xs-8 col-sm-4 col-md-2 col-lg-2 zoom">
+                        <div class="round-stats green3">
+                            <a href="http://103.120.177.174:8080/PartySystem/login/" title="Tally ERP Code Creation" target="_blank" style="color: white;">
+                                <p>Tally ERP Code Creation</p>
+                            </a>
+                        </div>
+                    </div>
+                            <div class="clearfix"></div>
+                        </div>
+                    
+   
+    
+
+
+
+</body>
+
+

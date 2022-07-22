@@ -1,0 +1,105 @@
+﻿@model CWC_CMS.Models.CMSModel
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayOutView_bak.cshtml";
+}
+
+<script src="~/Themes/ckeditor/ckeditor.js" class="RemoveOnSave"></script>
+
+
+
+
+
+
+<div id="editor"></div>
+@using (Html.BeginForm("Create", "CMSNewPage", FormMethod.Post, new { id = "CmsForm", @class = "form-horizontal" }))
+{
+   // @Html.AntiForgeryToken()
+    @Html.TextBoxFor(model => model.PageName, null, new { @class = "form-control", placeholder = "Type Page Name Here", required = true })
+    @Html.TextAreaFor(model => model.FinalSubmitHTML, new { @class = "form-control" })
+    @Html.HiddenFor(model => model.PageAddress, new { @class = "form-control" })
+
+}
+
+@Html.TextArea("EditTextbox", null, new { @class = "form-control", @id = "EditTextbox", @cols = 120, @rows = 15 })
+<button type="button" class="btn btn-default modelSavebtn" data-dismiss="modal">PreView</button>
+<button class="btn btn-success btnSave RemoveOnSave">Save Changes</button>
+
+<script class="RemoveOnSave">
+    $(function () {
+        $('[name="FinalSubmitHTML"]').hide();
+    });
+
+
+    $(".btnSave").on('click', function () {
+
+
+        if ($.trim(CKEDITOR.instances.EditTextbox.getData()) != '') {
+            var data = $.trim(CKEDITOR.instances.EditTextbox.getData());
+            var names_arr = ['alert(', '<script>', 'script', 'alert', 'video'];
+            var check = true;
+            if (data.indexOf('alert(') != -1) {
+                check = false;
+            }
+            if (data.indexOf('<script>') != -1) {
+                check = false;
+            }
+            if (data.indexOf('iframe') != -1) {
+                check = false;
+            }
+            if (data.indexOf('<iframe>') != -1) {
+                check = false;
+            }
+            if (data.indexOf('script') != -1) {
+                check = false;
+            }
+            if (data.indexOf('alert') != -1) {
+                check = false;
+            }
+            if (data.indexOf('video') != -1) {
+                check = false;
+            }
+            if (data.indexOf('onerror') != -1) {
+                check = false;
+            }
+            if (check == true) {
+                debugger;
+
+                var myformData = new FormData();
+                myformData.append('html', escape(CKEDITOR.instances.EditTextbox.getData()));
+                $.ajax({
+                    async: false,
+                    type: "POST",
+                    url: "../CMSNewPage/Encrypt",
+                    contentType: false,
+                    processData: false,
+                    data: myformData,
+                    success: function (response) {
+                        $('[name="FinalSubmitHTML"]').val(response);
+                        CKEDITOR.instances.EditTextbox.setData('');
+                        $('.RemoveOnSave').remove();
+                        $('#CmsForm').submit();
+                    },
+                    failure: function (response) {
+                        alert('Unable to process your  request');
+                        return false;
+                    }
+                });
+                $('[name="FinalSubmitHTML"]').val(CKEDITOR.instances.EditTextbox.getData());
+                 
+            }
+            else {
+                alert("Dear User,Please do not use Unsupport words/tags in editor like script tag,alert etc.");
+                CKEDITOR.instances.EditTextbox.setData($('#editor').html())
+                $('#myModalSuccess').modal('show');
+            }
+        }
+    });
+
+
+</script>
+
+
+
+<script class="RemoveOnSave">CKEDITOR.replace("EditTextbox");</script>

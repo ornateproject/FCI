@@ -1,0 +1,70 @@
+﻿@model CWC_CMS.Models.CMSModel
+
+
+@{
+    ViewBag.Title = "CMS";
+    Layout = "~/Views/Shared/_LayOutView_bak.cshtml";
+}
+
+
+<script src="~/Scripts/InlineCkEditor.js"></script>
+
+<script>
+    $(function () {
+
+        InlineEditor.create(document.querySelector('#editor'))
+    });
+</script>
+
+
+
+
+
+
+<script class="RemoveOnSave">
+
+    $('.btnSave').on('click', function () {
+        $('[name="FinalSubmitHTML"]').val($('html').html());
+    })
+</script>
+
+
+
+
+
+@Html.Raw(@Model.InitialPageHTML)
+@using (Html.BeginForm("Index", "CMS", FormMethod.Post, new { id = "CmsForm", @class = "form-horizontal" }))
+{
+    @Html.TextAreaFor(model => model.FinalSubmitHTML, new { @class = "form-control" })
+    @Html.HiddenFor(model => model.PageAddress, new { @class = "form-control" })
+}
+
+<button class="btn btn-success btnSave RemoveOnSave">Save Changes</button>
+<script class="RemoveOnSave">
+    $(function () {
+        $('[name="FinalSubmitHTML"]').hide();
+    });
+</script>
+
+
+
+
+<script>
+
+    $('.btnSave').on('click', function () {
+        debugger;
+        $('.RemoveOnSave').remove();
+        $('[name="FinalSubmitHTML"]').val($('html').html());
+        $('#CmsForm').submit();
+    })
+</script>
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,18 @@
+USE [CWC]
+GO
+/****** Object:  StoredProcedure [dbo].[PROC_GET_TENDER_XML]    Script Date: 2019-11-26 16:37:58 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+ALTER PROC [dbo].[PROC_GET_TENDER_XML]
+AS
+
+SELECT TenderReferenceNo T_REF_NO, TenderID T_ID, WorkOrItemTitle T_TITLE, WorkOrItemDescription T_DESC, PreQualificationDetails T_PRE_QUAL, 
+LocationDetail T_LOCATION, Pincode T_PINCODE, TenderCurrency T_CURRENCY, TenderFee T_FEE, TenderValue T_VALUE, EmdAmount T_EMD, format(PublishingDate ,'yyyy-MM-dd hh:mm tt')
+T_PUB_DATE,format(DocumentDownloadOrSaleStartDate ,'yyyy-MM-dd hh:mm tt') T_PREBID_DATE,CASE WHEN SeekClarificationStartDate = '1753-01-01 00:00:00.000' THEN 'Null' ELSE format(SeekClarificationStartDate ,'yyyy-MM-dd hh:mm tt') END T_DOC_START_DATE, CASE WHEN SeekClarificationEndDate = '1753-01-01 00:00:00.000' THEN 'Null' ELSE format(SeekClarificationEndDate ,'yyyy-MM-dd hh:mm tt') END T_DOC_END_DATE, format(BidSubmissionStartDate ,'yyyy-MM-dd hh:mm tt') T_BIDSUB_START_DATE, format(BidSubmissionClosingDate ,'yyyy-MM-dd hh:mm tt') T_BIDSUB_END_DATE, format(BidOpeningDate ,'yyyy-MM-dd hh:mm tt') T_BID_OPEN_DATE,
+InvitingOfficer T_INVITING_OFFICER, InvitingOfficerAddress T_INVITING_OFF_ADDRESS, ProductCategory T_PROD_CAT, ProductSubCategory T_PROD_SUB_CAT, TenderType T_TENDER_TYPE, TenderCategory T_TENDER_CATEGORY, FormOfContract T_FORM_CONTRACT, 43 AS T_SECTOR, 10 AS T_STATE, 'http://49.50.117.223:8080/HomePage' AS T_RETURN_URL, 'NA' AS T_REMARKS FROM TBL_TRAN_TENDER_DETAILS
+
+
+
+

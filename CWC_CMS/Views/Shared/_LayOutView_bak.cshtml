@@ -1,0 +1,1043 @@
+﻿@using SIDCUL.Models
+<!DOCTYPE html>
+<section class="RemoveOnSave">
+    <html lang="en">
+    <head class="RemoveOnSave">
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+        <meta name="description" content="" />
+        <meta name="author" content="" />
+        <title>FCI</title>
+        <link rel="stylesheet" href="@Url.Content("~/lib/jquery.gritter/jquery.gritter.css")" type="text/css" />
+        @*--Google Translate Code*@
+        <script src="~/Scripts/GoogleTranslate.js"></script>
+        <style>
+            div#google_translate_element div.goog-te-gadget-simple {
+                background-color: #e6e6e6;
+                border: none;
+            }
+
+                div#google_translate_element div.goog-te-gadget-simple a.goog-te-menu-value span {
+                    color: #393939;
+                }
+
+                div#google_translate_element div.goog-te-gadget-simple a.goog-te-menu-value span {
+                    font-size: 10px;
+                }
+
+                    div#google_translate_element div.goog-te-gadget-simple a.goog-te-menu-value span:hover {
+                        color: #000;
+                    }
+        </style>
+        <script type="text/javascript">
+            function googleTranslateElementInit() {
+                new google.translate.TranslateElement({ pageLanguage: 'en', includedLanguages: 'en,gu,hi,kn,ml,mr,ta,te,ur', layout: google.translate.TranslateElement.InlineLayout.SIMPLE }, 'google_translate_element');
+            }
+        </script>
+
+        @*-- END Google Translate Code*@
+        <link rel="stylesheet" href="@Url.Content("~/lib/weather-icons/css/weather-icons.css")" type="text/css" />
+        <link rel="stylesheet" href="@Url.Content("~/lib/jquery-ui/jquery-ui.css")" type="text/css" />
+        <link rel="stylesheet" href="@Url.Content("~/lib/select2/select2.css")" type="text/css" />
+        <link rel="stylesheet" href="@Url.Content("~/lib/dropzone/dropzone.css")" type="text/css" />
+        <link rel="stylesheet" href="@Url.Content("~/lib/jquery-toggles/toggles-full.css")" type="text/css" />
+        <link rel="stylesheet" href="@Url.Content("~/lib/fontawesome/css/font-awesome.css")" type="text/css" />
+        <link rel="stylesheet" href="@Url.Content("~/lib/timepicker/jquery.timepicker.css")" type="text/css" />
+        <link rel="stylesheet" href="@Url.Content("~/lib/bootstrapcolorpicker/css/bootstrap-colorpicker.css")" type="text/css" />
+        @*<link rel="stylesheet" href="@Url.Content("~/css/quirk.css")" type="text/css" />*@
+        <link rel="stylesheet" href="@Url.Content("~/lib/animate.css/animate.css")" type="text/css" />
+        @*<script src="@Url.Content("~/Scripts/jquery-1.7.1.min.js")"></script>*@
+        <script src="@Url.Content("~/Scripts/jquery-3.4.1.min.js")"></script>
+        <script src="@Url.Content("~/Scripts/jquery.validate.min.js")"></script>
+        <script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js")"></script>
+        <script src="@Url.Content("~/lib/modernizr/modernizr.js")"></script>
+        <script src="@Url.Content("~/lib/dropzone/dropzone.js")"></script>
+        @*<script src="@Url.Content("~/lib/jquery/jquery.js")"></script>*@
+        <script src="@Url.Content("~/lib/jquery-ui/jquery-ui.js")"></script>
+        @*<script src="@Url.Content("~/lib/bootstrap/js/bootstrap.js")"></script>*@
+        <script src="@Url.Content("~/Scripts/bootstrap.min.js")"></script>
+        <script src="@Url.Content("~/lib/jquery-autosize/autosize.js")"></script>
+        <script src="@Url.Content("~/lib/select2/select2.js")"></script>
+        <script src="@Url.Content("~/lib/jquery-toggles/toggles.js")"></script>
+        <script src="@Url.Content("~/lib/jquery-maskedinput/jquery.maskedinput.js")"></script>
+        <script src="@Url.Content("~/lib/timepicker/jquery.timepicker.js")"></script>
+        <script src="@Url.Content("~/lib/dropzone/dropzone.js")"></script>
+        <script src="@Url.Content("~/lib/bootstrapcolorpicker/js/bootstrap-colorpicker.js")"></script>
+        @*<script src="@Url.Content("~/js/quirk.js")"></script>*@
+        <script src="@Url.Content("~/lib/jquery-validate/jquery.validate.js")"></script>
+        <script src="@Url.Content("~/lib/jquery.gritter/jquery.gritter.js")"></script>
+        <link href="~/CssJs/jquery.dataTables.min.css" rel="stylesheet" />
+        <script src="~/CssJs/jquery.dataTables.min.js"></script>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+        <!--===============================================================================================-->
+        <link rel="icon" type="image/png" href="images/icons/favicon.html" />
+        <!--===============================================================================================-->
+        <link rel="stylesheet" type="text/css" href="staticResources/sites/default/files/vendor/bootstrap/css/bootstrap.min.html">
+        <!--===============================================================================================-->
+        <link rel="stylesheet" type="text/css" href="staticResources/sites/default/files/fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+        <!--===============================================================================================-->
+        <link rel="stylesheet" type="text/css" href="staticResources/sites/default/files/vendor/animate/animate.html">
+        <!--===============================================================================================-->
+        <link rel="stylesheet" type="text/css" href="staticResources/sites/default/files/vendor/select2/select2.min.html">
+        <!--===============================================================================================-->
+        <link rel="stylesheet" type="text/css" href="staticResources/sites/default/files/vendor/perfect-scrollbar/perfect-scrollbar.html">
+        <!--===============================================================================================-->
+        <!-- <link rel="stylesheet" type="text/css" href="staticResources/sites/default/files/css/util.css"> -->
+        @*<link rel="stylesheet" type="text/css" href="staticResources/sites/default/files/css/table.css">*@
+        <!--===============================================================================================-->
+        <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Tangerine:bold,bolditalic|Inconsolata:italic|Droid+Sans">
+
+        <link type="text/css" rel="stylesheet" href="staticResources/sites/default/files/css/css_lQaZfjVpwP_oGNqdtWCSpJT1EMqXdMiU84ekLLxQnc4.css" media="all" />
+        <link type="text/css" rel="stylesheet" href="staticResources/sites/default/files/css/css_u9Cn6xFPfn6NvRqMGUV6k10stVTR4AGT7eontS75hX4.css" media="all" />
+        <link type="text/css" rel="stylesheet" href="staticResources/sites/default/files/css/css_MLnTVauaZ3xU71FCGRx8ssffNeDNw9lXOXaHZZcXrQ0.css" media="all" />
+
+
+
+        <link type="text/css" rel="stylesheet" href="staticResources/sites/default/files/css/css_Ch_49ze4Bq3ULziIh8Dy-vtmJWaZVwru8GDKSm4NKiM.css" media="all" />
+        <script src="staticResources/sites/all/libraries/respondjs/respond.min63556355.js?pliuwa"></script>
+        @* <script src="staticResources/sites/default/files/js/js_Kd4BsnIT6T8vj1yoTIfotvk_bIOeY4Ndbdvl8ytcvjs.js"></script>*@
+        <script src="staticResources/sites/default/files/js/js_VT3vUnCVUKAfTaLvCJvJUfa6X4C8WoRFF97eXZUoqHY.js"></script>
+        <script src="staticResources/sites/default/files/js/js_QwNN-JdAEdJ7FW58qqObESLBwrQxseWoGc6C_gzQKYg.js"></script>
+        <script>var base_url = "index.html"; var themePath = "staticResources/sites/all/themes/upsc"; var modulePath = "staticResources/sites/all/modules/cmf/cmf_content";</script>
+        <script src="staticResources/sites/default/files/js/js_azzad_4dGM42fQEyYHR3vcj2YOtCAPB_TASnsUhTr9Q.js"></script>
+        <script src="staticResources/sites/default/files/js/js_u9XzY8GuIn7LRlzzmkoMbzg3ZjQZRlcForDmeex8alU.js"></script>
+        @* <script src="staticResources/sites/default/files/js/js_Ca3Ot-b7abQho2aA0y8hjE9nRIflp51xFsRP1rWp9KI.js"></script>
+            <script src="staticResources/sites/default/files/js/js_iiro2olv-RX3gC3Gs2RbWAN3fitln8gMi7wDaiQWkFg.js"></script>*@
+        <script>jQuery.extend(Drupal.settings, { "basePath": "\/", "pathPrefix": "", "ajaxPageState": { "theme": "upsc", "theme_token": "Turl5QSWtOB72SuLn94_U-8vw7PI1cbEPcspvMLrqbA", "jquery_version": "1.10", "js": { "sites\/all\/themes\/bootstrap\/js\/bootstrap.js": 1, "sites\/all\/libraries\/respondjs\/respond.min.js": 1, "sites\/all\/modules\/contributed\/jquery_update\/replace\/jquery\/1.10\/jquery.js": 1, "misc\/jquery.once.js": 1, "misc\/drupal.js": 1, "sites\/all\/modules\/contributed\/jquery_update\/replace\/ui\/external\/jquery.cookie.js": 1, "sites\/all\/modules\/cmf\/cmf_content\/assets\/js\/swithcer.js": 1, "sites\/all\/modules\/cmf\/cmf_content\/assets\/css\/font-awesome.min.css": 1, "sites\/all\/modules\/contributed\/quicktabs\/css\/quicktabs.css": 1, "sites\/all\/themes\/upsc\/css\/style.css": 1 } }, "encrypt_submissions": { "baseUrl": "https:\/\/upsc.gov.in" }, "urlIsAjaxTrusted": { "\/": true, "\/quicktabs\/ajax\/related_links\/0\/view\/related_links\/block\/1\/node\/": true }, "viewsBootstrap": { "carousel": { "1": { "id": 1, "name": "main_slider", "attributes": { "interval": 5000, "pause": false } } } }, "ajax": { "quicktabs-tab-related_links-0": { "progress": { "message": "", "type": "throbber" }, "event": "click", "url": "\/quicktabs\/ajax\/related_links\/0\/view\/related_links\/block\/1\/node\/" } }, "quicktabs": { "qt_related_links": { "name": "related_links", "tabs": [{ "vid": "related_links", "display": "block", "args": "", "view_path": "node", "view_dom_id": 1, "ajax_args": "", "actual_args": [] }], "ajaxPageState": { "jquery_version": "1.10" } } }, "bootstrap": { "anchorsFix": 1, "anchorsSmoothScrolling": 1, "popoverEnabled": 0, "popoverOptions": { "animation": 1, "html": 0, "placement": "right", "selector": "", "trigger": "click", "title": "", "content": "", "delay": 0, "container": "body" }, "tooltipEnabled": 0, "tooltipOptions": { "animation": 1, "html": 0, "placement": "auto left", "selector": "", "trigger": "hover focus", "delay": 0, "container": "body" } } });</script>
+        <link rel="stylesheet" type="text/css" href="staticResources/slick/slick.css">
+        <link rel="stylesheet" type="text/css" href="staticResources/slick/slick-theme.css">
+
+        <style>
+            blink {
+                animation: blinker 0.6s linear infinite;
+                color: #d6ff00;
+            }
+
+            @@keyframes blinker {
+                50% {
+                    opacity: 0;
+                }
+            }
+        </style>
+
+    </head>
+    <!-- LANGUAGE SETTING -->
+
+    <script>
+        $(function () {
+            $('#NavContactUs').prepend('<img src="staticResources/sites/default/files/styles/slider/public/2.png" width="60" /> <br />');
+            $('#NavHome').prepend('<img src="staticResources/sites/default/files/styles/slider/public/1.png" width="60" /> <br />');
+            $('#NavEmployeeCorner').prepend('<img src="staticResources/sites/default/files/styles/slider/public/7.png" width="60" /> <br />');
+
+        });
+    </script>
+
+
+    <body>
+
+
+        <header>
+            <input type="hidden" name="lang" id="lang" value="en_US">
+            <div class="header-fixed clearfix RemoveOnSave">
+                <div class="region region-top-header">
+                    <section id="block-cmf-content-header-region-block" class="block block-cmf-content clearfix">
+                        <div class="wrapper common-wrapper">
+                            <div class="container common-container">
+                                <div class="common-left clearfix">
+                                    <ul>
+
+                                        <li class="">
+                                            <marquee scrollamount="3">
+
+
+                                                <a style="color:#d6ff00" href="#" target="_blank"><b>GST Implementation Team and State Wise GST Number</b></a>
+
+
+                                            </marquee>
+                                        </li>
+
+
+                                    </ul>
+                                </div>
+                                <div class="common-right clearfix">
+                                    <ul id="header-nav">
+
+                                        <li class="ico-skip"><a href="#skipCont" title="Skip to main content">Skip to Main Content</a></li>
+                                        <li> <a onclick="set_font_size('increase')" title="Increase font size" href="javascript:void(0);">A<sup>+</sup></a> </li>
+                                        <li> <a onclick="set_font_size()" title="Reset font size" href="javascript:void(0);">A<sup>&nbsp;</sup></a> </li>
+                                        <li> <a onclick="set_font_size('decrease')" title="Decrease font size" href="javascript:void(0);">A<sup>-</sup></a> </li>
+
+                                        <li> <a href="https://www.facebook.com/Central-Warehousing-Corporation-1141868665925924/" title="High Contrast"><img src="staticResources/sites/all/themes/upsc/images/facebook-icon.png" /></a> </li>
+                                        <li> <a href="https://www.twitter.com/cwc_warehouse" title="High Contrast"><img src="staticResources/sites/all/themes/upsc/images/twiiter-icon.png" /></a> </li>
+
+
+                                        <li class="hindi"><div id="google_translate_element" style="margin-top: -1.5em;"></div></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                    <!-- /.block -->
+
+
+
+
+                </div>
+            </div>
+            <section class="header1 wrapper header-wrapper fontSize RemoveOnSave" id="myHeader">
+                <div class=" header-container">
+                    <div class="row">
+                        <div class="col-md-5 col-sm-12 col-xs-12">
+                            <!--   <a href="index-2.html" class="logo"><img src="staticResources/sites/all/themes/upsc/images/emblem-dark.png" /></a> -->
+
+                            <a href="http://49.50.87.108:8080/HomePage" class="logo"><img src="staticResources/sites/all/themes/upsc/images/emblem-dark.png" /></a>
+
+                        </div>
+                        <div class="col-md-8 col-xs-12 col-sm-12">
+                            <nav class="navbar navbar-default">
+                                <div class="container-fluid">
+                                    <!-- Brand and toggle get grouped for better mobile display -->
+
+                                    <div class="navbar-header">
+                                        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false"> <span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </button>
+                                    </div>
+                                    <!-- Design & Developed By Deepak K. Chaudhary, Sujeet Kumar Singh & MD Manouwer -->
+                                    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                                        <div id="main-menu">
+                                            <ul class="menu nav">
+                                                <li class="leaf">
+                                                    @{
+
+
+                                                        <text>
+                                                            @Html.EncodedActionLink("Home", "Index", "CWCViewPage", new { PageAddress = "~/CWC/188.95.36.104_8080/cwc/index.html" }, new { @class = "btnaudit", @id = "NavHome", style = "color:#326661", data_original_title = "Edit Training Category Data", data_placement = "top" })
+                                                        </text>
+
+                                                    }
+                                                </li>
+                                                <li class="expanded dropdown active">
+                                                    <a href="#" title="" data-target="#" class="dropdown-toggle active" data-toggle="dropdown">
+                                                        <img src="staticResources/sites/default/files/styles/slider/public/6.png" width="60" /> <br />About Us
+                                                    </a> <span class="caret"></span></a>
+                                                    <ul class="dropdown-menu" style="width:400">
+                                                        <div class="col-lg-12">
+                                                            <div class="row">
+                                                                <div class="col-lg-6">
+                                                                    <li class="collapsed">
+                                                                        @{
+
+
+                                                                            <text>
+                                                                                @Html.EncodedActionLink("FCI at a Glance", "Index", "CWCViewPage", new { PageAddress = "~/CWC/188.95.36.104_8080/cwc/AtGlance.html" }, new { @class = "btnaudit", style = "color:#326661", data_original_title = "Edit Training Category Data", data_placement = "top" })
+                                                                            </text>
+
+                                                                        }
+                                                                    </li>
+                                                                    <li class="collapsed">
+                                                                        @{
+
+
+                                                                            <text>
+                                                                                @Html.EncodedActionLink("Administrative Setup", "Index", "CWCViewPage", new { PageAddress = "~/CWC/188.95.36.104_8080/cwc/Administrative-Setup.html" }, new { @class = "btnaudit", style = "color:#326661", data_original_title = "Edit Training Category Data", data_placement = "top" })
+                                                                            </text>
+
+                                                                        }
+                                                                    </li>
+                                                                    <li class="first leaf">
+                                                                        @{
+
+
+                                                                            <text>
+                                                                                @Html.EncodedActionLink("Corporate Mission", "Index", "CWCViewPage", new { PageAddress = "~/CWC/188.95.36.104_8080/cwc/Corporate-Mission.html" }, new { @class = "btnaudit", style = "color:#326661", data_original_title = "Edit Training Category Data", data_placement = "top" })
+                                                                            </text>
+
+                                                                        }
+                                                                    </li>
+
+
+
+                                                                </div>
+                                                                <div class="col-lg-6">
+                                                                    <li class="collapsed">
+                                                                        @{
+
+
+                                                                            <text>
+                                                                                @Html.EncodedActionLink("Board of Directors", "Index", "CWCViewPage", new { PageAddress = "~/CWC/188.95.36.104_8080/cwc/Board-of-Directors.html" }, new { @class = "btnaudit", style = "color:#326661", data_original_title = "Edit Training Category Data", data_placement = "top" })
+                                                                            </text>
+
+                                                                        }
+                                                                    </li>
+                                                                    <li class="collapsed">
+                                                                        @{
+
+
+                                                                            <text>
+                                                                                @Html.EncodedActionLink("Managing Director's Message", "Index", "CWCViewPage", new { PageAddress = "~/CWC/188.95.36.104_8080/cwc/Director-Messange.html" }, new { @class = "btnaudit", style = "color:#326661", data_original_title = "Edit Training Category Data", data_placement = "top" })
+                                                                            </text>
+
+                                                                        }
+                                                                    </li>
+                                                                    <li class="collapsed">
+                                                                        @{
+
+
+                                                                            <text>
+                                                                                @Html.EncodedActionLink("SWCs", "Index", "CWCViewPage", new { PageAddress = "~/CWC/188.95.36.104_8080/cwc/SWCs.html" }, new { @class = "btnaudit", style = "color:#326661", data_original_title = "Edit Training Category Data", data_placement = "top" })
+                                                                            </text>
+
+                                                                        }
+                                                                    </li>
+                                                                </div>
+                                                                <!--<div class="col-lg-4"><img src="sites/default/files/styles/slider/public/2_0.jpg" width="100%" /></div>-->
+                                                            </div>
+                                                        </div>
+                                                    </ul>
+                                                </li>
+
+                                                <li class="expanded dropdown active">
+                                                    <a href="#" title="" data-target="#" class="dropdown-toggle active" data-toggle="dropdown">
+                                                        <img src="staticResources/sites/default/files/styles/slider/public/4.png" width="60" /> <br />Our Services
+                                                    </a> <span class="caret"></span></a>
+                                                    <ul class="dropdown-menu">
+                                                        <div class="col-lg-12">
+                                                            <div class="row">
+                                                                <div class="col-lg-6">
+
+                                                                    <li>
+                                                                        @{
+
+
+                                                                            <text>
+                                                                                @Html.EncodedActionLink("Storage", "Index", "CWCViewPage", new { PageAddress = "~/CWC/188.95.36.104_8080/cwc/Storage.html" }, new { @class = "btnaudit", style = "color:#326661", data_original_title = "Edit Training Category Data", data_placement = "top" })
+                                                                            </text>
+
+                                                                        }
+                                                                    </li>
+                                                                    <li>
+                                                                        @{
+
+
+                                                                            <text>
+                                                                                @Html.EncodedActionLink("ICD/CFS Services", "Index", "CWCViewPage", new { PageAddress = "~/CWC/188.95.36.104_8080/cwc/ICD-CFS-Services.html" }, new { @class = "btnaudit", style = "color:#326661", data_original_title = "Edit Training Category Data", data_placement = "top" })
+                                                                            </text>
+
+                                                                        }
+                                                                    </li>
+                                                                    <li>
+                                                                        @{
+
+
+                                                                            <text>
+                                                                                @Html.EncodedActionLink("Bond Facility", "Index", "CWCViewPage", new { PageAddress = "~/CWC/188.95.36.104_8080/cwc/Bonding-Facility.html" }, new { @class = "btnaudit", style = "color:#326661", data_original_title = "Edit Training Category Data", data_placement = "top" })
+                                                                            </text>
+
+                                                                        }
+                                                                    </li>
+                                                                    <li>
+                                                                        @{
+
+
+                                                                            <text>
+                                                                                @Html.EncodedActionLink("Air Cargo Operations", "Index", "CWCViewPage", new { PageAddress = "~/CWC/188.95.36.104_8080/cwc/Air-Cargo-Complex.html" }, new { @class = "btnaudit", style = "color:#326661", data_original_title = "Edit Training Category Data", data_placement = "top" })
+                                                                            </text>
+
+                                                                        }
+                                                                    </li>
+                                                                    <li>
+                                                                        @{
+
+
+                                                                            <text>
+                                                                                @Html.EncodedActionLink("Container Train Operations", "Index", "CWCViewPage", new { PageAddress = "~/CWC/188.95.36.104_8080/cwc/Container-Train-Operations.html" }, new { @class = "btnaudit", style = "color:#326661", data_original_title = "Edit Training Category Data", data_placement = "top" })
+                                                                            </text>
+
+                                                                        }
+                                                                    </li>
+                                                                    <li>
+                                                                        @{
+
+
+                                                                            <text>
+                                                                                @Html.EncodedActionLink("Integrated Check Post Terminal", "Index", "CWCViewPage", new { PageAddress = "~/CWC/188.95.36.104_8080/cwc/Integrated-Check-Post-Terminal.html" }, new { @class = "btnaudit", style = "color:#326661", data_original_title = "Edit Training Category Data", data_placement = "top" })
+                                                                            </text>
+
+                                                                        }
+                                                                    </li>
+                                                                    <li>
+                                                                        @{
+                                                                            <text>
+                                                                                @Html.EncodedActionLink("Intermediate Godown", "Index", "CWCViewPage", new { PageAddress = "~/CWC/188.95.36.104_8080/cwc/IntermediateGodown.html" }, new { @class = "btnaudit", style = "color:#326661", data_original_title = "Edit Training Category Data", data_placement = "top" })
+                                                                            </text>
+
+                                                                        }
+                                                                    </li>
+                                                                </div>
+                                                                <div class="col-lg-6">
+                                                                    <li>
+                                                                        @{
+
+
+                                                                            <text>
+                                                                                @Html.EncodedActionLink("Pest Control Services", "Index", "CWCViewPage", new { PageAddress = "~/CWC/188.95.36.104_8080/cwc/Pest-Control-Services.html" }, new { @class = "btnaudit", style = "color:#326661", data_original_title = "Edit Training Category Data", data_placement = "top" })
+                                                                            </text>
+
+                                                                        }
+                                                                    </li>
+                                                                    <li>
+                                                                        @{
+
+
+                                                                            <text>
+                                                                                @Html.EncodedActionLink("Farmers Extension Services", "Index", "CWCViewPage", new { PageAddress = "~/CWC/188.95.36.104_8080/cwc/Farmers-Extension-Services.html" }, new { @class = "btnaudit", style = "color:#326661", data_original_title = "Edit Training Category Data", data_placement = "top" })
+                                                                            </text>
+
+                                                                        }
+                                                                    </li>
+                                                                    <li>
+                                                                        @{
+
+
+                                                                            <text>
+                                                                                @Html.EncodedActionLink("Tariff and Rebate", "Index", "CWCViewPage", new { PageAddress = "~/CWC/188.95.36.104_8080/cwc/Tariff-and-Rebate.html" }, new { @class = "btnaudit", style = "color:#326661", data_original_title = "Edit Training Category Data", data_placement = "top" })
+                                                                            </text>
+
+                                                                        }
+                                                                    </li>
+                                                                    <li>
+                                                                        @{
+
+
+                                                                            <text>
+                                                                                @Html.EncodedActionLink("Vacant Storage Space", "Index", "CWCViewPage", new { PageAddress = "~/CWC/188.95.36.104_8080/cwc/Vacant-Storage-Space.html" }, new { @class = "btnaudit", style = "color:#326661", data_original_title = "Edit Training Category Data", data_placement = "top" })
+                                                                            </text>
+
+                                                                        }
+                                                                    </li>
+                                                                    <li>
+                                                                        @{
+
+
+                                                                            <text>
+                                                                                @Html.EncodedActionLink("Temperature Controlled Warehouses", "Index", "CWCViewPage", new { PageAddress = "~/CWC/188.95.36.104_8080/cwc/Temperature-Controlled-Warehouses.html" }, new { @class = "btnaudit", style = "color:#326661", data_original_title = "Edit Training Category Data", data_placement = "top" })
+                                                                            </text>
+
+                                                                        }
+                                                                    </li>
+
+
+                                                                </div>
+                                                            </div>
+                                                    </ul>
+                                                </li>
+                                                <li class="last leaf"><a href="https://cwcwms.com/web/index.php/login" title=""><img src="staticResources/sites/default/files/styles/slider/public/3.png" width="60" /> <br />Warehouse Management Solution</a></li>
+                                                <li class="last leaf"><a href="https://cwcwms.com/web/index.php/capacity/default" title=""><img src="staticResources/sites/default/files/styles/slider/public/5.png" width="60" /> <br />Online Space Booking</a></li>
+                                                <li class="leaf">
+                                                    @{
+
+
+                                                        <text>
+                                                            @Html.EncodedActionLink("Employee Corner", "Index", "CWCEmployeeCorner", new { }, new { @class = "btnaudit", @id = "NavEmployeeCorner", style = "color:#326661", data_original_title = "Edit Training Category Data", data_placement = "top" })
+                                                        </text>
+
+                                                    }
+                                                </li>
+                                                <li class="last leaf">
+                                                    @{
+
+
+                                                        <text>
+                                                            @Html.EncodedActionLink("Contact Us", "Index", "CWCViewPage", new { PageAddress = "~/CWC/188.95.36.104_8080/cwc/ContactUS.html" }, new { @class = "btnaudit", @id = "NavContactUs", style = "color:#326661", data_original_title = "Edit Training Category Data", data_placement = "top" })
+                                                        </text>
+
+                                                    }
+                                                </li>
+
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </nav>
+                        </div>
+
+                    </div>
+                </div>
+            </section>
+
+
+        </header>
+
+    </body>
+    <div class="wrapper" id="skipCont"></div>
+
+</section>
+
+<div class="container-fluid">
+
+    @RenderBody()
+</div>
+<section class="RemoveOnSave">
+    <body>
+        <footer class="footer fontSize">
+            <div class="container">
+                <div class="region region-footer">
+                    <section id="block-cmf-content-footer-region-block" class="block block-cmf-content clearfix">
+                        <footer class="wrapper footer-wrapper" style="fontsize:13px">
+                            <div class="footer-top-wrapper">
+                                <div class="container footer-top-container">
+                                    <div class="col-lg-3">
+                                        <h3>About Us</h3>
+                                        <ul class="menu nav">
+
+                                            <li>
+                                                @{
+
+
+                                                    <text>
+                                                        @Html.EncodedActionLink("FCI at a Glance", "Index", "CWCViewPage", new { PageAddress = "~/CWC/188.95.36.104_8080/cwc/ATGlance.html" }, new { @class = "btnaudit", style = "color:#FFFFFF", data_original_title = "Edit Training Category Data", data_placement = "top" })
+                                                    </text>
+
+                                                }
+                                            </li>
+                                            <li>
+                                                @{
+
+
+                                                    <text>
+                                                        @Html.EncodedActionLink("Administrative Setup", "Index", "CWCViewPage", new { PageAddress = "~/CWC/188.95.36.104_8080/cwc/Administrative-Setup.html" }, new { @class = "btnaudit", style = "color:#FFFFFF", data_original_title = "Edit Training Category Data", data_placement = "top" })
+                                                    </text>
+
+                                                }
+                                            </li>
+                                            <li>
+                                                @{
+
+
+                                                    <text>
+                                                        @Html.EncodedActionLink("Corporate Mission", "Index", "CWCViewPage", new { PageAddress = "~/CWC/188.95.36.104_8080/cwc/Corporate-Mission.html" }, new { @class = "btnaudit", style = "color:#FFFFFF", data_original_title = "Edit Training Category Data", data_placement = "top" })
+                                                    </text>
+
+                                                }
+                                            </li>
+                                            <li>
+                                                @{
+
+
+                                                    <text>
+                                                        @Html.EncodedActionLink("Board of Directors", "Index", "CWCViewPage", new { PageAddress = "~/CWC/188.95.36.104_8080/cwc/Board-of-Directors.html" }, new { @class = "btnaudit", style = "color:#FFFFFF", data_original_title = "Edit Training Category Data", data_placement = "top" })
+                                                    </text>
+
+                                                }
+                                            </li>
+                                            
+                                            <li>
+                                                @{
+
+
+                                                    <text>
+                                                        @Html.EncodedActionLink("Managing Director's Message", "Index", "CWCViewPage", new { PageAddress = "~/CWC/188.95.36.104_8080/cwc/Director-Messange.html" }, new { @class = "btnaudit", style = "color:#FFFFFF", data_original_title = "Edit Training Category Data", data_placement = "top" })
+                                                    </text>
+
+                                                }
+                                            </li>
+                                            <li>
+                                                @{
+
+
+                                                    <text>
+                                                        @Html.EncodedActionLink("SWCs", "Index", "CWCViewPage", new { PageAddress = "~/CWC/188.95.36.104_8080/cwc/SWCs.html" }, new { @class = "btnaudit", style = "color:#FFFFFF", data_original_title = "Edit Training Category Data", data_placement = "top" })
+                                                    </text>
+
+                                                }
+                                            </li>
+                                        </ul>
+
+
+                                        <h3>Documents</h3>
+                                        <ul class="menu nav">
+
+                                            <li class="havesubchild">
+                                                @{
+
+
+                                                    <text>
+                                                        @Html.EncodedActionLink("Annual Report", "Index", "CWCViewPage", new { PageAddress = "~/CWC/188.95.36.104_8080/cwc/Annual_Report.html" }, new { @class = "btnaudit", style = "color:#FFFFFF", data_original_title = "Edit Training Category Data", data_placement = "top" })
+                                                    </text>
+
+                                                }
+                                            </li>
+
+                                            <li>
+                                                @{
+                                                    <text>
+                                                        @Html.EncodedActionLink("Circulars / Guidelines", "Index", "CWCEmployeeCorner", new { }, new { @class = "btnaudit", style = "color:#FFFFFF", data_original_title = "Edit Training Category Data", data_placement = "top" })
+                                                    </text>
+
+                                                }
+                                            </li>
+
+                                            <li class="havesubchild">
+                                                @{
+
+
+                                                    <text>
+                                                        @Html.EncodedActionLink("Information Facilitation Reports", "Index", "CWCViewPage", new { PageAddress = "~/CWC/188.95.36.104_8080/cwc/InformationFacilationReports.html" }, new { @class = "btnaudit", style = "color:#FFFFFF", data_original_title = "Edit Training Category Data", data_placement = "top" })
+                                                    </text>
+
+                                                }
+                                            </li>
+                                            <li class="havesubchild">
+                                                @{
+
+
+                                                    <text>
+                                                        @Html.EncodedActionLink("Warehousing Corporations Act", "Index", "CWCViewPage", new { PageAddress = "~/CWC/188.95.36.104_8080/cwc/WarehousingCorporationsAct.html" }, new { @class = "btnaudit", style = "color:#FFFFFF", data_original_title = "Edit Training Category Data", data_placement = "top" })
+                                                    </text>
+
+                                                }
+                                            </li>
+
+                                            <li class="havesubchild"><a href="~/staticResources/Docs/national food security Act 2013.pdf" id="menu138" title="National Food Security Act 2013"><span class="menu-title">National Food Security Act 2013</span></a></li>
+                                        </ul>
+
+                                        <br>
+
+                                        <h3>Training cell</h3>
+                                        <ul class="menu nav">
+
+
+                                            <li class="havesubchild">
+                                                @{
+
+
+                                                    <text>
+                                                        @Html.EncodedActionLink("Programmes", "Index", "CWCViewPage", new { PageAddress = "~/CWC/188.95.36.104_8080/cwc/Programmes.html" }, new { @class = "btnaudit", style = "color:#FFFFFF", data_original_title = "Edit Training Category Data", data_placement = "top" })
+                                                    </text>
+
+                                                }
+                                            </li>
+
+                                            <li class="havesubchild"><a href="Docs/TRAINING POLICY CWC.pdf" id="menu138" title="Training Policy of CWC "><span class="menu-title">Training Policy of CWC </span></a></li>
+
+                                            <li class="havesubchild">
+                                                @{
+
+
+                                                    <text>
+                                                        @Html.EncodedActionLink("Corporate Social Responsibility", "Index", "CWCViewPage", new { PageAddress = "~/CWC/188.95.36.104_8080/cwc/CorporateSocialResponsibility.html" }, new { @class = "btnaudit", style = "color:#FFFFFF", data_original_title = "Edit Training Category Data", data_placement = "top" })
+                                                    </text>
+
+                                                }
+                                            </li>
+                                        </ul>
+
+
+
+                                    </div>
+
+
+                                    <div class="col-lg-3">
+                                        <h3>Our Services</h3>
+                                        <ul class="menu nav">
+                                            <li>
+                                                @{
+
+
+                                                    <text>
+                                                        @Html.EncodedActionLink("Storage", "Index", "CWCViewPage", new { PageAddress = "~/CWC/188.95.36.104_8080/cwc/Storage.html" }, new { @class = "btnaudit", style = "color:#FFFFFF", data_original_title = "Edit Training Category Data", data_placement = "top" })
+                                                    </text>
+
+                                                }
+                                            </li>
+                                            <li>
+                                                @{
+
+
+                                                    <text>
+                                                        @Html.EncodedActionLink("ICD/CFS Services", "Index", "CWCViewPage", new { PageAddress = "~/CWC/188.95.36.104_8080/cwc/ICD-CFS-Services.html" }, new { @class = "btnaudit", style = "color:#FFFFFF", data_original_title = "Edit Training Category Data", data_placement = "top" })
+                                                    </text>
+
+                                                }
+                                            </li>
+                                            <li>
+                                                @{
+
+
+                                                    <text>
+                                                        @Html.EncodedActionLink("Bond Facility", "Index", "CWCViewPage", new { PageAddress = "~/CWC/188.95.36.104_8080/cwc/Bonding-Facility.html" }, new { @class = "btnaudit", style = "color:#FFFFFF", data_original_title = "Edit Training Category Data", data_placement = "top" })
+                                                    </text>
+
+                                                }
+                                            </li>
+                                            <li>
+                                                @{
+
+
+                                                    <text>
+                                                        @Html.EncodedActionLink("Air Cargo Operations", "Index", "CWCViewPage", new { PageAddress = "~/CWC/188.95.36.104_8080/cwc/Air-Cargo-Complex.html" }, new { @class = "btnaudit", style = "color:#FFFFFF", data_original_title = "Edit Training Category Data", data_placement = "top" })
+                                                    </text>
+
+                                                }
+                                            </li>
+                                            <li>
+                                                @{
+
+
+                                                    <text>
+                                                        @Html.EncodedActionLink("Container Train Operations", "Index", "CWCViewPage", new { PageAddress = "~/CWC/188.95.36.104_8080/cwc/Container-Train-Operations.html" }, new { @class = "btnaudit", style = "color:#FFFFFF", data_original_title = "Edit Training Category Data", data_placement = "top" })
+                                                    </text>
+
+                                                }
+                                            </li>
+                                            <li>
+                                                @{
+
+
+                                                    <text>
+                                                        @Html.EncodedActionLink("Integrated Check Post Terminal", "Index", "CWCViewPage", new { PageAddress = "~/CWC/188.95.36.104_8080/cwc/Integrated-Check-Post-Terminal.html" }, new { @class = "btnaudit", style = "color:#FFFFFF", data_original_title = "Edit Training Category Data", data_placement = "top" })
+                                                    </text>
+
+                                                }
+                                            </li>
+                                            <li>
+                                                @{
+
+
+                                                    <text>
+                                                        @Html.EncodedActionLink("Pest Control Services", "Index", "CWCViewPage", new { PageAddress = "~/CWC/188.95.36.104_8080/cwc/Pest-Control-Services.html" }, new { @class = "btnaudit", style = "color:#FFFFFF", data_original_title = "Edit Training Category Data", data_placement = "top" })
+                                                    </text>
+
+                                                }
+                                            </li>
+                                            <li>
+                                                @{
+
+
+                                                    <text>
+                                                        @Html.EncodedActionLink("Farmers Extension Services", "Index", "CWCViewPage", new { PageAddress = "~/CWC/188.95.36.104_8080/cwc/Farmers-Extension-Services.html" }, new { @class = "btnaudit", style = "color:#FFFFFF", data_original_title = "Edit Training Category Data", data_placement = "top" })
+                                                    </text>
+
+                                                }
+                                            </li>
+                                            <li>
+                                                @{
+
+
+                                                    <text>
+                                                        @Html.EncodedActionLink("Tariff and Rebate", "Index", "CWCViewPage", new { PageAddress = "~/CWC/188.95.36.104_8080/cwc/Tariff-and-Rebate.html" }, new { @class = "btnaudit", style = "color:#FFFFFF", data_original_title = "Edit Training Category Data", data_placement = "top" })
+                                                    </text>
+
+                                                }
+                                            </li>
+                                            <li>
+                                                @{
+
+
+                                                    <text>
+                                                        @Html.EncodedActionLink("Vacant Storage Space", "Index", "CWCViewPage", new { PageAddress = "~/CWC/188.95.36.104_8080/cwc/Vacant-Storage-Space.html" }, new { @class = "btnaudit", style = "color:#FFFFFF", data_original_title = "Edit Training Category Data", data_placement = "top" })
+                                                    </text>
+
+                                                }
+                                            </li>
+                                            <li>
+                                                @{
+
+
+                                                    <text>
+                                                        @Html.EncodedActionLink("Temperature Controlled Warehouses", "Index", "CWCViewPage", new { PageAddress = "~/CWC/188.95.36.104_8080/cwc/Temperature-Controlled-Warehouses.html" }, new { @class = "btnaudit", style = "color:#FFFFFF", data_original_title = "Edit Training Category Data", data_placement = "top" })
+                                                    </text>
+
+                                                }
+                                            </li>
+                                            <li>
+                                                @{
+                                                    <text>
+                                                        @Html.EncodedActionLink("Intermediate Godown", "Index", "CWCViewPage", new { PageAddress = "~/CWC/188.95.36.104_8080/cwc/IntermediateGodown.html" }, new { @class = "btnaudit", style = "color:#FFFFFF", data_original_title = "Edit Training Category Data", data_placement = "top" })
+                                                    </text>
+
+                                                }
+                                            </li>
+                                        </ul>
+
+                                        <br /><br />
+                                        <h3>RTI</h3>
+                                        <ul class="menu nav">
+                                            <li>
+                                                @{
+
+
+                                                    <text>
+                                                        @Html.EncodedActionLink("RTI Act", "Index", "CWCViewPage", new { PageAddress = "~/CWC/188.95.36.104_8080/cwc/RTI.html" }, new { @class = "btnaudit", style = "color:#FFFFFF", data_original_title = "Edit Training Category Data", data_placement = "top" })
+                                                    </text>
+
+                                                }
+                                            </li>
+                                            <li class="havesubchild"><a href="~/staticResources/Docs/CO,ROS,CCs-XVI_020119.pdf" id="menu138" title="CWC's PIO & APIO"><span class="menu-title">CWC's PIO & APIO</span></a></li>
+                                            @*<li class="havesubchild"><a href="~/staticResources/Docs/Regulation_of_FEE_COST_rti_030713.pdf" id="menu138" title="Complaints Procedure"><span class="menu-title">Complaints Procedure</span></a></li>*@
+                                            <li class="havesubchild"><a href="https://rtionline.gov.in/" title="Complaints Aplication"><span class="menu-title"></span></a></li>
+                                            <!--   @{
+
+
+                                                        <text>
+                                                            @Html.EncodedActionLink("Submission of Application", "Index", "RTIApplicationForm", new { }, new { @class = "btnaudit", style = "color:#FFFFFF", data_original_title = "Edit Training Category Data", data_placement = "top" })
+                                                        </text>
+
+                                                    }
+                                            -->
+                                            </li>
+
+                                        </ul>
+
+
+                                    </div>
+
+
+                                    <div class="col-lg-3">
+                                        <h3>Important Links</h3>
+                                        <ul class="menu nav">
+                                            <li class="first leaf"><a href="http://fci.gov.in/" title="Food Corporation of India">Food Corporation of India</a></li>
+                                            <li class=""><a href="https://dfpd.gov.in//" title="Ministry of Food">Ministry of Food</a></li>
+                                            <li class=""><a href="https://dpe.gov.in/" title="Department of Public Enterprises">Department of Public Enterprises</a></li>
+                                            <li class="leaf"><a href="https://crwc.in/" title="Central Railside Warehouse Company Limited">Central Railside Warehouse Company Limited</a></li>
+                                            <li class="leaf"><a href="https://wdra.gov.in/" title="WDRA">WDRA</a></li>
+                                            <li class="last leaf"><a href="https://samanvay.cpse.in/" title="Samanvay Knowledge Management Portal">Samanvay Knowledge Management Portal</a></li>
+                                            <li class="last leaf"><a href="https://www.digitalindia.gov.in/" title="Digital India">Digital India</a></li>
+                                            <li class="last leaf"><a href="http://www.rajbhasha.nic.in/" title="Rajbhasha department of official language">Rajbhasha department of official language</a></li>
+                                            <li class="last leaf"><a href="https://gem.gov.in/" title="Government e Marketplace">Government e Marketplace</a></li>
+                                            <li class="last leaf"><a href="https://CWCeportal.com/" title="CWC e-Portal">CWC e-Portal</a></li>
+                                            <li class="last leaf"><a href="https://eofficecwc.com/" title="CWC e-Office">CWC e-Office</a></li>
+                                        </ul>
+
+                                        <br />
+                                        <h3>Locate us </h3>
+                                        <ul class="menu nav">
+                                            <li><a href='@Url.Action("Index","CWCRegionalOffices")' id="menu103" title="Regional Offices"><span class="menu-title">Regional Offices</span></a></li>
+
+                                            <li>
+                                                @{
+
+
+                                                    <text>
+                                                        @Html.EncodedActionLink("Construction Cell", "Index", "CWCViewPage", new { PageAddress = "~/CWC/188.95.36.104_8080/cwc/Construction-Cells.html" }, new { @class = "btnaudit", style = "color:#FFFFFF", data_original_title = "Edit Training Category Data", data_placement = "top" })
+                                                    </text>
+
+                                                }
+
+                                            </li>
+                                            <li><a href="https://drive.google.com/open?id=1fgHwvxAbwmMCUyD3ZaeykF-56BrZPVbB&amp;usp=sharing" class=" last-item" id="menu277" title="CWC MAP"><span class="menu-title">CWC MAP </span></a></li>
+                                        </ul>
+
+
+
+
+                                    </div>
+
+
+                                    <div class="col-lg-3">
+
+                                        @*<h3>Vigilance Corner</h3>
+                                            <ul class="menu nav">
+                                                <li>
+                                                    @{
+
+
+                                                        <text>
+                                                            @Html.EncodedActionLink("About Vigilance", "Index", "CWCViewPage", new { PageAddress = "~/CWC/188.95.36.104_8080/cwc/AboutVigilance.html" }, new { @class = "btnaudit", style = "color:#FFFFFF", data_original_title = "Edit Training Category Data", data_placement = "top" })
+                                                        </text>
+
+                                                    }
+                                                </li>
+                                                <li class="havesubchild">
+                                                    @{
+
+
+                                                        <text>
+                                                            @Html.EncodedActionLink("Submission of Complaints", "Create", "VigilanceApplicationForm", new { VigilanceID = 0 }, new { @class = "btnaudit", style = "color:#FFFFFF", data_original_title = "Edit Training Category Data", data_placement = "top" })
+                                                        </text>
+
+                                                    }
+
+                                                </li>
+
+                                            </ul>*@
+
+
+                                        @{
+
+                                            <text>
+                                                <h3>
+                                                    @Html.EncodedActionLink("Employee Welfare Cell", "Index", "CWCViewPage", new { PageAddress = "~/CWC/188.95.36.104_8080/cwc/Employee_Welfare.html" }, new { @style = "color:#28f318;" })
+                                                </h3>
+                                            </text>
+
+                                        }
+
+
+                                        @{
+
+                                            <text>
+                                                <h3>
+                                                    @Html.EncodedActionLink("Media Gallery", "Index", "CWCViewPage", new { PageAddress = "~/CWC/188.95.36.104_8080/cwc/cwc_gallery.html" }, new { @style = "color:#28f318;" })
+                                                </h3>
+                                            </text>
+
+                                        }
+                                        @{
+
+                                            <text>
+                                                <h3>
+                                                    @Html.EncodedActionLink("Public Notices", "Index", "PublicNotice", new { }, new { @style = "color:#28f318;" })
+                                                </h3>
+                                            </text>
+
+                                        }
+                                        @{
+
+                                            <text>
+                                                <h3>
+                                                    @Html.EncodedActionLink("Rajbhasha", "Index", "CWCViewPage", new { PageAddress = "~/CWC/188.95.36.104_8080/cwc/Rajbhasha.html" }, new { @style = "color:#28f318;" })
+                                                </h3>
+                                            </text>
+
+                                        }
+
+
+                                        @{
+
+                                            <text>
+                                                <h3>
+                                                    @Html.EncodedActionLink("Tenders", "ViewTenderList", "CWCCppTender", new { }, new { @style = "color:#28f318;" })
+                                                </h3>
+                                            </text>
+
+                                        }
+
+
+
+
+
+                                        @{
+
+                                            <text>
+                                                <h3>
+                                                    @Html.EncodedActionLink("Career@CWC", "Index", "CWCViewPage", new { PageAddress = "~/CWC/188.95.36.104_8080/cwc/CareerMain.html" }, new { @style = "color:#28f318;" })
+                                                </h3>
+                                            </text>
+
+                                        }
+
+
+
+
+                                        @{
+
+                                            <text>
+                                                <h3>
+                                                    @Html.EncodedActionLink("Employee Corner", "Index", "CWCEmployeeCorner", new { }, new { @style = "color:#28f318;" })
+                                                </h3>
+                                            </text>
+
+                                        }
+                                    </div>
+
+                                </div>
+                            </div>
+
+                        </footer>
+                    </section>
+
+
+                </div>
+
+
+
+            </div>
+        </footer>
+        <div class="footer-bottom-wrapper">
+            <div class="container footer-bottom-container">
+                <div class="footer-content clearfix ">
+                    <div class="copyright-content">Hyperlink Policy | Privacy Policy | Hyperlink policy |  Copyright © 2019 Central Warehousing Corporation. All Rights Reserved.  </div>
+
+
+                </div>
+            </div>
+        </div>
+        <script src="staticResources/sites/default/files/js/js_B2uv6dkjoYobfQVyuXdchgrpnnx4oM0TkP_bDVf8Qrg.js"></script>
+
+        <script>
+            window.onscroll = function () { myFunction() };
+
+            var header = document.getElementById("myHeader");
+            var navbarfixed = header.offsetTop;
+
+            function myFunction() {
+                if (window.pageYOffset > navbarfixed) {
+                    header.classList.add("navbarfixed");
+                } else {
+                    header.classList.remove("navbarfixed");
+                }
+            }
+        </script>
+
+        <script src="staticResources/slick/slick.min.js" type="text/javascript" charset="utf-8"></script>
+        <script type="text/javascript">
+            $(document).on('ready', function () {
+                $('.autoplay').slick({
+                    slidesToShow: 3,
+                    slidesToScroll: 1,
+                    autoplay: true,
+                    autoplaySpeed: 2000,
+                });
+            });
+        </script>
+    </body>
+
+    </html>
+
+    <script src="staticResources/sites/default/files/js/js_B2uv6dkjoYobfQVyuXdchgrpnnx4oM0TkP_bDVf8Qrg.js" class="RemoveOnSave"></script>
+
+    <script>
+        window.onscroll = function () { myFunction() };
+
+        var header = document.getElementById("myHeader");
+        var navbarfixed = header.offsetTop;
+
+        function myFunction() {
+            if (window.pageYOffset > navbarfixed) {
+                header.classList.add("navbarfixed");
+            } else {
+                header.classList.remove("navbarfixed");
+            }
+        }
+    </script>
+
+    <script src="staticResources/slick/slick.min.js" type="text/javascript" charset="utf-8"></script>
+    </body>
+</section>
+    </html>
+
+
+<script>
+
+    $(function () {
+
+
+        $("body").on("change", "#google_translate_element select", function (e) {
+            debugger;
+            if ($(this).children('span.text').eq(0).text() == "English") {
+                console.log("Hi");
+            }
+        });
+
+
+        //$('#google_translate_element').children('a').on('click', function () {
+        //    debugger;
+        //    if ($(this).children('span.text').eq(0).text() == "English") {
+        //        console.log("Hi");
+        //    }
+        //});
+    })
+</script>

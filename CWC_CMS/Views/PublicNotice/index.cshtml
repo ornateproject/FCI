@@ -1,0 +1,201 @@
+﻿@model IEnumerable<CWC_CMS.Models.PublicNoticeModel>
+@{int Rownumber = 0;}
+@{
+    ViewBag.Title = "index";
+    Layout = "~/Views/Shared/_LayoutView_bak.cshtml";
+}
+
+
+<section id="editor">
+
+    <div class="col-xs-12 col-sm-12 col-md-12 inner-title">
+        <h2>Public Notices</h2>
+    </div>
+
+    <section class="fontSize inn-h3" style="margin-top: 20px;">
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-12  ">
+                    <div class="region region-upsc-first">
+                        <img src="staticResources/sites/default/files/styles/slider/public/22.jpg" width="100%" class="inn-img" />
+                        <div class="hidden-sm-down">
+                            <ul itemscope="" itemtype="https://schema.org/BreadcrumbList" class="breadcrumb">
+                                <li class="active"> <span class="divider icon-location"></span> </li>
+                                <!--<li itemprop="itemListElement" itemscope="" itemtype="#"> <a itemprop="item" href="index-2.html" class="pathway"><span itemprop="name">Home</span></a> <span class="divider"> &gt; </span> </li>
+                                <li itemprop="itemListElement" itemscope="" itemtype="#"> <a itemprop="item" href="index-2.html" class="pathway"><span itemprop="name">Career@cwc</span></a> <span class="divider"> &gt; </span> </li>
+                                <li itemprop="itemListElement" itemscope="" itemtype="#" class="active"> <span itemprop="name"> Consultant Requirement </span> </li>-->
+                                <li itemprop="itemListElement" itemscope="" itemtype="#"> <span itemprop="name">Home</span> <span class="divider"> &gt; </span> </li>
+                                <li itemprop="itemListElement" itemscope="" itemtype="#" class="active"> <span itemprop="name"> Public Notices </span> </li>
+                            </ul>
+                        </div>
+                        <div class="region region-upsc-first">
+                            <section id="block-menu-block-1" class="block block-menu-block clearfix text-center px-0">
+                                <h2 class="heading mb-4"><span class="hborderb">Public Notices</span></h2>
+                                <div class="menu-block-wrapper menu-block-1 menu-name-main-menu parent-mlid-611 menu-level-1">
+
+
+                                    @*<table border="0" cellspacing="0" cellpadding="0">
+                                            <tbody>
+                                                <tr>
+                                                    <th width="10%" height="48" align="center" style="background-color:#ef4815; color:white"><strong><span style="font-size: small;">Date</span></strong></th>
+                                                    <th  width="50%" height="48" align="center" style="background-color:#ef4815; color:white"><strong><span style="font-size: small;">Description</span></strong></th>
+                                                    <th colspan="2" width="40%" height="48" align="center" style="background-color:#ef4815; color:white"><strong><span style="font-size: small;">Click here to download</span></strong>
+
+                                                    </th>
+
+                                                </tr>
+                                                <tr>
+                                                    <th width="10%" height="48" align="center" style="background-color:#ef4815; color:white"><strong><span style="font-size: small;"></span></strong></th>
+                                                    <th width="50%" height="48" align="center" style="background-color:#ef4815; color:white"><strong><span style="font-size: small;"></span></strong></th>
+                                                    <th width="20%" height="48" align="center" style="background-color:#ef4815; color:white"><strong><span style="font-size: small;">English</span></strong></th>
+                                                    <th width="20%" height="48" align="center" style="background-color:#ef4815; color:white"><strong><span style="font-size: small;">Hindi<br></span></strong></th>
+
+                                                </tr>
+                                                <tr>
+                                                    <td></td>
+                                                    <td>GST Implementation Team and State Wise GST Number</td>
+                                                    <td><a rel="nofollow" target="_blank" title="Link" href="http://www.cewacor.nic.in/Docs/statewise GSTIN_160119.pdf">Download File</a></td>
+                                                    <td></td>
+                                                </tr>
+                                                <tr>
+                                                    <td></td>
+                                                    <td>Central Warehousing Corporation has waived off registration charges of Rs. 5000/- for Vendors and customers who intend to participate in E-Tender</td>
+                                                    <td><a rel="nofollow" target="_blank" title="Link" href="http://www.cewacor.nic.in/Docs/waive_200718.pdf">Download File</a></td>
+                                                    <td></td>
+                                                </tr>
+                                                <tr>
+                                                    <td></td>
+                                                    <td>ATTENTION DEPOSITORS- CWC neither allots storage space through the channel of agents /middlemen/property dealers nor pays any brokerage charges to anyone.</td>
+                                                    <td><a rel="nofollow" target="_blank" title="Link" href="http://www.cewacor.nic.in/Docs/cwc_041218.pdf">Download File</a></td>
+                                                    <td></td>
+                                                </tr>
+                                                <tr>
+                                                    <td></td>
+                                                    <td>MoU signed between Central Warehousing Corporation &amp; National Institute of Agriculture Extension Management (MANAGE) on 31.08.2018</td>
+                                                    <td><a rel="nofollow" target="_blank" title="Link" href="http://www.cewacor.nic.in/Docs/mou_110918.pdf">Download File</a></td>
+                                                    <td></td>
+                                                </tr>
+                                            </tbody>
+                                        </table>*@
+
+
+
+                                    @using (Html.BeginForm("Create", "PublicNotice", FormMethod.Get, new { @class = "form-horizontal", id = "basicForm" }))
+                                    {
+                                        <div style="width:90%; margin-left:5%;">
+                                            <table class="table table-striped table-primary hover" id="datatablelist">
+                                                <thead>
+                                                    <tr>
+                                                        <th width="10%" height="48" align="center" style="background-color:#ef4815; color:white">Sr.No </th>
+                                                        <th width="15%">
+                                                            Date
+                                                        </th>
+                                                        <th width="15%">
+                                                            Description
+                                                        </th>
+                                                        <th width="10%">
+                                                            English Document
+                                                        </th>
+                                                        <th width="40%">
+                                                            Hindi Document
+                                                        </th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    @if (Model != null)
+                                                    {
+                                                        foreach (var item in Model)
+                                                        {
+                                                            <tr>
+                                                                <td>
+                                                                    @(Rownumber += 1)
+
+                                                                </td>
+                                                                <td>
+                                                                    <p>@item.NoticeDate.ToString("dd-MMM-yyyy")</p>
+                                                                    @*@Html.DisplayFor(modelItem => item.NoticeDate)*@
+                                                                </td>
+
+                                                                <td>
+                                                                    @Html.DisplayFor(modelItem => item.Description)
+
+                                                                </td>
+                                                                <td>
+                                                                    @if (item.EnglishDocumentPath != "NA")
+                                                                    {
+                                                                        @Html.ActionLink("View Document", "Document_View", "PublicNotice", new { FilePath = item.EnglishDocumentPath, noticeid = item.publicNotiecsId, filecheck = 0 }, new { @class = "text-primary ", target = "_blank", style = "width:100px;" })
+                                                                    }
+                                                                    else
+                                                                    {
+                                                                        <p class="text-danger">No Document</p>
+                                                                    }
+                                                                </td>
+                                                                <td>
+                                                                    @if (item.HindiDocumentPath != "NA")
+                                                                    {
+                                                                        @Html.ActionLink("View Document", "Document_View", "PublicNotice", new { FilePath = item.HindiDocumentPath, noticeid = item.publicNotiecsId, filecheck = 1 }, new { @class = "text-primary ", target = "_blank", style = "width:100px;" })
+                                                                    }
+                                                                    else
+                                                                    {
+                                                                        <p class="text-danger">No Document</p>
+                                                                    }
+                                                                </td>
+                                                            </tr>
+                                                        }
+                                                    }
+
+                                                </tbody>
+                                            </table>
+                                        </div>                         }
+
+                                    <br /><br />
+                                </div>
+                            </section>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+    </section>
+
+
+
+
+
+
+
+
+
+</section>
+@*<style>
+        .active {
+            background-color: purple;
+            color: #fff !important;
+            padding: 10px 20px;
+        }
+    </style>
+    <br /><br />
+    <div id="Curriculum" class="container-fluid">
+
+    </div>
+    <script type="text/javascript">
+
+
+        $(function () {
+            $('.active').removeClass('active');
+            var URL = '@Url.Action("CurriculumPartialViewLoad", "CWCCuricullum")'
+            $('#Curriculum').empty();
+            $('#Curriculum').load(URL, { CurriculumID: 'GeneralCurriculum' })
+        });
+
+
+        $('.CurriculumLinkClass').on('click', function () {
+            var URL = '@Url.Action("CurriculumPartialViewLoad", "CWCCuricullum")'
+            $('#Curriculum').empty();
+            $('#Curriculum').load(URL, { CurriculumID: $(this).attr('id') });
+            $('.active').removeClass('active');
+            $(this).addClass('active');
+            //$(this).css('color', "white");
+        });
+    </script>*@

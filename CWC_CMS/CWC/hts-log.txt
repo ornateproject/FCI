@@ -1,0 +1,99 @@
+HTTrack3.49-2+htsswf+htsjava launched on Tue, 20 Aug 2019 14:27:13 at http://188.95.36.104:8080/cwc/index.html +*.png +*.gif +*.jpg +*.jpeg +*.css +*.js -ad.doubleclick.net/* -mime:application/foobar
+(winhttrack -qwC2%Ps2u1%s%uN0%I0p3DaK0H0%kf2A25000%f#f -F "Mozilla/4.5 (compatible; HTTrack 3.0x; Windows 98)" -%F "<!-- Mirrored from %s%s by HTTrack Website Copier/3.x [XR&CO'2014], %s -->" -%l "en, *" http://188.95.36.104:8080/cwc/index.html -O1 "C:\My Web Sites\CWC" +*.png +*.gif +*.jpg +*.jpeg +*.css +*.js -ad.doubleclick.net/* -mime:application/foobar )
+
+Information, Warnings and Errors reported for this mirror:
+note:	the hts-log.txt file, and hts-cache folder, may contain sensitive information,
+	such as username/password authentication for websites mirrored in this project
+	do not share these files/folders if you want these information to remain private
+
+14:29:58	Error: 	"Not Found" (404) at link 188.95.36.104:8080/cwc/staticResources/sites/default/files/vendor/bootstrap/css/bootstrap.min.css (from 188.95.36.104:8080/cwc/index.html)
+14:30:07	Error: 	"Not Found" (404) at link 188.95.36.104:8080/cwc/staticResources/sites/default/files/vendor/animate/animate.css (from 188.95.36.104:8080/cwc/index.html)
+14:30:07	Error: 	"Not Found" (404) at link 188.95.36.104:8080/cwc/staticResources/sites/default/files/vendor/select2/select2.min.css (from 188.95.36.104:8080/cwc/index.html)
+14:30:07	Error: 	"Not Found" (404) at link 188.95.36.104:8080/cwc/staticResources/sites/default/files/vendor/perfect-scrollbar/perfect-scrollbar.css (from 188.95.36.104:8080/cwc/index.html)
+14:33:23	Warning: 	File not parsed, looks like binary: 188.95.36.104:8080/cwc/staticResources/sites/default/files/fonts/font-awesome-4.7.0/fonts/fontawesome-webfont.eot?v=4.7.0
+14:33:23	Warning: 	File not parsed, looks like binary: 188.95.36.104:8080/cwc/staticResources/sites/default/files/fonts/font-awesome-4.7.0/fonts/fontawesome-webfont.eot?
+14:33:23	Warning: 	File not parsed, looks like binary: 188.95.36.104:8080/cwc/staticResources/sites/default/files/fonts/font-awesome-4.7.0/fonts/fontawesome-webfont.woff2?v=4.7.0
+14:33:23	Warning: 	File not parsed, looks like binary: 188.95.36.104:8080/cwc/staticResources/sites/default/files/fonts/font-awesome-4.7.0/fonts/fontawesome-webfont.woff?v=4.7.0
+14:33:23	Warning: 	File not parsed, looks like binary: 188.95.36.104:8080/cwc/staticResources/sites/default/files/fonts/font-awesome-4.7.0/fonts/fontawesome-webfont.ttf?v=4.7.0
+14:33:23	Warning: 	File not parsed, looks like binary: 188.95.36.104:8080/cwc/staticResources/sites/default/files/fonts/Lato/Lato-Regular.ttf
+14:33:23	Warning: 	File not parsed, looks like binary: 188.95.36.104:8080/cwc/staticResources/sites/default/files/fonts/Lato/Lato-Bold.ttf
+14:33:23	Warning: 	File not parsed, looks like binary: 188.95.36.104:8080/cwc/staticResources/sites/all/modules/cmf/cmf_content/assets/fonts/DXI1ORHCpsQm3Vp6mXoaTegdm0LZdjqr5-oayXSOefg.html
+14:33:23	Warning: 	Warning: store application/octet-stream without scan: C:/My Web Sites/CWC/188.95.36.104_8080/cwc/staticResources/sites/all/modules/cmf/cmf_content/assets/fonts/DXI1ORHCpsQm3Vp6mXoaTegdm0LZdjqr5-oayXSOefg.html
+14:33:23	Warning: 	File not parsed, looks like binary: 188.95.36.104:8080/cwc/staticResources/sites/all/modules/cmf/cmf_content/assets/fonts/DXI1ORHCpsQm3Vp6mXoaTXhCUOGz7vYGh680lGh-uXM.woff
+14:33:23	Warning: 	File not parsed, looks like binary: 188.95.36.104:8080/cwc/staticResources/sites/all/modules/cmf/cmf_content/assets/fonts/cJZKeOuBrn4kERxqtaUH3VtXRa8TVwTICgirnJhmVJw.html
+14:33:23	Warning: 	Warning: store application/octet-stream without scan: C:/My Web Sites/CWC/188.95.36.104_8080/cwc/staticResources/sites/all/modules/cmf/cmf_content/assets/fonts/cJZKeOuBrn4kERxqtaUH3VtXRa8TVwTICgirnJhmVJw.html
+14:33:23	Warning: 	File not parsed, looks like binary: 188.95.36.104:8080/cwc/staticResources/sites/all/modules/cmf/cmf_content/assets/fonts/cJZKeOuBrn4kERxqtaUH3T8E0i7KZn-EPnyo3HZu7kw.woff
+14:33:23	Warning: 	File not parsed, looks like binary: 188.95.36.104:8080/cwc/staticResources/sites/all/modules/cmf/cmf_content/assets/fonts/MTP_ySUJH_bn48VBG8sNSugdm0LZdjqr5-oayXSOefg.html
+14:33:23	Warning: 	Warning: store application/octet-stream without scan: C:/My Web Sites/CWC/188.95.36.104_8080/cwc/staticResources/sites/all/modules/cmf/cmf_content/assets/fonts/MTP_ySUJH_bn48VBG8sNSugdm0LZdjqr5-oayXSOefg.html
+14:33:24	Warning: 	File not parsed, looks like binary: 188.95.36.104:8080/cwc/staticResources/sites/all/modules/cmf/cmf_content/assets/fonts/MTP_ySUJH_bn48VBG8sNSnhCUOGz7vYGh680lGh-uXM.woff
+14:33:24	Warning: 	File not parsed, looks like binary: 188.95.36.104:8080/cwc/staticResources/sites/all/modules/cmf/cmf_content/assets/fonts/k3k702ZOKiLJc3WVjuplzOgdm0LZdjqr5-oayXSOefg.html
+14:33:24	Warning: 	Warning: store application/octet-stream without scan: C:/My Web Sites/CWC/188.95.36.104_8080/cwc/staticResources/sites/all/modules/cmf/cmf_content/assets/fonts/k3k702ZOKiLJc3WVjuplzOgdm0LZdjqr5-oayXSOefg.html
+14:33:24	Warning: 	File not parsed, looks like binary: 188.95.36.104:8080/cwc/staticResources/sites/all/modules/cmf/cmf_content/assets/fonts/k3k702ZOKiLJc3WVjuplzHhCUOGz7vYGh680lGh-uXM.woff
+14:33:24	Warning: 	File not parsed, looks like binary: 188.95.36.104:8080/cwc/staticResources/sites/all/modules/cmf/cmf_content/assets/fonts/EInbV5DfGHOiMmvb1Xr-hugdm0LZdjqr5-oayXSOefg.html
+14:33:24	Warning: 	Warning: store application/octet-stream without scan: C:/My Web Sites/CWC/188.95.36.104_8080/cwc/staticResources/sites/all/modules/cmf/cmf_content/assets/fonts/EInbV5DfGHOiMmvb1Xr-hugdm0LZdjqr5-oayXSOefg.html
+14:33:24	Warning: 	File not parsed, looks like binary: 188.95.36.104:8080/cwc/staticResources/sites/all/modules/cmf/cmf_content/assets/fonts/EInbV5DfGHOiMmvb1Xr-hnhCUOGz7vYGh680lGh-uXM.woff
+14:33:24	Warning: 	File not parsed, looks like binary: 188.95.36.104:8080/cwc/staticResources/sites/all/modules/cmf/cmf_content/assets/fonts/EsvMC5un3kjyUhB9ZEPPwg.html
+14:33:24	Warning: 	Warning: store application/octet-stream without scan: C:/My Web Sites/CWC/188.95.36.104_8080/cwc/staticResources/sites/all/modules/cmf/cmf_content/assets/fonts/EsvMC5un3kjyUhB9ZEPPwg.html
+14:33:24	Warning: 	File not parsed, looks like binary: 188.95.36.104:8080/cwc/staticResources/sites/all/modules/cmf/cmf_content/assets/fonts/KT3KS9Aol4WfR6Vas8kNcg.woff
+14:33:24	Warning: 	File not parsed, looks like binary: 188.95.36.104:8080/cwc/staticResources/sites/all/modules/cmf/cmf_content/assets/fonts/1YwB1sO8YE1Lyjf12WNiUA.html
+14:33:24	Warning: 	Warning: store application/octet-stream without scan: C:/My Web Sites/CWC/188.95.36.104_8080/cwc/staticResources/sites/all/modules/cmf/cmf_content/assets/fonts/1YwB1sO8YE1Lyjf12WNiUA.html
+14:33:24	Warning: 	File not parsed, looks like binary: 188.95.36.104:8080/cwc/staticResources/sites/all/modules/cmf/cmf_content/assets/fonts/9k-RPmcnxYEPm8CNFsH2gg.woff
+14:33:24	Warning: 	File not parsed, looks like binary: 188.95.36.104:8080/cwc/staticResources/sites/all/modules/cmf/cmf_content/assets/fonts/H2DMvhDLycM56KNuAtbJYA.html
+14:33:24	Warning: 	Warning: store application/octet-stream without scan: C:/My Web Sites/CWC/188.95.36.104_8080/cwc/staticResources/sites/all/modules/cmf/cmf_content/assets/fonts/H2DMvhDLycM56KNuAtbJYA.html
+14:33:24	Warning: 	File not parsed, looks like binary: 188.95.36.104:8080/cwc/staticResources/sites/all/modules/cmf/cmf_content/assets/fonts/wkfQbvfT_02e2IWO3yYueQ.woff
+14:33:24	Warning: 	File not parsed, looks like binary: 188.95.36.104:8080/cwc/staticResources/sites/all/modules/cmf/cmf_content/assets/fonts/tI4j516nok_GrVf4dhunkg.html
+14:33:24	Warning: 	Warning: store application/octet-stream without scan: C:/My Web Sites/CWC/188.95.36.104_8080/cwc/staticResources/sites/all/modules/cmf/cmf_content/assets/fonts/tI4j516nok_GrVf4dhunkg.html
+14:33:24	Warning: 	File not parsed, looks like binary: 188.95.36.104:8080/cwc/staticResources/sites/all/modules/cmf/cmf_content/assets/fonts/BVtM30trf7q_jfqYeHfjtA.woff
+14:33:24	Warning: 	File not parsed, looks like binary: 188.95.36.104:8080/cwc/staticResources/sites/all/modules/cmf/cmf_content/assets/fonts/toadOcfmlt9b38dHJxOBGOode0-EuMkY--TSyExeINg.html
+14:33:24	Warning: 	Warning: store application/octet-stream without scan: C:/My Web Sites/CWC/188.95.36.104_8080/cwc/staticResources/sites/all/modules/cmf/cmf_content/assets/fonts/toadOcfmlt9b38dHJxOBGOode0-EuMkY--TSyExeINg.html
+14:33:24	Warning: 	File not parsed, looks like binary: 188.95.36.104:8080/cwc/staticResources/sites/all/modules/cmf/cmf_content/assets/fonts/toadOcfmlt9b38dHJxOBGNbE_oMaV8t2eFeISPpzbdE.woff
+14:33:24	Warning: 	File not parsed, looks like binary: 188.95.36.104:8080/cwc/staticResources/sites/all/modules/cmf/cmf_content/assets/fonts/ODelI1aHBYDBqgeIAH2zlNV_2ngZ8dMf8fLgjYEouxg.html
+14:33:24	Warning: 	Warning: store application/octet-stream without scan: C:/My Web Sites/CWC/188.95.36.104_8080/cwc/staticResources/sites/all/modules/cmf/cmf_content/assets/fonts/ODelI1aHBYDBqgeIAH2zlNV_2ngZ8dMf8fLgjYEouxg.html
+14:33:24	Warning: 	File not parsed, looks like binary: 188.95.36.104:8080/cwc/staticResources/sites/all/modules/cmf/cmf_content/assets/fonts/ODelI1aHBYDBqgeIAH2zlBM0YzuT7MdOe03otPbuUS0.woff
+14:33:24	Warning: 	File not parsed, looks like binary: 188.95.36.104:8080/cwc/staticResources/sites/all/modules/cmf/cmf_content/assets/fonts/toadOcfmlt9b38dHJxOBGCOFnW3Jk0f09zW_Yln67Ac.html
+14:33:24	Warning: 	Warning: store application/octet-stream without scan: C:/My Web Sites/CWC/188.95.36.104_8080/cwc/staticResources/sites/all/modules/cmf/cmf_content/assets/fonts/toadOcfmlt9b38dHJxOBGCOFnW3Jk0f09zW_Yln67Ac.html
+14:33:24	Warning: 	File not parsed, looks like binary: 188.95.36.104:8080/cwc/staticResources/sites/all/modules/cmf/cmf_content/assets/fonts/toadOcfmlt9b38dHJxOBGJ6-ys_j0H4QL65VLqzI3wI.woff
+14:33:24	Warning: 	File not parsed, looks like binary: 188.95.36.104:8080/cwc/staticResources/sites/all/modules/cmf/cmf_content/assets/fonts/toadOcfmlt9b38dHJxOBGEo0As1BFRXtCDhS66znb_k.html
+14:33:24	Warning: 	Warning: store application/octet-stream without scan: C:/My Web Sites/CWC/188.95.36.104_8080/cwc/staticResources/sites/all/modules/cmf/cmf_content/assets/fonts/toadOcfmlt9b38dHJxOBGEo0As1BFRXtCDhS66znb_k.html
+14:33:24	Warning: 	File not parsed, looks like binary: 188.95.36.104:8080/cwc/staticResources/sites/all/modules/cmf/cmf_content/assets/fonts/toadOcfmlt9b38dHJxOBGFkQc6VGVFSmCnC_l7QZG60.woff
+14:33:24	Warning: 	File not parsed, looks like binary: 188.95.36.104:8080/cwc/staticResources/sites/all/modules/cmf/cmf_content/assets/fonts/toadOcfmlt9b38dHJxOBGHZhYM0_6AejPZE-OqA592o.html
+14:33:24	Warning: 	Warning: store application/octet-stream without scan: C:/My Web Sites/CWC/188.95.36.104_8080/cwc/staticResources/sites/all/modules/cmf/cmf_content/assets/fonts/toadOcfmlt9b38dHJxOBGHZhYM0_6AejPZE-OqA592o.html
+14:33:24	Warning: 	File not parsed, looks like binary: 188.95.36.104:8080/cwc/staticResources/sites/all/modules/cmf/cmf_content/assets/fonts/toadOcfmlt9b38dHJxOBGHiec-hVyr2k4iOzEQsW1iE.woff
+14:33:24	Warning: 	File not parsed, looks like binary: 188.95.36.104:8080/cwc/staticResources/sites/all/modules/cmf/cmf_content/assets/fonts/flexslider-icon.eot
+14:33:24	Warning: 	File not parsed, looks like binary: 188.95.36.104:8080/cwc/staticResources/sites/all/modules/cmf/cmf_content/assets/fonts/flexslider-icond41d.eot?
+14:33:24	Warning: 	File not parsed, looks like binary: 188.95.36.104:8080/cwc/staticResources/sites/all/modules/cmf/cmf_content/assets/fonts/flexslider-icon.woff
+14:33:24	Warning: 	File not parsed, looks like binary: 188.95.36.104:8080/cwc/staticResources/sites/all/modules/cmf/cmf_content/assets/fonts/flexslider-icon.ttf
+14:33:24	Warning: 	File not parsed, looks like binary: 188.95.36.104:8080/cwc/staticResources/sites/all/modules/cmf/cmf_content/assets/fonts/fontawesome-webfonte0a5.eot?v=4.3.0
+14:33:24	Warning: 	File not parsed, looks like binary: 188.95.36.104:8080/cwc/staticResources/sites/all/modules/cmf/cmf_content/assets/fonts/fontawesome-webfontd41d.eot?
+14:33:24	Warning: 	File not parsed, looks like binary: 188.95.36.104:8080/cwc/staticResources/sites/all/modules/cmf/cmf_content/assets/fonts/fontawesome-webfonte0a5.html?v=4.3.0
+14:33:24	Warning: 	Warning: store application/octet-stream without scan: C:/My Web Sites/CWC/188.95.36.104_8080/cwc/staticResources/sites/all/modules/cmf/cmf_content/assets/fonts/fontawesome-webfonte0a5e0a5-2.html
+14:33:24	Warning: 	File not parsed, looks like binary: 188.95.36.104:8080/cwc/staticResources/sites/all/modules/cmf/cmf_content/assets/fonts/fontawesome-webfonte0a5.woff?v=4.3.0
+14:33:24	Warning: 	File not parsed, looks like binary: 188.95.36.104:8080/cwc/staticResources/sites/all/modules/cmf/cmf_content/assets/fonts/fontawesome-webfonte0a5.ttf?v=4.3.0
+14:33:25	Warning: 	File not parsed, looks like binary: 188.95.36.104:8080/cwc/staticResources/sites/all/themes/upsc/fonts/glyphicons-halflings-regular.eot
+14:33:25	Warning: 	File not parsed, looks like binary: 188.95.36.104:8080/cwc/staticResources/sites/all/themes/upsc/fonts/glyphicons-halflings-regulard41d.eot?
+14:33:25	Warning: 	File not parsed, looks like binary: 188.95.36.104:8080/cwc/staticResources/sites/all/themes/upsc/fonts/glyphicons-halflings-regular.html
+14:33:25	Warning: 	Warning: store application/octet-stream without scan: C:/My Web Sites/CWC/188.95.36.104_8080/cwc/staticResources/sites/all/themes/upsc/fonts/glyphicons-halflings-regular-2.html
+14:33:25	Warning: 	File not parsed, looks like binary: 188.95.36.104:8080/cwc/staticResources/sites/all/themes/upsc/fonts/glyphicons-halflings-regular.woff
+14:33:25	Warning: 	File not parsed, looks like binary: 188.95.36.104:8080/cwc/staticResources/sites/all/themes/upsc/fonts/glyphicons-halflings-regular.ttf
+14:33:25	Warning: 	File not parsed, looks like binary: 188.95.36.104:8080/cwc/staticResources/slick/fonts/slick.eot
+14:33:25	Warning: 	File not parsed, looks like binary: 188.95.36.104:8080/cwc/staticResources/slick/fonts/slick.eot?
+14:33:25	Warning: 	File not parsed, looks like binary: 188.95.36.104:8080/cwc/staticResources/slick/fonts/slick.woff
+14:33:25	Warning: 	File not parsed, looks like binary: 188.95.36.104:8080/cwc/staticResources/slick/fonts/slick.ttf
+14:33:25	Error: 	"Not Found" (404) at link 188.95.36.104:8080/cwc/staticResources/galary/cwc gallery/Capture.PNG (from 188.95.36.104:8080/cwc/cwc_gallery)
+14:33:26	Error: 	"Not Found" (404) at link 188.95.36.104:8080/cwc/staticResources/galary/cwc gallery/Capture1.PNG (from 188.95.36.104:8080/cwc/cwc_gallery)
+14:33:26	Error: 	"Not Found" (404) at link 188.95.36.104:8080/cwc/staticResources/galary/cwc gallery/Capture2.PNG (from 188.95.36.104:8080/cwc/cwc_gallery)
+14:33:26	Error: 	"Not Found" (404) at link 188.95.36.104:8080/cwc/staticResources/galary/cwc gallery/Capture3.PNG (from 188.95.36.104:8080/cwc/cwc_gallery)
+14:33:26	Error: 	"Not Found" (404) at link 188.95.36.104:8080/cwc/staticResources/galary/cwc gallery/Capture4.PNG (from 188.95.36.104:8080/cwc/cwc_gallery)
+14:33:26	Error: 	"Not Found" (404) at link 188.95.36.104:8080/cwc/staticResources/galary/cwc gallery/Capture5.PNG (from 188.95.36.104:8080/cwc/cwc_gallery)
+14:33:26	Error: 	"Not Found" (404) at link 188.95.36.104:8080/cwc/staticResources/galary/cwc gallery/Capture6.PNG (from 188.95.36.104:8080/cwc/cwc_gallery)
+14:33:26	Error: 	"Not Found" (404) at link 188.95.36.104:8080/cwc/staticResources/galary/cwc gallery/Capture7.PNG (from 188.95.36.104:8080/cwc/cwc_gallery)
+14:33:26	Error: 	"Not Found" (404) at link 188.95.36.104:8080/cwc/staticResources/galary/cwc gallery/Capture8.PNG (from 188.95.36.104:8080/cwc/cwc_gallery)
+14:33:26	Error: 	"Not Found" (404) at link 188.95.36.104:8080/cwc/staticResources/galary/cwc gallery/Capture9.PNG (from 188.95.36.104:8080/cwc/cwc_gallery)
+14:36:47	Error: 	"Not Found" (404) at link 188.95.36.104:8080/cwc/staticResources/sites/default/files/images/loading.gif (from 188.95.36.104:8080/cwc/staticResources/sites/default/files/css/lightbox.min.css)
+14:36:47	Error: 	"Not Found" (404) at link 188.95.36.104:8080/cwc/staticResources/Docs/cwc_act_1962_270317.pdf (from 188.95.36.104:8080/cwc/RTI)
+14:36:47	Error: 	"Not Found" (404) at link 188.95.36.104:8080/cwc/staticResources/Docs/cwc_amendment.pdf (from 188.95.36.104:8080/cwc/RTI)
+14:36:47	Error: 	"Not Found" (404) at link 188.95.36.104:8080/cwc/staticResources/Docs/staff_reg1986.pdf (from 188.95.36.104:8080/cwc/RTI)
+14:36:47	Error: 	"Not Found" (404) at link 188.95.36.104:8080/cwc/staticResources/Docs/ammendment_200514.pdf (from 188.95.36.104:8080/cwc/RTI)
+
+HTTrack Website Copier/3.49-2 mirror complete in 10 minutes 21 seconds : 278 links scanned, 258 files written (16500637 bytes overall) [16503914 bytes received at 26576 bytes/sec], 85589 bytes transferred using HTTP compression in 1 files, ratio 34%
+(19 errors, 69 warnings, 0 messages)

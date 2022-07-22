@@ -1,0 +1,100 @@
+﻿<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+<!-- Latest compiled JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+
+<script src="~/js/html2canvas.js"></script>
+<script src="~/js/jspdf.min.js"></script>
+<script>
+
+    $(function () {
+        $('img').addClass('img-responsive');
+    })
+</script>
+<input type="hidden" id="WebsiteRootPath" value="@ViewBag.DesktopPath" class="RemoveOnSave" />
+<style>
+
+    body{
+        background-color: gray;
+    }
+</style>
+<div class="container text-center">
+    <div class="form-horizontal">
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <table style="width:100%; background-color:transparent">
+                    <tr>
+                        <td>
+
+                            <h4 class="panel-title text-left">View Offer Letter</h4>
+
+                        </td>
+
+                        <td style="text-align:right">
+                            @Html.ActionLink("Back  ", "index", "HomePage", new
+                   { @*OmID = "0"*@ }, new { @class = "btn btn-default btn-quirk" })
+                        </td>
+                    </tr>
+                </table>
+
+            </div>
+
+            <div class="panel-body" id="pagePDF">
+
+
+                @Html.Raw(@Model.InitialPageHTML)
+            </div>
+            <button class="btn btn-default" id="btnPdf">Print Pdf</button>
+        </div>
+
+
+    </div>
+
+</div>
+
+<script type="text/javascript">
+
+
+    $("#btnPdf").on('click', function () {
+        getPDF();
+    })
+    function getPDF() {
+        var HTML_Width = $("#pagePDF").width();
+        var HTML_Height = $("#pagePDF").height();
+        var top_left_margin = 10;
+        var PDF_Width = HTML_Width + (top_left_margin * 2);
+        var PDF_Height = (HTML_Height * 1.6) + (top_left_margin * 2.1);
+        var canvas_image_width = HTML_Width;
+        var canvas_image_height = HTML_Height;
+
+        var totalPDFPages = Math.ceil(HTML_Height / PDF_Height) - 1;
+
+
+        html2canvas($("#pagePDF")[0], { allowTaint: true, height: PDF_Height, y: 0 }).then(function (canvas) {
+            canvas.getContext('2d');
+
+            console.log(canvas.height + "  " + canvas.width);
+
+
+            var imgData = canvas.toDataURL("image/jpeg", 1.0, { y: 0, height: PDF_Height, Width: PDF_Width });
+            var pdf = new jsPDF('p', 'pt', [PDF_Height - PDF_Height / 2.5, PDF_Width]);
+            // pdf.addImage(imgData, 'JPG', top_left_margin, top_left_margin, canvas_image_width, canvas_image_height);
+            pdf.addImage(imgData, 'JPG', top_left_margin, 0, canvas_image_width - (canvas_image_width / 8), canvas_image_height * 1.4);
+
+            for (var i = 1; i <= totalPDFPages; i++) {
+                pdf.addPage(PDF_Width, PDF_Height);
+                pdf.addImage(imgData, 'JPG', top_left_margin, (PDF_Height * i) + (top_left_margin * 4), canvas_image_width, canvas_image_height);
+            }
+
+            pdf.save("HTML-Document.pdf");
+        });
+
+
+    };
+
+   
+</script>

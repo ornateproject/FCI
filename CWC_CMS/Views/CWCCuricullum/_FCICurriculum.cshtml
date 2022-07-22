@@ -1,0 +1,87 @@
+﻿<table class="table table-striped table-primary hover" id="datatablelist" style="width:100%">
+    <thead>
+        <tr>
+            <td class="bg-primary"><span>Date of Circular &#160; &#160; &#160; &#160;</span></td>
+            <td class="bg-primary"><span>Subject &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160;&#160;</span></td>
+        </tr>
+    </thead>
+<tbody>
+        <tr>
+            <td><span><span>16.12.1973</span></span></td>
+            <td><span>&#160;<a target="_blank" href="Docs/Foodgrain%20Utilization%20of%20unutilizated%20reserved%20space%20for%20storage%20by%20other%20depositors.pdf">Central Warehouses -reservation of space by bulk depositors utilization of&#160; reserved space for storage by other depositors's goods</a></span></td>
+        </tr>
+        <tr>
+            <td><span>29.03.1974</span></td>
+            <td><span><a target="_blank" href="Docs/Foodgrain%20Gunny%20Account%20maintenance%20Instructions.pdf"><span>Circular -Maintenance of Gunny Accounts-Instructions regarding.</span></a></span></td>
+        </tr>
+        <tr>
+            <td><span>15.09.1978</span></td>
+            <td><span><a target="_blank" href="Docs/Foodgrain%20Stock%20Transfer%20One%20stock%20to%20another.pdf"><span>Circular - Transfer of Residual Stock from&#160; One stock to other stack accounting procedure thereof.</span></a></span></td>
+        </tr>
+        <tr>
+            <td><span>19.08.1996</span></td>
+            <td><a target="_blank" href="Docs/Foodgrain%20Disposal%20of%20perishable%20stock.pdf"><span>Storage and disposal of perishable stocks like seeds etc -procedure thereof.</span></a></td>
+        </tr>
+        <tr>
+            <td><span>06.11.1998</span></td>
+            <td><span><a target="_blank" href="Docs/Food%20Grain%20Storage%20Loss%20n%20Transit%20loss%20Control%20of%20regularisation%204.pdf"><span>Circular -Control of Transit and Storage Losses and regularisation of losses within presribed time schedule.</span></a></span></td>
+        </tr>
+        <tr>
+            <td><span>25.08.2004</span></td>
+            <td><span>&#160;<a target="_blank" href="Docs/Food%20Grain%20%20Physical%20verify%20cation%3b%20P.V%20by%20depositors%20after.pdf">Circular -Physical verification of the Stocks.</a></span></td>
+        </tr>
+        <tr>
+            <td><span>22.04.2009</span></td>
+            <td><span>&#160;<a target="_blank" href="Docs/FCI%20Recovery%20of%20outstanding%20dues.pdf">Recovery of outstanding dues</a></span></td>
+        </tr>
+        <tr>
+            <td><span><span>01.08.2017</span></span></td>
+            <td><span><a target="_blank" href="Docs/Foodgrain%20(T)%20Transit%20Loss%20Measure%20to%20minimize%20T.L..pdf"><span>Measure to minimize Transit Losses in Food Grain Stocks-Regarding.</span></a></span></td>
+        </tr>
+        <tr>
+            <td><span>30.10.2018</span></td>
+            <td><span><a target="_blank" href="Docs/Price%20policy%20for%20Rab%20Crops%20of%202018-19-ltr.pdf">Price policy of Rabi Crops</a></span></td>
+        </tr>
+        <tr>
+            <td><span>23.01.2019</span></td>
+            <td><span><a target="_blank" href="Docs/comm_circ_food_rec_240119.pdf">Inspection, Sampling and Analysis procedure for Receipt of Stocks of Paddy/Rice for Kharif Marketing season 2018-19 of FCI/Civil Supplies Corporations at the Warehouses - Instructions</a></span></td>
+        </tr>
+    </tbody>
+</table>
+
+<script src="~/CssJs/dtjs.js"></script>
+<script>
+   
+    var url = '@Url.Action("ViewDocument", "CWCCuricullum")'
+    var IsEmployee = '@ViewBag.IsEmployee';
+    $("td").find("a").each(function () {
+        @*@{
+
+                    var @EncodedURL = CWC_CMS.Models.CommonDAL.EncodeString($(this).attr("href"));
+                }*@
+        $(this).attr("href", window.btoa($(this).attr("href")))
+
+
+        $(this).on('click', function (event) {
+            if (IsEmployee == "Yes") {
+                event.preventDefault();
+                $('#DocumentDiv').load(url, { EncryptedString: $(this).attr("href")})
+                //window.location.href = "/CWCCuricullum/ViewDocument?EncryptedString=" + $(this).attr("href")
+                        return true;
+                    }
+                    else {
+                        alert('You are not authenticated to View this document');
+                        return false;
+                    }
+                });
+    });
+
+
+
+    @*function SecurityCheck(RedirectingLink) {
+
+        if ('@ViewBag.IsEmployee' == "Yes") {
+
+        }
+    }*@
+</script>

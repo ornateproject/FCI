@@ -1,0 +1,931 @@
+﻿@model CWC_CMS.Models.VigilanceApplicationFormModel
+@using CaptchaMvc.HtmlHelpers
+
+@{
+    ViewBag.Title = "Vigilance Form";
+    Layout = "~/Views/Shared/_LayOutView_bak3.cshtml";
+}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.2/rollups/aes.js"></script>
+<style type="text/css">
+    .drop {
+        background-color: #fcfcfd;
+        border-color: #bdc3d1;
+        border-radius: 2px;
+        height: 38px;
+        outline: none;
+    }
+
+    .mr3 {
+        margin-left: -10px;
+    }
+
+    body {
+        background-image: url('~/images/BackgroundVigilance.png');
+    }
+</style>
+<script>
+    $(function () {
+        $('.panel-heading').attr('style', 'background-color: #79A618')
+
+    })
+</script>
+<script type="text/javascript">
+    $(function () {
+        $(".datepicker").datepicker({
+            dateFormat: 'dd-M-yy',
+            changeMonth: true,
+            changeYear: true
+        });
+        $("#basicFormOTP").hide();
+    });
+</script>
+<link href="~/css/site.css" rel="StyleSheet" />
+@*<link href="~/lib/summernote/summernote.css" rel="stylesheet" />
+    <script src="~/lib/summernote/summernote.js"></script>*@
+<script type="text/javascript">
+
+    $(document).ready(function () {
+
+        $('#basicForm').validate({
+            highlight: function (element) {
+                $(element).closest('.form-group').removeClass('has-success').addClass('has-error');
+            },
+            success: function (element) {
+                $(element).closest('.form-group').removeClass('has-error');
+            }
+        });
+        $('.select2').select2();
+    });
+
+    $(document).ready(function () {
+        $(".digit").keypress(function (e) {
+            if (e.which != 8 && e.which != 0 && (e.which < 48 || e.which > 57)) {
+                $("#errormsg").html("Digits Only").show().fadeOut("slow");
+                return false;
+            }
+        });
+
+        // Summernote
+        //$('#summernote,#summernote1, #summernote2,#summernote3,#summernote4,#summernote5,#summernote6,#summernote7,#summernote8,#summernote9').summernote({
+        //    height: 120,
+        //    toolbar: [
+        //      ['style', ['bold', 'italic', 'underline', 'clear']],
+        //      ['fontsize', ['fontsize']],
+        //      ['color', ['color']],
+        //      ['para', ['ul', 'ol', 'paragraph']]
+        //    ]
+        //});
+    });
+</script>
+
+<script>
+
+    $(document).ready(function () {
+
+        var SaveResult = '@ViewBag.SaveResult';
+        if (SaveResult == 1) {
+            $('#myModalSaveUpdate').modal('show');
+            $("#basicForm").hide();
+            $("#basicFormOTP").show();
+
+            
+
+            $('.CaptchaClass').remove();
+        }
+        @*if'(@ViewBag.SaveUpdateMessage' == "<h5> Captcha Entered Is Invalid. !!! <h5 /><br /> Kindly try again.")
+            {
+                $("#basicFormOTP").hide();
+            }*@
+    });
+</script>
+
+<script type="text/javascript">
+
+    function EncryptValue() {
+        debugger;
+        var txtpassword1 = document.getElementById("Password").value.trim();
+        if (txtpassword1 == "") {
+            alert('Please enter Password');
+            return false;
+        }
+        else {
+            //PageMethods.GetCurrentTime(document.getElementById("<%=txtPwd.ClientID%>").value, OnSuccess);
+            $.ajax({
+                async: false,
+                type: "POST",
+                url: "../VigilanceApplicationForm/Encrypt",
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                data: "{'plainText' : '" + $("#Password").val() + "'}",
+                success: OnSuccess,
+                failure: function (response) {
+                    //alert(response.d);
+                    return false;
+                }
+            });
+
+            function OnSuccess(response) {
+                debugger;
+                $("#Password").val(response);
+                return true;
+            }
+        }
+    }
+
+    function EncryptValueNew() {
+        debugger;
+        var txtpassword1 = document.getElementById("Answer").value.trim();
+        if (txtpassword1 == "") {
+            alert('Please enter Answer');
+            return false;
+        }
+        else {
+            //PageMethods.GetCurrentTime(document.getElementById("<%=txtPwd.ClientID%>").value, OnSuccess);
+            $.ajax({
+                async: false,
+                type: "POST",
+                url: "../VigilanceApplicationForm/Encrypt",
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                data: "{'plainText' : '" + $("#Answer").val() + "'}",
+                success: OnSuccess,
+                failure: function (response) {
+                    //alert(response.d);
+                    return false;
+                }
+            });
+
+            function OnSuccess(response) {
+                debugger;
+                $("#Answer").val(response);
+                return true;
+            }
+        }
+    }
+
+    function EncryptValueConfirm() {
+        debugger;
+        var txtpassword1 = document.getElementById("ConfirmPassword").value.trim();
+        if (txtpassword1 == "") {
+            alert('Please enter Confirm Password');
+            return false;
+        }
+        else {
+            //PageMethods.GetCurrentTime(document.getElementById("<%=txtPwd.ClientID%>").value, OnSuccess);
+            $.ajax({
+                async: false,
+                type: "POST",
+                url: "../VigilanceApplicationForm/Encrypt",
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                data: "{'plainText' : '" + $("#ConfirmPassword").val() + "'}",
+                success: OnSuccess,
+                failure: function (response) {
+                    //alert(response.d);
+                    return false;
+                }
+            });
+
+            function OnSuccess(response) {
+                debugger;
+                $("#ConfirmPassword").val(response);
+                return true;
+            }
+        }
+    }
+</script>
+
+<script type="text/javascript">
+    // Script For Spcial Charcter not to be allowed
+    var specialKeys = new Array();
+    specialKeys.push(8); //Backspace
+    specialKeys.push(9); //Tab
+    specialKeys.push(46); //Delete
+    specialKeys.push(36); //Home
+    specialKeys.push(35); //End
+    specialKeys.push(37); //Left
+    specialKeys.push(39); //Right
+    function IsAlphaNumeric(e) {
+        var keyCode = e.keyCode == 0 ? e.charCode : e.keyCode;
+        var ret = ((keyCode >= 48 && keyCode <= 57) || (keyCode == 32) || (keyCode >= 65 && keyCode <= 90) || (keyCode >= 97 && keyCode <= 122) || (specialKeys.indexOf(e.keyCode) != -1 && e.charCode != e.keyCode));
+        document.getElementById("error").style.display = ret ? "none" : "inline";
+        return ret;
+    }
+
+    function IsAlphaNumeric1(e) {
+        var keyCode = e.keyCode == 0 ? e.charCode : e.keyCode;
+        var ret = ((keyCode >= 48 && keyCode <= 57) || (keyCode == 32) || (keyCode >= 65 && keyCode <= 90) || (keyCode >= 97 && keyCode <= 122) || (specialKeys.indexOf(e.keyCode) != -1 && e.charCode != e.keyCode));
+        document.getElementById("error1").style.display = ret ? "none" : "inline";
+        return ret;
+    }
+</script>
+
+
+    @Html.AntiForgeryToken()
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-10 col-md-offset-1">
+                @Html.ValidationSummary(true)
+                <!-- panel -->
+
+                <div class="panel panel-primary">
+                    <div class="panel-heading">
+                        <div class="row">
+                            <div class="col-sm-5">
+
+                                <img src="https://fci.gov.in/images/logo.png" height="50" />
+                            </div>
+                            <div class="col-sm-6">
+                                <h3 class="" style="color:#fff">Complaint Management System</h3>
+                            </div>
+                            <div class="col-sm-1">
+                                @Html.ActionLink("Login  ", "index", "Login", new
+                           {@*OmID = "0"*@}, new { @class = "btn btn-success btn-quirk btn-wide mr3" })
+                            </div>
+                        </div>
+
+
+                    </div>
+                    @using (Html.BeginForm("Create", "VigilanceApplicationForm", FormMethod.Post, new { @class = "form-horizontal", id = "basicForm", enctype = "multipart/form-data" }))
+                    {
+                        <div class="panel-body">
+                            <div class="panel panel-primary" style="border: dotted 1px">
+                                <div class="panel-heading">
+                                    <div class="row">
+                                        <div class="col-md-11">
+                                            <h4 style="color:#ffffff">Registration Details</h4>
+                                        </div>
+                                        <div class="col-sm-1">
+                                            @*<a class="btn btn-default btn-quirk" href="http://www.cewacor.nic.in/CWCViewPage?q=aRHkPwqENGlw33ullbX4y8BYQa6K1n5FHPelqCebYUbYJQKR5t9Rqy%2FOZKhP5LKnZXTWFy9QNbA%3D">Back  </a>*@
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <div class="panel-body">
+                                    <div class="row">
+                                        <div>
+                                            <br />
+                                            <div class="form-group">
+
+                                                <div class="col-md-5 col-md-offset-1">
+                                                    <label class="control-label"><b style="font-size: 115%;">User Name</b><b style="font-size: 25px; font-weight: 900;"><span class="text-danger">*</span></b></label>
+                                                    <div class="input-group">
+                                                        <span class="input-group-addon">
+                                                            <i class="glyphicon glyphicon-user"></i>
+                                                        </span>
+                                                        @Html.TextBoxFor(model => model.UserName, new { @class = "form-control", @onkeypress = "return IsAlphaNumeric(event)", autocomplete = "off", placeholder = "Enter Alphanumeric Only" })
+                                                    </div>
+                                                    <span class="col-sm-3 control-label" style="color:red;margin-right:-10px"> </span>
+                                                    @Html.ValidationMessageFor(model => model.UserName, "", new { @class = "text-danger" })
+                                                    <span id="error" style="color: Red; display: none">* Special Characters not allowed</span>
+                                                    @{
+                                                        if (@ViewBag.UserNameResult == "1")
+                                                        {
+                                                            <span id="UserNameResulterror" style="color: Red; display: block">This User Name is already exist, Please provide another one</span>
+                                                        }
+                                                    }
+                                                </div>
+
+                                                <div class="col-md-5">
+                                                    <label class="control-label"><b style="font-size: 115%;">Password</b><b style="font-size: 25px; font-weight: 900;"><span class="text-danger">*</span></b></label>
+                                                    <div class="input-group">
+                                                        <span class="input-group-addon">
+                                                            <i class="glyphicon glyphicon-eye-close"></i>
+                                                        </span>
+                                                        @Html.TextBoxFor(model => model.Password, new { @class = "form-control", autocomplete = "off", onchange = "EncryptValue()", placeholder = "Should contain 1 digit,1 Special Character,1 small, 1 capital letter and minimum 7 character", @type = "password" })
+                                                    </div>
+                                                    <span class="col-sm-3 control-label" style="color:red;margin-right:-10px"> </span>
+                                                    @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+                                                    @{
+                                                        if (@ViewBag.PasswordResult == "1")
+                                                        {
+                                                            <span id="Passworderror" style="color: Red; display: block">Password must be at least 7 characters, no more than 15 characters, and must include at least one upper case letter, one lower case letter, one numeric digit and one special character.</span>
+                                                        }
+                                                    }
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group">
+
+                                                <div class="col-md-5 col-md-offset-1">
+                                                    <label class="control-label"><b style="font-size: 115%;">Confirm Password</b><b style="font-size: 25px; font-weight: 900;"><span class="text-danger">*</span></b></label>
+                                                    <div class="input-group">
+                                                        <span class="input-group-addon">
+                                                            <i class="glyphicon glyphicon-eye-close">
+                                                            </i>
+                                                        </span>
+                                                        @Html.TextBoxFor(model => model.ConfirmPassword, new { @class = "form-control", autocomplete = "off", onchange = "EncryptValueConfirm()", placeholder = "Should contain 1 digit,1 Special Character,1 small, 1 capital letter and minimum 8 character", @type = "password" })
+                                                    </div>
+                                                    <span class="col-sm-3 control-label" style="color:red;margin-right:-10px"> </span>
+                                                    @Html.ValidationMessageFor(model => model.ConfirmPassword, "", new { @class = "text-danger" })
+
+                                                </div>
+
+                                                <div class="col-md-5">
+                                                    <label class="control-label"><b style="font-size: 115%;">Security Question</b><b style="font-size: 25px; font-weight: 900;"><span class="text-danger">*</span></b></label>
+                                                    <div class="input-group">
+                                                        <span class="input-group-addon">
+                                                            <i class="glyphicon glyphicon-text-width"></i>
+                                                        </span>
+                                                        @Html.DropDownListFor(model => model.SecurityQuestion, new SelectList(@ViewBag.FillSecurityQuestion, "Value", "Text", selectedValue: false), "Please Select", new { id = "SecurityQuestionID", @class = "drop select2", style = "width: 100%", required = true })
+                                                    </div>
+                                                    @Html.HiddenFor(model => model.SecurityQuestion, new { required = false })
+                                                    @Html.ValidationMessageFor(model => model.SecurityQuestion, "", new { @class = "text-danger" })
+
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+
+                                                <div class="col-md-5 col-md-offset-1">
+                                                    <label class="control-label"><b style="font-size: 115%;">Answer</b><b style="font-size: 25px; font-weight: 900;"><span class="text-danger">*</span></b></label>
+                                                    <div class="input-group">
+                                                        <span class="input-group-addon">
+                                                            <i class="glyphicon glyphicon-eye-close"></i>
+                                                        </span>
+                                                        @Html.TextBoxFor(model => model.Answer, new { @class = "form-control", autocomplete = "off", onchange = "EncryptValueNew()", placeholder = "Please enter Answer", @type = "password" })
+                                                    </div>
+                                                    @Html.ValidationMessageFor(model => model.Answer, "", new { @class = "text-danger" })
+
+                                                </div>
+                                            </div>
+
+
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <br />
+                                <div class="panel-heading">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <h4 style="color:#ffffff">Personal Details</h4>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="panel-body">
+                                    <div class="row">
+                                        <div class="form-group">
+
+                                            <div class="col-md-5 col-md-offset-1">
+                                                <label class="control-label"><b style="font-size: 115%;">Salutation</b></label>
+                                                @Html.DropDownListFor(model => model.Salutation, new SelectList(@ViewBag.FillSalutation, "Value", "Text", selectedValue: false), "Please Select", new { id = "SalutationID", @class = "drop select2", style = "width: 100%", required = true })
+                                                @Html.HiddenFor(model => model.Salutation, new { required = false })
+                                                @Html.ValidationMessageFor(model => model.Salutation, "", new { @class = "text-danger" })
+
+                                            </div>
+
+
+                                            <div class="col-md-5">
+                                                <label class="control-label"><b style="font-size: 115%;">Name</b><b style="font-size: 25px; font-weight: 900;"><span class="text-danger">*</span></b></label>
+                                                <div class="input-group">
+                                                    <span class="input-group-addon">
+                                                        <i class="glyphicon glyphicon-user"></i>
+                                                    </span>
+                                                    @Html.TextBoxFor(model => model.Name, new { @class = "form-control", @onkeypress = "return IsAlphaNumeric1(event)", autocomplete = "off", placeholder = "Please enter Name" })
+                                                </div>
+                                                @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+                                                <span id="error1" style="color: Red; display: none">* Special Characters not allowed</span>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+
+                                            <div class="col-md-5 col-md-offset-1">
+                                                <label class="control-label"><b style="font-size: 115%;">Age</b><b style="font-size: 25px; font-weight: 900;"><span class="text-danger">*</span></b></label>
+                                                @Html.TextBoxFor(model => model.Age, new { @class = "form-control", autocomplete = "off", placeholder = "Please enter Age" })
+                                                @Html.ValidationMessageFor(model => model.Age, "", new { @class = "text-danger" })
+                                            </div>
+                                            <div class="col-md-5">
+                                                <label class="control-label"><b style="font-size: 115%;">Government Id :</b></label>
+                                                <div class="form-group">
+                                                    <div class="custom-control custom-radio custom-control-inline col-sm-6 padding5" style="padding-left:20px">
+                                                        @Html.RadioButtonFor(model => model.IsGovernmentIDPanCardOrAadharCard, "IsPanCard", new { @class = "custom-control-input", @id = "IsGovernmentIDPanCard" })
+                                                        <label class="custom-control-label" for="EMDExceptionAllowed">Pan Card</label>
+                                                    </div>
+                                                    <div class="custom-control custom-radio custom-control-inline col-sm-6 padding5">
+                                                        @Html.RadioButtonFor(model => model.IsGovernmentIDPanCardOrAadharCard, "IsAadharCard", new { @class = "custom-control-input", @id = "IsGovernmentIDAadharCard" })
+                                                        <label class="custom-control-label" for="EMDExceptionNotAllowed">Aadhar Card</label>
+                                                        @Html.ValidationMessageFor(model => model.IsGovernmentIDPanCardOrAadharCard, "", new { @class = "text-danger" })
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group" id="PanCardDiv">
+                                            <div class="col-md-5 col-md-offset-1">
+                                                <label class="control-label"><b style="font-size: 115%;">Enter Pan Card No</b></label>
+                                                <div class="col-md-12" style="padding-left: 0px;">
+                                                    @Html.TextBoxFor(model => model.PanCard, new { @class = "form-control", autocomplete = "off", placeholder = "XXXXX1234X", onchange = "EncryptValuePen()", type = "Password" })
+                                                    @Html.ValidationMessageFor(model => model.PanCard, "", new { @class = "text-danger" })
+                                                    @{
+                                                        if (@ViewBag.PanCardResult == "1")
+                                                        {
+                                                            <span id="PanCarderror" style="color: Red; display: block">Enter Valid PanCard Number</span>
+                                                        }
+                                                    }
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group" id="AadharCardDiv">
+                                            <div class="col-md-5 col-md-offset-1">
+                                                <label class="control-label"><b style="font-size: 115%;">Enter Aadhar Card No</b></label>
+                                                <div class="col-md-12" style="padding-left: 0px;">
+                                                    @Html.TextBoxFor(model => model.AadharCard, new { @class = "form-control", autocomplete = "off", onchange = "EncryptValueAadhar()", type = "Password", required = true, placeholder = "12 Digit Number" })
+                                                    @Html.ValidationMessageFor(model => model.AadharCard, "", new { @class = "text-danger" })
+                                                    @{
+                                                        if (@ViewBag.AadharResult == "1")
+                                                        {
+                                                            <span id="Aadharerror" style="color: Red; display: block">Only Number </span>
+                                                        }
+                                                    }
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        @*<div class="form-group" id="PanCardDiv">
+                                <label class="col-sm-3 control-label"><b style="font-size: 115%;">Enter Pan Card No</b></label>
+                                <div class="col-sm-6">
+                                    @Html.TextBoxFor(model => model.PanCard, new { @class = "form-control", placeholder = "XXXXX1234X" })
+                                    @Html.ValidationMessageFor(model => model.PanCard, "", new { @class = "text-danger" })
+
+                                </div>
+                            </div>
+
+                            <div class="form-group" id="AadharCardDiv">
+                                <label class="col-sm-3 control-label"><b style="font-size: 115%;">Enter Aadhar Card No</b></label>
+                                <div class="col-sm-6">
+                                    @Html.TextBoxFor(model => model.AadharCard, new { @class = "form-control", placeholder = "12 Digit Number" })
+                                    @Html.ValidationMessageFor(model => model.AadharCard, "", new { @class = "text-danger" })
+
+                                </div>
+                            </div>*@
+
+                                        <div class="form-group">
+                                            <div class="col-md-5 col-md-offset-1">
+                                                <label class="control-label"><b style="font-size: 115%;">Address</b><b style="font-size: 25px; font-weight: 900;"><span class="text-danger">*</span></b></label>
+                                                <div class="input-group">
+                                                    <span class="input-group-addon">
+                                                        <i class="glyphicon glyphicon-home"></i>
+                                                    </span>
+                                                    @Html.TextAreaFor(model => model.Address, new { @class = "form-control", autocomplete = "off", placeholder = "Only these ('-','.','/' & ',')Special characters are allowed to use" })
+                                                </div>
+                                                @Html.ValidationMessageFor(model => model.Address, "", new { @class = "text-danger" })
+
+                                            </div>
+
+                                            <div class="col-md-5">
+                                                <label class="control-label"><b style="font-size: 115%;">State</b><b style="font-size: 25px; font-weight: 900;"><span class="text-danger">*</span></b></label>
+                                                @Html.DropDownListFor(model => model.State, new SelectList(@ViewBag.FillState, "Value", "Text", selectedValue: false), "SELECT", new { id = "StateDropdown", @class = "drop select2", style = "width: 100%" })
+                                                @Html.ValidationMessageFor(model => model.State, "", new { @class = "text-danger" })
+
+                                            </div>
+                                        </div>
+
+
+
+
+                                        <div class="form-group">
+                                            <div class="col-md-5 col-md-offset-1">
+                                                <label class="control-label"><b style="font-size: 115%;">City</b><b style="font-size: 25px; font-weight: 900;"><span class="text-danger">*</span></b></label>
+                                                @Html.DropDownListFor(model => model.City, new SelectList(@ViewBag.FillCity, "Value", "Text", selectedValue: false), "SELECT", new { id = "CityDropdown", @class = "drop select2", style = "width: 100%" })
+                                                @Html.ValidationMessageFor(model => model.City, "", new { @class = "text-danger" })
+
+                                            </div>
+
+                                            <div class="col-md-5">
+                                                <label class="control-label"><b style="font-size: 115%;">Pin</b><b style="font-size: 25px; font-weight: 900;"><span class="text-danger">*</span></b></label>
+                                                @Html.DropDownListFor(model => model.Pincode, new SelectList(@ViewBag.FillPincode, "Value", "Text", selectedValue: false), "SELECT", new { id = "PincodeDropdown", @class = "drop select2", style = "width: 100%" })
+                                                @Html.ValidationMessageFor(model => model.Pincode, "", new { @class = "text-danger" })
+
+                                            </div>
+                                        </div>
+
+
+
+                                        <div class="form-group">
+                                            <div class="col-md-5 col-md-offset-1">
+                                                <label class="control-label"><b style="font-size: 115%;">E-mail:</b><b style="font-size: 25px; font-weight: 900;"><span class="text-danger">*</span></b></label>
+                                                <div class="input-group">
+                                                    <span class="input-group-addon">
+                                                        <i class="glyphicon glyphicon-envelope"></i>
+                                                    </span>
+                                                    @Html.TextBoxFor(model => model.Email, new { @class = "form-control", autocomplete = "off", placeholder = "Please Enter E-Mail" })
+                                                </div>
+                                                @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+
+                                            </div>
+
+                                            <div class="col-md-5">
+                                                <label class="control-label"><b style="font-size: 115%;">Mobile Number:</b><b style="font-size: 25px; font-weight: 900;"><span class="text-danger">*</span></b></label>
+                                                <div class="input-group">
+                                                    <span class="input-group-addon">
+                                                        <i class="glyphicon glyphicon-phone"></i>
+                                                    </span>
+                                                    @Html.TextBoxFor(model => model.MobileNo, new { @class = "form-control", autocomplete = "off", placeholder = "10 Digit Number", id = "MobileNo" })
+
+                                                </div>
+                                                @Html.ValidationMessageFor(model => model.MobileNo, "", new { @class = "text-danger" })
+
+
+
+                                            </div>
+                                        </div>
+
+                                        <p style="margin-left: 9%;color:red;margin-top: -1%;">One-time password (OTP) will be received on registered email ID.</p>
+
+
+                                        <div class="form-group">
+                                            <div class="col-md-5 col-md-offset-1">
+                                                <label class="control-label"><b style="font-size: 115%;">Landline Number</b>:</label>
+                                                <div class="form-group">
+                                                    <div class="col-sm-3">
+                                                        <div class="input-group">
+                                                            <span class="input-group-addon">
+                                                                <i class="glyphicon glyphicon-phone-alt"></i>
+                                                            </span>
+                                                            <input type="text" class="form-control" readonly="readonly" placeholder="+91" />
+
+                                                        </div>
+
+
+
+                                                    </div>
+
+                                                    <div class="col-sm-4">
+                                                        @Html.TextBoxFor(model => model.LandlineStdCode, new { @class = "form-control", autocomplete = "off", placeholder = "3 Digit" })
+
+                                                        @Html.ValidationMessageFor(model => model.LandlineStdCode, "", new { @class = "text-danger" })
+
+
+
+                                                    </div>
+
+                                                    <div class="col-sm-5">
+
+                                                        @Html.TextBoxFor(model => model.LandlineNo, new { @class = "form-control", autocomplete = "off", placeholder = "8 Digit" })
+
+                                                        @Html.ValidationMessageFor(model => model.LandlineNo, "", new { @class = "text-danger" })
+
+
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <div class="col-md-5 col-md-offset-1">
+
+                                                @*<label class="control-label"><b style="font-size: 115%;">Captcha</b> :<b style="font-size: 25px; font-weight: 900;"><span class="text-danger">*</span></b></label>
+                                    <div class="col-md-12">
+                                        @Html.MathCaptcha()
+
+                                    </div>*@
+
+                                                <label class="control-label"><b style="font-size: 115%;">Captcha</b> :<span class="text-danger">*</span></label>
+                                                <div class="form-group">
+                                                    <div class="col-sm-4">
+                                                        <img  src="~/Login/ShowCaptchaImage" />
+                                                        </div>
+                                                        <div class="col-sm-6">
+                                                            @*@Html.ActionLink("Refresh", "Index", new { }, new { style = "color:blue;  text-decoration: underline;" })*@
+                                                            @Html.TextBox("CaptchaText", null, new { @class = "form-control", @placeholder = "Captcha", autocomplete = "off", required = true })
+                                                        </div>
+                                                    </div>
+                                            </div>
+                                        </div>
+
+
+
+                                    </div>
+                                </div>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="row">
+                            <div class="form-group">
+                                <div class="col-md-5 col-md-offset-2">
+                                    @{
+                                        if (@ViewBag.IsNewForm == "Yes")
+                                        {
+                                            <input type="submit" value=" Save " id="btnSubmit" class="btn btn-success btn-quirk btn-wide mr5" />
+                                        }
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+                                  
+
+@using (Html.BeginForm("CheckIfOtpEnteredIsValid", "VigilanceApplicationForm", FormMethod.Post, new { @class = "form-horizontal", id = "basicFormOTP", enctype = "multipart/form-data" }))
+{
+    @*@Html.AntiForgeryToken()
+
+        @Html.ValidationSummary(true)*@
+    <div class="container-fluid">
+        <div class="form-horizontal">
+            <div class="panel panel-primary">
+                <!-- panel -->
+                <div class="panel-heading">
+                    <table style="width:100%; background-color:transparent">
+                        <tr>
+                            <td>
+                                <h4 class="panel-title">OTP Section</h4>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="panel-body">
+                    <div style="border: dotted 1px">
+                        <br />
+
+
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">Enter OTP<b style="font-size: 25px; font-weight: 900;"><span class="text-danger">*</span></b></label>
+                            <div class="col-sm-6">
+                                @Html.TextBoxFor(model => model.OTP, new { @class = "form-control", placeholder = "Enter Your 6 digit OTP" })
+                                <span class="col-sm-3 control-label" style="color:red;margin-right:-10px"> </span>
+                                @Html.ValidationMessageFor(model => model.OTP, "", new { @class = "text-danger" })
+
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-offset-2 col-md-10 padding10">
+                                <input type="submit" value=" Submit " id="btnSubmit" class="btn btn-success btn-quirk btn-wide mr5" />
+
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+}
+
+<script type="text/javascript">
+    $(function () {
+
+        if ($('#StateDropdown').find('option:selected').text() == 'SELECT') {
+            $('#CityDropdown').empty();
+            $('#CityDropdown').append($('<option/>', { value: -1, text: 'SELECT' }));
+            $('#CityDropdown').select2();
+            $('#PincodeDropdown').empty();
+            $('#PincodeDropdown').append($('<option/>', { value: -1, text: 'SELECT' }));
+            $('#PincodeDropdown').select2();
+        }
+        else {
+            var StateValue = $('#StateDropdown').val();
+            var CityValue = $('#CityDropdown').val();
+            var PincodeValue = $('#PincodeDropdown').val();
+            $('#StateDropdown').change();
+            $('#CityDropdown').val('');
+            $('#CityDropdown').val(CityValue).change();
+            $('#PincodeDropdown').val(PincodeValue);
+        }
+
+
+        $('#StateDropdown').on('change', function () {
+
+            if ($(this).find('option:selected').text() == 'SELECT') {
+                $('#CityDropdown').empty();
+                $('#CityDropdown').append($('<option/>', { value: -1, text: 'SELECT' }));
+                $('#CityDropdown').select2();
+            }
+            else {
+                $.ajax({
+                    url: '../VigilanceApplicationForm/FillCityByStateID',
+                    method: 'Post',
+                    dataType: 'json',
+                    data: { StateID: $(this).val() },
+                    success: function (data) {
+                        $('#CityDropdown').empty();
+                        $('#CityDropdown').append($('<option/>', { value: -1, text: 'SELECT' }));
+                        $('#CityDropdown').select2();
+                        $(data).each(function (index, item) {
+
+                            $('#CityDropdown').append('<option value="' + item.Value + '">' + item.Text + '</option>');
+                        });
+
+                        $('#CityDropdown').select2();
+                        $('#CityDropdown').change();
+                    }
+                });
+            }
+        });
+
+
+
+        $('#CityDropdown').on('change', function () {
+            debugger;
+            if ($(this).find('option:selected').text() == 'SELECT') {
+                $('#PincodeDropdown').empty();
+                $('#PincodeDropdown').append($('<option/>', { value: -1, text: 'SELECT' }));
+                $('#PincodeDropdown').select2();
+            }
+            else {
+                $.ajax({
+                    url: '../VigilanceApplicationForm/FillPincodeByCityID',
+                    method: 'Post',
+                    dataType: 'json',
+                    data: { CityID: $(this).val() },
+                    success: function (data) {
+                        $('#PincodeDropdown').empty();
+                        $('#PincodeDropdown').append($('<option/>', { value: -1, text: 'SELECT' }));
+                        $('#CityDropdown').select2();
+                        $(data).each(function (index, item) {
+
+                            $('#PincodeDropdown').append('<option value="' + item.Value + '">' + item.Text + '</option>');
+                        });
+
+                        $('#PincodeDropdown').select2();
+                    }
+                });
+            }
+        });
+
+
+    });
+</script>
+
+<script type="text/javascript">
+
+    $(function () {
+        console.log($("input[type='radio'][name='IsGovernmentIDPanCardOrAadharCard']:checked").val());
+
+        if ($("input[type='radio'][name='IsGovernmentIDPanCardOrAadharCard']:checked").val() == "IsPanCard") {
+            $('#PanCardDiv').show();
+            $('#AadharCardDiv').hide();
+        }
+        else if ($("input[type='radio'][name='IsGovernmentIDPanCardOrAadharCard']:checked").val() == "IsAadharCard") {
+
+            $('#PanCardDiv').hide();
+            $('#AadharCardDiv').show();
+        }
+        else {
+
+            $('#PanCardDiv').hide();
+            $('#AadharCardDiv').hide();
+        }
+
+
+        $('#IsGovernmentIDPanCard').change(function () {
+            $('#PanCardDiv').show();
+            $('#AadharCardDiv').hide();
+
+        });
+
+        $('#IsGovernmentIDAadharCard').change(function () {
+            $('#PanCardDiv').hide();
+            $('#AadharCardDiv').show();
+        });
+    });
+</script>
+<script type="text/javascript">
+
+    function EncryptValueAadhar() {
+        debugger;
+        var txtpassword1 = document.getElementById("AadharCard").value.trim();
+        if (txtpassword1 == "") {
+            alert('Please enter Enter Aadhar Card');
+            return false;
+        }
+        else {
+            //PageMethods.GetCurrentTime(document.getElementById("<%=txtPwd.ClientID%>").value, OnSuccess);
+            $.ajax({
+                async: false,
+                type: "POST",
+                url: "../VigilanceApplicationForm/Encrypt",
+                //url: "Encrypt",
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                data: "{'plainText' : '" + $("#AadharCard").val() + "'}",
+                success: OnSuccess,
+                failure: function (response) {
+                    //alert(response.d);
+                    return false;
+                }
+            });
+
+            function OnSuccess(response) {
+                debugger;
+                $("#AadharCard").val(response);
+                return true;
+            }
+        }
+    }
+
+    function EncryptValuePen() {
+        debugger;
+        var txtpassword1 = document.getElementById("PanCard").value.trim();
+        if (txtpassword1 == "") {
+            alert('Please enter Enter Pan Card');
+            return false;
+        }
+        else {
+            //PageMethods.GetCurrentTime(document.getElementById("<%=txtPwd.ClientID%>").value, OnSuccess);
+            $.ajax({
+                async: false,
+                type: "POST",
+                url: "../VigilanceApplicationForm/Encrypt",
+                //url: "Encrypt",
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                data: "{'plainText' : '" + $("#PanCard").val() + "'}",
+                success: OnSuccess,
+                failure: function (response) {
+                    //alert(response.d);
+                    return false;
+                }
+            });
+
+            function OnSuccess(response) {
+                debugger;
+                $("#PanCard").val(response);
+                return true;
+            }
+        }
+    }
+</script>
+
+<center>
+    <div class="modal fade" id="myModalSaveUpdate" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header btn-danger">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h2 class="modal-title">Message from System</h2>
+                </div>
+                <div class="modal-body">
+                    @*@if (ViewBag.SaveUpdateMessage != null)
+                        {
+                            @Html.Raw(@ViewBag.SaveUpdateMessage)
+                        }*@
+
+                    @if (ViewBag.SaveUpdateMessage != null)
+                    {
+                        <script type="text/javascript">
+                            window.onload = function () {
+                                alert("@ViewBag.SaveUpdateMessage");
+                            };
+                        </script>
+                    }
+                </div>
+                <div class="modal-footer">
+                    <a href="http://49.50.87.108:8080/homepage" class="btn btn-primary">Home</a><br /><br />
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</center>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#basicForm').submit(function () {
+            debugger;
+            var result1 = $('#PDF_File_Path1').val();
+
+
+            var result2 = $('#PDF_File_Path2').val();
+
+
+            var result3 = $('#PDF_File_Path3').val();
+            var _FileName3 = $('#PDF_File_Path3_string').val();
+
+            if (result1 == "undefined" || result1 == "") {
+                alert("Please Upload possession, enclose proofs. PDF File");
+                return false;
+            }
+            if (_FileName2 == "undefined" || _FileName2 == "") {
+                if (result2 == "undefined" || result2 == "") {
+                    alert("Please Upload enclose DPC certificate PDF File");
+                    return false;
+                }
+            }
+            if (_FileName3 == "undefined" || _FileName3 == "") {
+                if (result3 == "undefined" || result3 == "") {
+                    alert("Please Upload occupation certificate, enclose proofs PDF File");
+                    return false;
+                }
+            }
+            else {
+                return true;
+            }
+        });
+    });
+</script>

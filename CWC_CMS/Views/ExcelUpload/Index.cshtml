@@ -1,0 +1,364 @@
+﻿@model CWC_CMS.Models.MyViewModel
+
+@{
+    ViewBag.Title = "Vigilance Form";
+    Layout = "~/Views/Shared/_LayOutView_bak3.cshtml";
+}
+
+
+
+
+
+
+<style type="text/css">
+    .drop {
+        background-color: #fcfcfd;
+        border-color: #bdc3d1;
+        border-radius: 2px;
+        height: 38px;
+        outline: none;
+    }
+
+
+    body {
+        background-image: url('~/images/BackgroundVigilance.png');
+    }
+</style>
+<style type="text/css">
+    #tblExcel {
+        width: 1000px;
+        border: none;
+        background-color: #000000;
+    }
+
+    .tdColumnHeader {
+        padding: 2px 2px 2px 2px;
+        text-align: center;
+        font-family: Verdana;
+        font-size: 12px;
+        font-weight: bold;
+        background-color: cornflowerblue;
+        color: #FFFFFF;
+    }
+
+    .tdCellData {
+        padding: 2px 2px 2px 2px;
+        font-family: Verdana;
+        font-size: 12px;
+        background-color: aqua;
+        color: #000000;
+    }
+</style>
+
+<script type="text/javascript">
+    $(function () {
+        $(".datepicker").datepicker({
+            dateFormat: 'dd-M-yy',
+            changeMonth: true,
+            changeYear: true
+        });
+        $("#basicFormOTP").hide();
+    });
+</script>
+<link href="~/css/site.css" rel="StyleSheet" />
+@*<link href="~/lib/summernote/summernote.css" rel="stylesheet" />
+    <script src="~/lib/summernote/summernote.js"></script>*@
+<script type="text/javascript">
+
+    $(document).ready(function () {
+
+        $('#basicForm').validate({
+            highlight: function (element) {
+                $(element).closest('.form-group').removeClass('has-success').addClass('has-error');
+            },
+            success: function (element) {
+                $(element).closest('.form-group').removeClass('has-error');
+            }
+        });
+        $('.select2').select2();
+    });
+
+    $(document).ready(function () {
+        $(".digit").keypress(function (e) {
+            if (e.which != 8 && e.which != 0 && (e.which < 48 || e.which > 57)) {
+                $("#errormsg").html("Digits Only").show().fadeOut("slow");
+                return false;
+            }
+        });
+
+        // Summernote
+        //$('#summernote,#summernote1, #summernote2,#summernote3,#summernote4,#summernote5,#summernote6,#summernote7,#summernote8,#summernote9').summernote({
+        //    height: 120,
+        //    toolbar: [
+        //      ['style', ['bold', 'italic', 'underline', 'clear']],
+        //      ['fontsize', ['fontsize']],
+        //      ['color', ['color']],
+        //      ['para', ['ul', 'ol', 'paragraph']]
+        //    ]
+        //});
+    });
+</script>
+
+<script>
+
+    $(document).ready(function () {
+
+        var SaveResult = '@ViewBag.SaveResult';
+        if (SaveResult == 1) {
+            $('#myModalSaveUpdate').modal('show');
+
+        }
+    });
+</script>
+
+@using (Html.BeginForm("Index", "ExcelUpload", FormMethod.Post, new { @class = "form-horizontal", id = "basicForm", enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-10 col-md-offset-1">
+                @Html.ValidationSummary(true)
+                <!-- panel -->
+
+                <div class="panel panel-primary">
+                    <div class="panel-heading">
+                        <div class="row">
+                            <div class="col-sm-5">
+
+                                <img src="https://fci.gov.in/images/logo.png" height="50" />
+                            </div>
+                            <div class="col-sm-6">
+                                <h3 class="" style="color:#fff">Excel Upload Portal</h3>
+                            </div>
+                            <div class="col-sm-1">
+                                @Html.ActionLink("Back  ", "index", "ExcelUpload", new
+                   {  }, new { @class = "btn btn-default btn-quirk" })
+                            </div>
+                        </div>
+
+
+                    </div>
+                    <div class="panel-body">
+                        <div class="panel panel-primary" style="border: dotted 1px">
+                            <div class="panel-heading">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <h4 style="color:#ffffff">Excel Upload</h4>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="panel-body">
+                                <div class="row">
+                                    <div>
+                                        <br />
+
+
+                                        <div class="form-group">
+
+                                            <div class="col-md-3 col-md-offset-1">
+                                                <label class="control-label"><b style="font-size: 115%;">Exam Name</b><span class="text-danger">*</span></label>
+                                                <div class="input-group">
+                                                    <span class="input-group-addon">
+                                                        <i class="glyphicon glyphicon-text-width"></i>
+                                                    </span>
+                                                    @Html.TextBoxFor(model => model.ExamName, new { @class = "form-control", placeholder = "Type here...", required = true })
+                                                    <span class="col-sm-3 control-label" style="color:red;margin-right:-10px">   </span>
+                                                    @Html.ValidationMessageFor(model => model.ExamName)
+
+
+                                                </div>
+                                            </div>
+                                            <div class="col-md-3">
+                                                <label class="control-label"><b style="font-size: 115%;">Excel File </b><span class="text-danger">*</span></label>
+                                                <div class="input-group">
+                                                    <span class="input-group-addon">
+                                                        <i class="glyphicon glyphicon-eye-close"></i>
+                                                    </span>
+                                                    @Html.TextBoxFor(model => model.MyExcelFile, new { @class = "form-control", placeholder = "", @type = "file" , @id = "FileUpload"})
+                                                </div>
+                                                <span class="col-sm-3 control-label" style="color:red;margin-right:-10px"> </span>
+                                                @Html.ValidationMessageFor(model => model.MyExcelFile, "", new { @class = "text-danger" })
+
+                                            
+
+                                        </div>
+
+                                            <div class="col-md-3">
+                                                <label class="control-label"><b style="font-size: 115%;">Image Files For Result </b><span class="text-danger">*</span></label>
+                                                <div class="input-group">
+                                                    <span class="input-group-addon">
+                                                        <i class="glyphicon glyphicon-eye-close"></i>
+                                                    </span>
+                                                    @Html.TextBoxFor(model => model.ResultImageFiles, new { @class = "form-control", placeholder = "", @type = "file", @multiple = "multiple" })
+                                                </div>
+                                                <span class="col-sm-3 control-label" style="color:red;margin-right:-10px"> </span>
+                                                @Html.ValidationMessageFor(model => model.ResultImageFiles, "", new { @class = "text-danger" })
+
+
+
+                                            </div>
+                                    </div>
+                                        
+                                </div>
+                            </div>
+                                <span class="control-label" style="color:red;margin-right:-10px">Fields "ROLL_NO", "REGT_NO", "BIRTH_DATE" are mandatory in Excel.These must be Present in the excel with same Header Name as these fields will be used for Login. Correct Format for "BIRTH_DATE" is "yyyy-mm-dd".(Eg :  2019-01-31) </span>
+                            <br />
+
+                        </div>
+
+                    </div>
+                    <div class="row">
+                        <div class="form-group">
+                            <div class="col-md-5 col-md-offset-2">
+                             
+                                <input type="submit" value="Validate" name="action:ValidateExcel" class="btn btn-success btn-quirk btn-wide mr5" />
+                                @{
+
+                                    if (@ViewBag.IsExcelValidated == "Yes")
+                                    {
+                                        <input type="submit" value="Upload" name="action:Index" class="btn btn-success btn-quirk btn-wide mr5" />
+                                        
+                                    }
+                                }
+                                
+   
+                               
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <br /><br />
+                    @Html.Raw(Model.MSExcelTable)
+
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+    </div>
+    
+
+}
+
+<center>
+    <div class="modal fade" id="myModalSaveUpdate" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header btn-danger">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h2 class="modal-title">Message from System</h2>
+                </div>
+                <div class="modal-body">
+                    @if (ViewBag.SaveUpdateMessage != null)
+                    {
+                        @Html.Raw(@ViewBag.SaveUpdateMessage)
+                    }
+                </div>
+                <div class="modal-footer">
+                    <a href="http://169.38.99.248/" class="btn btn-primary">Home</a><br /><br />
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</center>
+
+<script type="text/javascript">
+    $(function () {
+
+
+        
+
+
+        function ValidateFileSize(fileid) {
+            try {
+                var fileSize = 0;
+                if (navigator.userAgent.match(/msie/i)) {
+                    var obaxo = new ActiveXObject("Scripting.FileSystemObject");
+                    var filePath = $("#" + fileid)[0].value;
+                    var objFile = obaxo.getFile(filePath);
+                    var fileSize = objFile.size;
+                    fileSize = fileSize / 1048576;
+                }
+                else {
+                    fileSize = $(fileid)[0].files[0].size
+                    fileSize = fileSize / 1048576;
+                }
+
+                return fileSize;
+            }
+            catch (e) {
+                alert("Error is :" + e);
+            }
+        }
+
+        function getNameFromPath(strFilepath) {
+            var objRE = new RegExp(/([^\/\\]+)$/);
+            var strName = objRE.exec(strFilepath);
+
+            if (strName == null) {
+                return null;
+            }
+            else {
+                return strName[0];
+            }
+        }
+
+        function ValidateFile(value) {
+            debugger;
+            console.log("***" + $(value).val() + "***");
+            var file = getNameFromPath($(value).val());
+
+            var flag = true;
+            if (file != null) {
+                var extension = file.substr((file.lastIndexOf('.') + 1));
+                switch (extension) {
+                    //case 'jpg':
+                    //case 'jpeg':
+                    case 'xls':
+                        flag = true;
+                        break;
+                    case 'xlsx':
+                        flag = true;
+                        break;
+                    default:
+                        flag = false;
+                }
+            }
+
+            if (flag == false) {
+
+                var str = value.name;
+                var res = str.split("_");
+                var data = "_val" + res[1];
+                $("#" + data).text("You can upload only Excel extension file Only");
+                $("#" + value.name).val('');
+                return false;
+            }
+            else {
+                var size = ValidateFileSize(value);
+                var str = value.name;
+                var res = str.split("_");
+                var data = "_val" + res[1];
+                if (size > 50) {
+                    $("#" + data).text("You Can Upload file Size Up to 50 MB.");
+                    $("#" + value.name).val('');
+                }
+                else {
+                    $("#" + data).text("");
+                }
+            }
+        }
+
+
+        $("#FileUpload").on('change', function () {
+            ValidateFile(this);
+        });
+    });
+    
+</script>
+

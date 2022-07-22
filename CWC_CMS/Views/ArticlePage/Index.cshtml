@@ -1,0 +1,41 @@
+﻿@using KalikoCMS
+@using KalikoCMS.Core
+@model CWC_CMS.PageTypes.ArticlePageType
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title>@Model.PageName</title>
+    <style>
+        .preamble {
+            font-size: 1.2em;
+        }
+    </style>
+</head>
+
+<body>
+    <div>
+        <ul>
+            @foreach (CmsPage page in PageFactory.GetChildrenForPage(KalikoCMS.Configuration.SiteSettings.RootPage, p => p.VisibleInMenu))
+            {
+                <li><a href="@page.PageUrl">@page.PageName</a></li>
+            }
+        </ul>
+        <!-- Check if top image is defined -->
+        @if (!string.IsNullOrEmpty(Model.TopImage.ImageUrl))
+        {
+            @Model.TopImage.ToHtml()
+        }
+        @Model.Property["MyPropertyName"]
+        <h1>@Model.Heading.Value</h1>
+        <p class="preamble">@Model.Preamble.Value</p>
+        @Model.MainBody.Value
+        <p>Created: @Model.CreatedDate</p>
+    </div>
+</body>
+</html>

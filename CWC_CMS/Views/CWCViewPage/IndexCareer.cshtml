@@ -1,0 +1,82 @@
+﻿@using SIDCUL.Models
+@{
+    ViewBag.Title = "IndexCareer";
+    Layout = "~/Views/Shared/_LayoutViewCareer.cshtml";
+}
+
+@if (@ViewBag.IsHomePage)
+{
+    <script>
+        $(function () {
+            var RootURL = $('#WebsiteRootPath').val();
+            $('.PdfLinkClass').each(function () {
+                var NewHrefAttr = $(this).attr('href').replace('WebsiteRootURLXyz', RootURL);
+                $(this).attr('href', NewHrefAttr);
+                console.log($(this).attr('href'))
+            });
+
+            $('#BoxDiv').empty();
+            $('#BoxDiv').append(@{
+
+
+    <text>
+        "@Html.EncodedActionLink("Tenders", "Index", "CWCViewPage", new { PageAddress = "~/CWC/188.95.36.104_8080/cwc/cwc_tenders.html" }, new { @class = "btnaudit", @id = "NavHome", style = "color:#326661", data_original_title = "Edit Training Category Data", data_placement = "top" })"
+    </text>
+
+        });
+            $('#BoxDiv').append(@{
+
+
+    <text>
+        "@Html.EncodedActionLink("CWC Divisions", "Index", "CWCViewPage", new { PageAddress = "~/CWC/188.95.36.104_8080/cwc/OurDivisions.html" }, new { @class = "btnaudit", @id = "NavHome", style = "color:#326661", data_original_title = "Edit Training Category Data", data_placement = "top" })"
+    </text>
+
+            });
+            $('#BoxDiv').append(@{
+
+
+    <text>
+        "@Html.EncodedActionLink("Notices", "Index", "CWCViewPage", new { PageAddress = "~/CWC/188.95.36.104_8080/cwc/cwc_notices.html" }, new { @class = "btnaudit", @id = "NavHome", style = "color:#326661", data_original_title = "Edit Training Category Data", data_placement = "top" })"
+    </text>
+
+            });
+            $('#BoxDiv').append(@{
+
+
+    <text>
+        "@Html.EncodedActionLink("RTI", "Index", "CWCViewPage", new { PageAddress = "~/CWC/188.95.36.104_8080/cwc/cwc_rti.html" }, new { @class = "btnaudit", @id = "NavHome", style = "color:#326661", data_original_title = "Edit Training Category Data", data_placement = "top" })"
+    </text>
+
+            });
+            $('#BoxDiv').append(@{
+
+
+    <text>
+        "@Html.EncodedActionLink("Raj Bhasha", "Index", "CWCViewPage", new { PageAddress = "~/CWC/188.95.36.104_8080/cwc/Rajbhasha.html" }, new { @class = "btnaudit", @id = "NavHome", style = "color:#326661", data_original_title = "Edit Training Category Data", data_placement = "top" })"
+    </text>
+
+            });
+            $('#BoxDiv').append(@{
+
+
+    <text>
+        "@Html.EncodedActionLink("Regional Offices", "Index", "CWCViewPage", new { PageAddress = "~/CWC/188.95.36.104_8080/cwc/Our-Offices.html" }, new { @class = "btnaudit", @id = "NavOffices", style = "color:#326661", data_original_title = "Edit Training Category Data", data_placement = "top" })"
+    </text>
+
+            });
+
+        $('#BoxDiv').children('a').each(function () {
+            var ATagText = $(this).text();
+            $(this).text('');
+            $(this).append('<div class="box">' + ATagText + '</div>');
+        });
+
+
+
+        });
+    </script>
+}
+
+<input type="hidden" id="WebsiteRootPath" value="@ViewBag.DesktopPath" class="RemoveOnSave" />
+@Html.Raw(@Model.InitialPageHTML)
+

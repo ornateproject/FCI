@@ -1,0 +1,88 @@
+﻿
+<!DOCTYPE html>
+<html lang="en">
+
+@{
+
+    string userdetailsCareer = null;
+    string[] seprater = { "(@#$)" };
+    if (Session["userdetailsCareer"] != null)
+    {
+        userdetailsCareer = Session["userdetailsCareer"].ToString();
+
+    }
+    if (userdetailsCareer != null)
+    {
+
+    }
+    else
+    {
+        Response.Redirect("~/Login/Index?result=registered");
+    }
+
+
+}
+
+
+<head class="RemoveOnSave">
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <title>FCI</title>
+    <link rel="stylesheet" href="@Url.Content("~/lib/jquery.gritter/jquery.gritter.css")" type="text/css" />
+    <link rel="stylesheet" href="@Url.Content("~/lib/weather-icons/css/weather-icons.css")" type="text/css" />
+    <link rel="stylesheet" href="@Url.Content("~/lib/jquery-ui/jquery-ui.css")" type="text/css" />
+    <link rel="stylesheet" href="@Url.Content("~/lib/select2/select2.css")" type="text/css" />
+    <link rel="stylesheet" href="@Url.Content("~/lib/dropzone/dropzone.css")" type="text/css" />
+    <link rel="stylesheet" href="@Url.Content("~/lib/jquery-toggles/toggles-full.css")" type="text/css" />
+    <link rel="stylesheet" href="@Url.Content("~/lib/fontawesome/css/font-awesome.css")" type="text/css" />
+    <link rel="stylesheet" href="@Url.Content("~/lib/timepicker/jquery.timepicker.css")" type="text/css" />
+    <link rel="stylesheet" href="@Url.Content("~/lib/bootstrapcolorpicker/css/bootstrap-colorpicker.css")" type="text/css" />
+    <link rel="stylesheet" href="@Url.Content("~/css/quirk.css")" type="text/css" />
+    <link rel="stylesheet" href="@Url.Content("~/lib/animate.css/animate.css")" type="text/css" />
+    @*<script src="@Url.Content("~/Scripts/jquery-1.7.1.min.js")"></script>*@
+    <script src="@Url.Content("~/Scripts/jquery-3.4.1.min.js")"></script>
+    <script src="@Url.Content("~/Scripts/jquery.validate.min.js")"></script>
+    <script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js")"></script>
+    <script src="@Url.Content("~/lib/modernizr/modernizr.js")"></script>
+    <script src="@Url.Content("~/lib/dropzone/dropzone.js")"></script>
+    @*<script src="@Url.Content("~/lib/jquery/jquery.js")"></script>*@
+    <script src="@Url.Content("~/lib/jquery-ui/jquery-ui.js")"></script>
+    @*<script src="@Url.Content("~/lib/bootstrap/js/bootstrap.js")"></script>*@
+    <script src="@Url.Content("~/Scripts/bootstrap.min.js")"></script>
+    <script src="@Url.Content("~/lib/jquery-autosize/autosize.js")"></script>
+    <script src="@Url.Content("~/lib/select2/select2.js")"></script>
+    <script src="@Url.Content("~/lib/jquery-toggles/toggles.js")"></script>
+    <script src="@Url.Content("~/lib/jquery-maskedinput/jquery.maskedinput.js")"></script>
+    <script src="@Url.Content("~/lib/timepicker/jquery.timepicker.js")"></script>
+    <script src="@Url.Content("~/lib/dropzone/dropzone.js")"></script>
+    <script src="@Url.Content("~/lib/bootstrapcolorpicker/js/bootstrap-colorpicker.js")"></script>
+    <script src="@Url.Content("~/js/quirk.js")"></script>
+    <script src="@Url.Content("~/lib/jquery-validate/jquery.validate.js")"></script>
+    <script src="@Url.Content("~/lib/jquery.gritter/jquery.gritter.js")"></script>
+    <link href="~/CssJs/jquery.dataTables.min.css" rel="stylesheet" />
+    <script src="~/CssJs/jquery.dataTables.min.js"></script>
+
+
+</head>
+
+<body>
+
+    <div class="container-fluid">
+        @RenderBody()
+    </div>
+
+
+</body>
+</html>
+<script type="text/javascript">
+
+
+
+
+
+
+
+</script>
+

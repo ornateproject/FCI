@@ -1,0 +1,119 @@
+  public ActionResult Index_Post()
+        {
+            bool check = false;
+
+            CMSModel cmsModel = new CMSModel();
+            TryUpdateModel(cmsModel);
+            string fileLoc = Server.MapPath(cmsModel.PageAddress);
+            string PageHTMLContent = cmsModel.FinalSubmitHTML.ToString();
+            PageHTMLContent = PageHTMLContent.Replace("<", "");
+            if (PageHTMLContent.Contains("<"))
+            {
+                check = true;
+            }
+            else if (PageHTMLContent.Contains(">"))
+            {
+                check = true;
+            }
+            else if (PageHTMLContent.Contains("script"))
+            {
+                check = true;
+            }
+            else if (PageHTMLContent.Contains("<script>"))
+            {
+                check = true;
+            }
+            else if (PageHTMLContent.Contains("</script>"))
+            {
+                check = true;
+            }
+            else if (PageHTMLContent.Contains("alert"))
+            {
+                check = true;
+            }
+            else if (PageHTMLContent.Contains("onerror"))
+            {
+                check = true;
+            }
+            else if (PageHTMLContent.Contains("iframe"))
+            {
+                check = true;
+            }
+            else if (PageHTMLContent.Contains("video"))
+            {
+                check = true;
+            }
+            else if (PageHTMLContent.Contains("audio"))
+            {
+                check = true;
+            } 
+
+            PageHTMLContent = PageHTMLContent.Replace(">", "");
+            PageHTMLContent = PageHTMLContent.Replace("script", "");
+            PageHTMLContent = PageHTMLContent.Replace("<script>", "");
+            PageHTMLContent = PageHTMLContent.Replace("</script>", "");
+            PageHTMLContent = PageHTMLContent.Replace("alert", "");
+            PageHTMLContent = PageHTMLContent.Replace("onerror", "");
+            PageHTMLContent = PageHTMLContent.Replace("iframe", "");
+            PageHTMLContent = PageHTMLContent.Replace("video", "");
+            PageHTMLContent = PageHTMLContent.Replace("audio", "");
+            if (!check)
+            {
+                if (TempData["ContentSaltKey"] != null)
+                {
+                    string SaltKey = TempData.Peek("ContentSaltKey").ToString();
+                    PageHTMLContent = CommonDAL.DecryptWithSaltKey(PageHTMLContent, SaltKey);
+                    if (PageHTMLContent.ToLower() == "error")
+                    {
+                        TempData["ValidationMsg"] = "failed";
+                        return RedirectToAction("Index", "Home");
+                    }
+                }
+                else
+                {
+                    TempData["ValidationMsg"] = "failed";
+                    return RedirectToAction("Index", "Home");
+                }
+
+                string MenuName = Master.GET_MENU_NAME_BY_PAGE_ADDRESS(cmsModel.PageAddress);
+
+                if (System.IO.File.Exists(fileLoc))
+                {
+                    System.IO.File.Move(Server.MapPath(cmsModel.PageAddress), Path.Combine(Server.MapPath("~/PagesBackupForRestorationPurposes/"), MenuName + System.DateTime.Now.ToString("yyyyMMddHHmmssfff")));
+                }
+
+                FileStream fs = null;
+                if (!System.IO.File.Exists(fileLoc))
+                {
+                    using (fs = System.IO.File.Create(fileLoc))
+                    {
+
+                    }
+                }
+
+                if (System.IO.File.Exists(fileLoc))
+                {
+                    using (StreamWriter sw = new StreamWriter(fileLoc))
+                    {
+                        sw.Write(PageHTMLContent);
+                    }
+                }
+
+                string BackupName = cmsModel.PageAddress + System.DateTime.Now + "Backup";
+                int result = cmsModel.SaveHTML(Path.Combine(Server.MapPath("~/PagesBackupForRestorationPurposes/"), MenuName + System.DateTime.Now.ToString("yyyyMMddHHmmssfff")), BackupName);
+                if (result > 0)
+                {
+                    return RedirectToAction("Index", "Home", new { @result = "Success" });
+                }
+                else
+                {
+                    return RedirectToAction("Index", "Home", new { @result = "Failed" });
+                }
+            }
+            else
+            {
+                TempData["ValidationMsg"] = "failed";
+                return RedirectToAction("Index", "Home");
+            }
+
+        }

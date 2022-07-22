@@ -1,0 +1,92 @@
+﻿@using SIDCUL.Models
+@{
+    ViewBag.Title = "CareerIndex";
+    Layout = "~/Views/Shared/_LayoutViewCareerSession.cshtml";
+}
+<script>
+    $(document).ready(function () {
+
+        $('#LogoutBtn').addClass('btn-danger')
+        if (window.location.href.indexOf("result=Success") > -1) {
+            // $('#myModal').modal('show');
+            $.gritter.add({
+                title: ' Saved',
+                text: ' Saved Successfully !!!',
+                class_name: 'with-icon check-circle success'
+            });
+
+            $('#myModalSuccess').modal('show');
+        }
+    });
+</script>
+
+<table style="width:100%; background-color:transparent">
+    <tr>
+
+        <td style="text-align:right">
+
+            @{
+
+                <text>
+                    @Html.EncodedActionLink("Logout", "Index", "Login", new { }, new { @class = "btn", @id = "LogoutBtn" })
+                </text>
+
+            }
+        </td>
+    </tr>
+</table>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-12 ml-auto col-xl-12 mr-auto">
+            <p class="category">Tabs with Icons on Card</p>
+            <!-- Nav tabs -->
+            <div class="card">
+                <div class="card-header">
+                    <ul class="nav nav-tabs justify-content-center" role="tablist">
+                        <li class="nav-item">
+                            <a class="nav-link active" data-toggle="tab" href="#home" role="tab">
+                                <i class="now-ui-icons objects_umbrella-13"></i> Home
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" data-toggle="tab" href="#profile" role="tab">
+                                <i class="now-ui-icons shopping_cart-simple"></i> Exam Master
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" data-toggle="tab" href="#messages" role="tab">
+                                <i class="now-ui-icons shopping_shop"></i> Messages
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" data-toggle="tab" href="#settings" role="tab">
+                                <i class="now-ui-icons ui-2_settings-90"></i> Settings
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="card-body">
+                    <!-- Tab panes -->
+                    <div class="tab-content text-center">
+                        <div class="tab-pane active" id="home" role="tabpanel">
+                            
+                        </div>
+                        <div class="tab-pane" id="profile" role="tabpanel">
+                            @Html.Action("Index","ExamMaster")
+                        </div>
+                        <div class="tab-pane" id="messages" role="tabpanel">
+                            <p>I think that’s a responsibility that I have, to push possibilities, to show people, this is the level that things could be at. So when you get something that has the name Kanye West on it, it’s supposed to be pushing the furthest possibilities. I will be the leader of a company that ends up being worth billions of dollars, because I got the answers. I understand culture. I am the nucleus.</p>
+                        </div>
+                        <div class="tab-pane" id="settings" role="tabpanel">
+                            <p>
+                                "I will be the leader of a company that ends up being worth billions of dollars, because I got the answers. I understand culture. I am the nucleus. I think that’s a responsibility that I have, to push possibilities, to show people, this is the level that things could be at."
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+</div>

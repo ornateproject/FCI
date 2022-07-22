@@ -1,0 +1,226 @@
+﻿@model IEnumerable<CWC_CMS.Models.ExamMasterModel>
+@using SIDCUL.Models
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutViewCareerSession.cshtml";
+}
+
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('.fa').addClass("fa fa-pencil tooltips");
+        $('.btn').addClass("btn btn-default btn-quirk");
+        $('.btnaudit').addClass("fa fa-list-alt fa-1x tooltips");
+        $('.actdelete').addClass("fa fa-trash tooltips")
+        $('.actprimary').addClass("btn btn-primary")
+    });
+
+    $(function () {
+        $('[name=deletepopup]').click(function () {
+            $('#myModal').modal('show');
+            var href = $(this).attr('href');
+            var s = $('#popupid').attr('href', href);
+            return false;
+        });
+        if (window.location.search == "?result=DeleteSuccess") {
+            $('#myModaldelete').modal('show');
+            $.gritter.add({
+                title: 'Exam Master Record Deleted',
+                text: 'Exam Master Record Deleted Successfully !!!',
+                class_name: 'with-icon exclamation-circle warning'
+            });
+
+
+        }
+    });
+</script>
+<script type="text/javascript">
+
+    $(document).ready(function () {
+
+        $('#basicForm').validate({
+            highlight: function (element) {
+                $(element).closest('.form-group').removeClass('has-success').addClass('has-error');
+            },
+            success: function (element) {
+                $(element).closest('.form-group').removeClass('has-error');
+            }
+        });
+        $('.select2').select2();
+
+        if (window.location.href.indexOf("result=CheckShiftDate") > -1) {
+            $('#CheckFromtDate').modal('show');
+            $.gritter.add({
+                title: 'Input Date Error',
+                text: 'From Date Should Be Less Than Or Equal To ToDate !!!',
+                class_name: 'with-icon check-circle success'
+            });
+        }
+
+        if (window.location.href.indexOf("result=Success") > -1) {
+            // $('#myModal').modal('show');
+            $.gritter.add({
+                title: ' Saved',
+                text: ' Saved Successfully !!!',
+                class_name: 'with-icon check-circle success'
+            });
+        }
+
+        if (window.location.href.indexOf("result=UpdateSuccess") > -1) {
+            // $('#myModal').modal('show');
+            $.gritter.add({
+                title: ' Update',
+                text: ' Updated Successfully !!!',
+                class_name: 'with-icon check-circle success'
+            });
+        }
+
+
+        if (window.location.href.indexOf("result=Failed") > -1) {
+
+            $.gritter.add({
+                title: 'Exam Master Record not Saved',
+                text: 'Exam Master Please Contact Adminstrator....',
+                class_name: 'with-icon exclamation-circle warning'
+            });
+        }
+    });
+
+    $(document).ready(function () {
+        $(".digit").keypress(function (e) {
+            if (e.which != 8 && e.which != 0 && (e.which < 48 || e.which > 57)) {
+                $("#errormsg").html("Digits Only").show().fadeOut("slow");
+                return false;
+            }
+        });
+    });
+</script>
+
+
+
+<div class="panel panel-default">
+    <ul class="panel-options">
+        <li><a class="panel-minimize"><i class="fa fa-chevron-down"></i></a></li>
+
+    </ul>
+    <div class="panel-heading">
+        <table style="width:100%; background-color:transparent">
+            <tr>
+                <td>
+                    <h4 class="panel-title">View</h4>
+
+                </td>
+
+                <td style="text-align:right">
+
+                    @{
+                        
+                            <text>
+                                @Html.EncodedActionLink("Add New  ", "Create", "ExamMaster", new { ExamID = 0 }, new { @class = "btn" })
+                            </text>
+                       
+                    }
+                </td>
+            </tr>
+        </table>
+
+
+    </div>
+    @*<div class="panel-body">
+
+        </div>*@
+</div>
+
+
+
+
+@using (Html.BeginForm("Create", "ExamMaster", FormMethod.Get, new { @class = "form-horizontal", id = "basicForm" }))
+{
+
+    <table class="table table-striped table-primary hover" id="datatablelist">
+        <thead>
+            <tr>
+                <th>
+                    Exam Name
+                </th>
+                <th>
+                    Created On
+                </th>
+
+
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ExamName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CreatedOn)
+                    </td>
+                    <td>
+                        @{
+                
+                    <text>
+                        @Html.EncodedActionLink(" ", "Create", "ExamMaster", new { ExamID = item.ExamID }, new { @class = "fa", style = "color:#326661", data_original_title = "Edit EMD Fees Data", data_placement = "top", data_toggle = "tooltip" }) |
+                    </text>
+                
+              
+                
+                    <text>
+                        @Html.EncodedActionLink(" ", "ViewExams", "ExamMaster", new { ExamID = item.ExamID }, new { @class = "btnaudit", style = "color:#326661", data_original_title = "Edit Training Category Data", data_placement = "top" })
+                    </text>
+                
+                        }
+                    </td>
+
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+<script src="~/CssJs/dtjs.js"></script>
+
+
+
+
+<div class="modal bounceIn animated" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="myModalLabel">Are you sure, You want to delete<br />Exam Master Record !!! </h4>
+            </div>
+            <div class="modal-body">
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                @Html.EncodedActionLink("Delete ", "Delete", "ExamMaster", new { /* id=item.PrimaryKey */ }, new { id = "popupid", @class = "actprimary" })
+
+            </div>
+        </div>
+        <!-- modal-content -->
+    </div>
+    <!-- modal-dialog -->
+</div>
+
+<div class="modal bounceIn animated" id="myModaldelete" tabindex="-1" role="dialog" aria-labelledby="myModaldeleteLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="myModaldeleteLabel">Deleted Successfully !!! </h4>
+            </div>
+            <div class="modal-body">
+                @Html.ActionLink("Close ", "Index", new { /* id=item.PrimaryKey */ }, new { @class = "btn" })
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+        <!-- modal-content -->
+    </div>
+    <!-- modal-dialog -->
+</div>

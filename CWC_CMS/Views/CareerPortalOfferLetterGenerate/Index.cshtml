@@ -1,0 +1,53 @@
+﻿@model CWC_CMS.Models.CMSModel
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayOutView_bak.cshtml";
+}
+
+<script src="~/Themes/ckeditor/ckeditor.js" class="RemoveOnSave"></script>
+
+
+
+
+
+
+<div id="editor"></div>
+@using (Html.BeginForm("Create", "CareerPortalOfferLetterGenerate", FormMethod.Post, new { id = "CmsForm", @class = "form-horizontal" }))
+{
+    @Html.DropDownListFor(model => model.ExamName, new SelectList(@ViewBag.FillExam, "Value", "Text", selectedValue: false), "Select Exam", new { id = "ExamID", @class = "drop select2", style = "width: 100%", required = true })
+    @Html.TextAreaFor(model => model.FinalSubmitHTML, new { @class = "form-control" })
+    @Html.HiddenFor(model => model.PageAddress, new { @class = "form-control" })
+
+}
+
+@Html.TextArea("EditTextbox", null, new { @class = "form-control", @id = "EditTextbox", @cols = 120, @rows = 15 })
+<button type="button" class="btn btn-default modelSavebtn" data-dismiss="modal">PreView</button>
+<button class="btn btn-success btnSave RemoveOnSave">Save Changes</button>
+
+<script class="RemoveOnSave">
+    $(function () {
+        $('[name="FinalSubmitHTML"]').hide();
+    });
+
+
+    $(".btnSave").on('click', function () {
+
+
+        if ($.trim(CKEDITOR.instances.EditTextbox.getData()) != '') {
+            $('[name="FinalSubmitHTML"]').val(CKEDITOR.instances.EditTextbox.getData());
+            CKEDITOR.instances.EditTextbox.setData('');
+            $('.RemoveOnSave').remove();
+            $('#CmsForm').submit();
+            //Li.text($('[name="EditTextbox"]').val());
+            //Li.append('<button class="btn btn-primary btn-xs RemoveOnSave LiEditbtn">Edit</button>' + '<button class="btn btn-danger btn-xs RemoveOnSave LiDeletebtn">Delete</button>');
+            //$('[name="EditTextbox"]').val('');
+        }
+    });
+
+
+</script>
+
+
+
+<script class="RemoveOnSave">CKEDITOR.replace("EditTextbox");</script>

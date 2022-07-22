@@ -1,0 +1,105 @@
+﻿<table class="table table-striped table-primary hover" id="datatablelist" style="width:100%">
+    <thead>
+
+        <tr>
+            <td class="subHeading bg-primary" width="10%" align="center"><strong>Date</strong></td>
+            <td class="subHeading bg-primary" width="40%" align="center"><strong>Designation</strong></td>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>17.12.2018</td>
+            <td><a target="_blank" href="Docs/oforder_sio_171218.pdf">SIO</a></td>
+        </tr>
+        <tr>
+            <td>17.12.2018</td>
+            <td><a target="_blank" href="Docs/ofo_hindi_171218.pdf">Hindi translator</a></td>
+        </tr>
+        <tr>
+            <td>15.09.2015</td>
+            <td><a target="_blank" href="Docs/upgrad/upgr_wag-I_pers_090516.pdf">WAG-I</a></td>
+        </tr>
+        <tr>
+            <td>28.05.2015</td>
+            <td>I<a target="_blank" href="Docs/upgrad/upgrad_isolated_cadre_290515.pdf">solated Cadre</a></td>
+        </tr>
+        <tr>
+            <td>27.05.2015</td>
+            <td><a target="_blank" href="Docs/upgrad/upgrad_ee_civil_290515.pdf">Executive Engineer (Civil)</a></td>
+        </tr>
+        <tr>
+            <td>13.05.2015</td>
+            <td><a target="_blank" href="Docs/upgrad/up_gr_ee_c_150515.pdf">Executive Engineer (Civil)</a></td>
+        </tr>
+        <tr>
+            <td>11.05.2015</td>
+            <td><a target="_blank" href="Docs/upgrad/up_gr_ae_c_150515.pdf">&#160;Assistant  Engineer (Civil)&#160;</a>&#160;&#160;&#160;<a target="_blank" href="Docs/upgrad/up_gr_ae_elect_150515.pdf"> Assistant  Engineer (Elect.)</a></td>
+        </tr>
+        <tr>
+            <td>08.05.2015</td>
+            <td><a target="_blank" href="Docs/upgrad/up_gr_supdt_120515.pdf">Superintendents</a></td>
+        </tr>
+        <tr>
+            <td>08.05.2015</td>
+            <td><a target="_blank" href="Docs/upgrad/up_gr_ta_120515.pdf">Technical Assistant</a></td>
+        </tr>
+        <tr>
+            <td>30.04.2015</td>
+            <td><a target="_blank" href="Docs/upgrad/up_gr_am_ac_pers_co_300415.pdf">&#160;Assistant Manager (A/cs)</a></td>
+        </tr>
+        <tr>
+            <td>29.04.201</td>
+            <td><a target="_blank" href="Docs/upgrad/up_gr_ta_pers_co_290415.pdf">&#160;Technical Assistant</a></td>
+        </tr>
+        <tr>
+            <td>21.04.2015</td>
+            <td><a target="_blank" href="Docs/JS%20(Upgradation)-_180119.html">&#160;Jr. Supdt. </a></td>
+        </tr>
+        <tr>
+            <td>17.04.2015</td>
+            <td><a target="_blank" href="Docs/upgrad/up_gr_ee_e_pers_co_170415.pdf">&#160;Executive Engineer (E)</a><br /></td>
+        </tr>
+        <tr>
+            <td>17.04.2015</td>
+            <td><a target="_blank" href="Docs/upgrad/up_gr_ta_pers_co_170415.pdf">&#160;Technical Assistant</a><br /></td>
+        </tr>
+    </tbody>
+</table>
+
+<script src="~/CssJs/dtjs.js"></script>
+
+<script>
+   
+    var url = '@Url.Action("ViewDocument", "CWCCuricullum")'
+    var IsEmployee = '@ViewBag.IsEmployee';
+    $("td").find("a").each(function () {
+        @*@{
+
+                    var @EncodedURL = CWC_CMS.Models.CommonDAL.EncodeString($(this).attr("href"));
+                }*@
+        $(this).attr("href", window.btoa($(this).attr("href")))
+
+
+        $(this).on('click', function (event) {
+            if (IsEmployee == "Yes") {
+                event.preventDefault();
+                $('#DocumentDiv').load(url, { EncryptedString: $(this).attr("href")})
+                //window.location.href = "/CWCCuricullum/ViewDocument?EncryptedString=" + $(this).attr("href")
+                        return true;
+                    }
+                    else {
+                        alert('You are not authenticated to View this document');
+                        return false;
+                    }
+                });
+    });
+
+
+
+    @*function SecurityCheck(RedirectingLink) {
+
+        if ('@ViewBag.IsEmployee' == "Yes") {
+
+        }
+    }*@
+</script>

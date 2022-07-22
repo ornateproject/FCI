@@ -1,0 +1,4 @@
+# HTTrack Website Copier Cookie File
+# This file format is compatible with Netscape cookies
+188.95.36.104:8080	TRUE	/cwc	FALSE	1999999999	JSESSIONID	FDA972C27423ADF1D5B4D86CFFEF931E
+

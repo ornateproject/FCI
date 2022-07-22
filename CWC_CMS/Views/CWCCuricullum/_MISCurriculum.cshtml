@@ -1,0 +1,89 @@
+﻿<table class="table table-striped table-primary hover" id="datatablelist" style="width:100%">
+    <thead>
+        <tr>
+            <td class="subHeading bg-primary" width="10%" align="center">
+                <p>Date</p>
+            </td>
+            <td class="subHeading bg-primary" width="80%" align="center">Circulars/Guidelines</td>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>07.05.2019</td>
+            <td><span><a target="_blank" href="Docs/circ_mis_070519.pdf">Reiteration of circular number CWC/MIS/E-procurement/2018-19/537E dated 18.03.2019</a></span></td>
+        </tr>
+        <tr>
+            <td>03.04.2019</td>
+            <td><span><a target="_blank" href="Docs/cir_mis_030419.pdf">Changes in e-tender /mode e-tender document w.r.t e payment (EMD , tender processing fees , tender cost ), preparation of technical bid format in e-tendering portal , last date of downloading of tender (Technical &amp; Price bid format ) and last date of bid submission&#160; and&#160; Clarification&#160;</a></span></td>
+        </tr>
+        <tr>
+            <td>
+                <p>05.01.2018</p>
+            </td>
+            <td><span><a target="_blank" href="Docs/mis_wms_050118.pdf">Procurement of Hardware &amp; internet connectivity required to operate Warehousing Management System (WMS) to be rolled out at warehouses in near future.</a></span></td>
+        </tr>
+        <tr>
+            <td>20.06.2017</td>
+            <td><a target="_blank" href="Docs/guidelines_IC_DOS_comis_200617.pdf"><span>Guidelines of Internet Connectivity and data usages at warehouses for implementation of Depot On-line system in CWC warehouses</span></a></td>
+        </tr>
+        <tr>
+            <td>23.03.2017</td>
+            <td><a target="_blank" href="Docs/cir_fci_dos_mis_240317.pdf"><span>Guidelines for working in Depot-on-line System (DOS) at CWC Warehouses. </span></a></td>
+        </tr>
+        <tr>
+            <td>20.06.2016</td>
+            <td><span><a target="_blank" href="Docs/e-mail_proforma_co_ro_cc.pdf">Proforma for Creation of e-mail ids</a>.&#160;  <a target="_blank" href="Docs/email_manual_160616.pdf">E-mail user manual,</a>&#160;&#160; <a target="_blank" href="Docs/password_change_200616.pdf">Manual for changing password &#160; </a>&#160;&#160;<a target="_blank" href="Docs/nic_Password_Policy_200616.pdf">NIC Password policy,</a>&#160;&#160;<br /></span></td>
+        </tr>
+        <tr class="EmployeeOnly">
+            <td>05,12,2014</td>
+            <td><a target="_blank" href="Docs/update_storage_data_051214.pdf"><span>Regular updating of Storage Data of the CWs in the farmer's portal launched by Ministry of Agriculture, Govt. of India.</span></a></td>
+        </tr>
+        <tr>
+            <td>03.06.2014</td>
+            <td><a target="_blank" href="Docs/mis/cir_mis_030614.pdf"><span>Ministry guidelines for Transition plan for complete migration to IPV6 by December 2017.</span></a></td>
+        </tr>
+        <tr>
+            <td>03.09.2012</td>
+            <td><a target="_blank" href="Docs/mis/cppp_mandat_cir.html"><span>Mandatory e-Publication of tender enquiries on Central Public Procurement Portal.</span></a></td>
+        </tr>
+    </tbody>
+</table>
+<script src="~/CssJs/dtjs.js"></script>
+
+<script>
+   
+    var url = '@Url.Action("ViewDocument", "CWCCuricullum")'
+    var IsEmployee = '@ViewBag.IsEmployee';
+    $("td").find("a").each(function () {
+        @*@{
+
+                    var @EncodedURL = CWC_CMS.Models.CommonDAL.EncodeString($(this).attr("href"));
+                }*@
+        $(this).attr("href", window.btoa($(this).attr("href")))
+
+
+        $(this).on('click', function (event) {
+            if (IsEmployee == "Yes") {
+                event.preventDefault();
+                $('#DocumentDiv').load(url, { EncryptedString: $(this).attr("href")})
+                //window.location.href = "/CWCCuricullum/ViewDocument?EncryptedString=" + $(this).attr("href")
+                        return true;
+                    }
+                    else {
+                        alert('You are not authenticated to View this document');
+                        return false;
+                    }
+                });
+    });
+
+
+
+    @*function SecurityCheck(RedirectingLink) {
+
+        if ('@ViewBag.IsEmployee' == "Yes") {
+
+        }
+    }*@
+</script>
+
+

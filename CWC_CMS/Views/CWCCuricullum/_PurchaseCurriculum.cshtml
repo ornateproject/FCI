@@ -1,0 +1,79 @@
+﻿<table class="table table-striped table-primary hover" id="datatablelist" style="width:100%">
+    <thead>
+        <tr>
+            <td class="subHeading bg-primary" width="10%" align="center">
+                <p>Date</p>
+            </td>
+            <td class="subHeading bg-primary" width="90%" align="center">Circulars/Guidelines</td>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>23.01.2019</td>
+            <td><span><a target="_blank" href="Docs/Letter%20MSME%2023012019.pdf">Amendment to Public Procurement Policy for Micro and&#160; Small Enterprises (MSEs) order ,2012 implementation</a></span></td>
+        </tr>
+        <tr>
+            <td>15.10.2018</td>
+            <td><span><a target="_blank" href="Docs/GeM%20all%20RMs%2015102018.pdf">'Procurement of Goods &amp; Services by using GeM portal'</a></span></td>
+        </tr>
+        <tr>
+            <td>11.10.2018</td>
+            <td><span><a target="_blank" href="Docs/MTDELWB27.11.2018.pdf">Model Tender "ELWB</a>&#160;27.11.2018"</span></td>
+        </tr>
+        <tr>
+            <td>23.02.2018</td>
+            <td><span><a target="_blank" href="Docs/ANNualPROc_230218.pdf">Annual Procurement Plan for FY-2017-18</a></span></td>
+        </tr>
+        <tr>
+            <td>23.02.2018</td>
+            <td><span><a target="_blank" href="Docs/Circular_LWBMTD_23022018.pdf">Amendments in Model Tender document of ELWB.</a></span></td>
+        </tr>
+        <tr>
+            <td>23.03.2017<br /></td>
+            <td>&#160;<a target="_blank" href="Docs/MSEs_pur_230317.pdf">Competent  Authority Nominated as Nodal Office for implementation of Public  Procurement Policy for Goods &amp; service rendered by Micro &amp; Small  Enterprices (MSEs)</a></td>
+        </tr>
+        <tr>
+            <td>08.01.2016</td>
+            <td><span><a target="_blank" href="Docs/Letter%20MSME%2008012016.pdf">Issue of "Guidelines for implementation for Purchase and Price Preference Policy of the Govt . of India for small manufacturing units registered with National Small Scale Industries Corporation Ltd.</a></span></td>
+        </tr>
+    </tbody>
+</table>
+
+<script src="~/CssJs/dtjs.js"></script>
+
+<script>
+   
+    var url = '@Url.Action("ViewDocument", "CWCCuricullum")'
+    var IsEmployee = '@ViewBag.IsEmployee';
+    $("td").find("a").each(function () {
+        @*@{
+
+                    var @EncodedURL = CWC_CMS.Models.CommonDAL.EncodeString($(this).attr("href"));
+                }*@
+        $(this).attr("href", window.btoa($(this).attr("href")))
+
+
+        $(this).on('click', function (event) {
+            if (IsEmployee == "Yes") {
+                event.preventDefault();
+                $('#DocumentDiv').load(url, { EncryptedString: $(this).attr("href")})
+                //window.location.href = "/CWCCuricullum/ViewDocument?EncryptedString=" + $(this).attr("href")
+                        return true;
+                    }
+                    else {
+                        alert('You are not authenticated to View this document');
+                        return false;
+                    }
+                });
+    });
+
+
+
+    @*function SecurityCheck(RedirectingLink) {
+
+        if ('@ViewBag.IsEmployee' == "Yes") {
+
+        }
+    }*@
+</script>
+

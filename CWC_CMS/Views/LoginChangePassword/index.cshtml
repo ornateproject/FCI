@@ -1,0 +1,491 @@
+﻿@model CWC_CMS.Models.LoginChangePasswordModel
+@using CaptchaMvc.HtmlHelpers
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>CWC</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="@Url.Content("~/Scripts/jquery-1.7.1.min.js")"></script>
+    <!--===============================================================================================-->
+    <link rel="icon" type="image/png" href="@Url.Content("~/images/CWC.ico")" />
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="@Url.Content("~/vendor/vendor/bootstrap/css/bootstrap.min.css")" />
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="@Url.Content("~/vendor/fonts/font-awesome-4.7.0/css/font-awesome.min.css")" />
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="@Url.Content("~/vendor/vendor/animate/animate.css")" />
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="@Url.Content("~/vendor/vendor/css-hamburgers/hamburgers.min.css")" />
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="@Url.Content("~/vendor/vendor/select2/select2.min.css")" />
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="@Url.Content("~/vendor/css/util.css")" />
+
+    <link rel="stylesheet" type="text/css" href="@Url.Content("~/vendor/css/main.css")" />
+    <!--===============================================================================================-->
+    <link rel="stylesheet" href="@Url.Content("~/lib/jquery.gritter/jquery.gritter.css")" type="text/css" />
+    <script src="@Url.Content("~/lib/jquery-validate/jquery.validate.js")"></script>
+    <script src="@Url.Content("~/lib/jquery.gritter/jquery.gritter.js")"></script>
+
+    <link rel="stylesheet" href="@Url.Content("~/lib/jquery.gritter/jquery.gritter.css")" type="text/css" />
+    <link rel="stylesheet" href="@Url.Content("~/lib/weather-icons/css/weather-icons.css")" type="text/css" />
+    <link rel="stylesheet" href="@Url.Content("~/lib/jquery-ui/jquery-ui.css")" type="text/css" />
+    <link rel="stylesheet" href="@Url.Content("~/lib/select2/select2.css")" type="text/css" />
+    <link rel="stylesheet" href="@Url.Content("~/lib/dropzone/dropzone.css")" type="text/css" />
+    <link rel="stylesheet" href="@Url.Content("~/lib/jquery-toggles/toggles-full.css")" type="text/css" />
+    <link rel="stylesheet" href="@Url.Content("~/lib/fontawesome/css/font-awesome.css")" type="text/css" />
+    <link rel="stylesheet" href="@Url.Content("~/lib/timepicker/jquery.timepicker.css")" type="text/css" />
+    <link rel="stylesheet" href="@Url.Content("~/lib/bootstrapcolorpicker/css/bootstrap-colorpicker.css")" type="text/css" />
+    <link rel="stylesheet" href="@Url.Content("~/css/quirk.css")" type="text/css" />
+    <link rel="stylesheet" href="@Url.Content("~/lib/animate.css/animate.css")" type="text/css" />
+    <script src="@Url.Content("~/Scripts/jquery-1.7.1.min.js")"></script>
+    <script src="@Url.Content("~/Scripts/jquery.validate.min.js")"></script>
+    <script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js")"></script>
+    <script src="@Url.Content("~/lib/modernizr/modernizr.js")"></script>
+    <script src="@Url.Content("~/lib/dropzone/dropzone.js")"></script>
+    <script src="@Url.Content("~/lib/jquery/jquery.js")"></script>
+    <script src="@Url.Content("~/lib/jquery-ui/jquery-ui.js")"></script>
+    <script src="@Url.Content("~/lib/bootstrap/js/bootstrap.js")"></script>
+    <script src="@Url.Content("~/lib/jquery-autosize/autosize.js")"></script>
+    <script src="@Url.Content("~/lib/select2/select2.js")"></script>
+    <script src="@Url.Content("~/lib/jquery-toggles/toggles.js")"></script>
+    <script src="@Url.Content("~/lib/jquery-maskedinput/jquery.maskedinput.js")"></script>
+    <script src="@Url.Content("~/lib/timepicker/jquery.timepicker.js")"></script>
+    <script src="@Url.Content("~/lib/dropzone/dropzone.js")"></script>
+    <script src="@Url.Content("~/lib/bootstrapcolorpicker/js/bootstrap-colorpicker.js")"></script>
+    <script src="@Url.Content("~/js/quirk.js")"></script>
+    <script src="@Url.Content("~/lib/jquery-validate/jquery.validate.js")"></script>
+    <script src="@Url.Content("~/lib/jquery.gritter/jquery.gritter.js")"></script>
+    @*Praveen Kumar*@
+    @*15 Jan 2019*@
+    @*For Captcha*@
+    @*Start*@
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.2/rollups/aes.js"></script>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    @*End*@
+    <style>
+        .uppercase {
+            text-transform: uppercase;
+        }
+
+        .container-login100 {
+            background-color: aqua !important;
+        }
+    </style>
+    @*Praveen Kumar*@
+    @*15 Jan 2019*@
+    @*For Encryption*@
+    @*Start*@
+    @*<script>
+            function encrypt() {
+                var pass = document.getElementById('txtPwd').value;
+                var hide = document.getElementById('Hide').value;
+                if (pass == "") {
+                    document.getElementById('err').innerHTML = 'Error:Password is missing';
+                    return false;
+                }
+                else {
+                    document.getElementById("Hide").value = document.getElementById("txtPwd").value;
+                    var hash = CryptoJS.MD5(pass);
+                    document.getElementById('txtPwd').value = hash;
+                    return true;
+                }
+            }
+        </script>*@
+    @*End*@
+
+
+
+    @*Praveen Kumar*@
+    @*15 Jan 2019*@
+    @*For Captcha*@
+    @*Start*@
+    <script>
+        $(document).ready(function () {
+            $("#CaptchaInputText").attr('maxlength', '6');
+            $('#CaptchaInputText').addClass("form form-control uppercase");
+            $('#CaptchaInputText').bind('copy paste', function (e) {
+                e.preventDefault();
+            });
+        });
+    </script>
+    @*End*@
+
+    <script>
+
+    $(document).ready(function () {
+
+        var SaveResult = '@ViewBag.SaveResult';
+        if (SaveResult == 1) {
+            $('#myModalSaveUpdate').modal('show');
+
+
+        }
+    });
+    </script>
+    <script type="text/javascript">
+        //$(document).ready(function () {
+        //    var lefttime = 1;
+        //    var interval;
+        //    interval = setInterval('change()', 60000);
+
+
+        //    function change() {
+        //        lefttime--;
+        //        if (lefttime <= 2) alert("The session will be off, Left time is " + lefttime + " second!")
+        //    }
+        //});
+        $(document).ready(function () {
+            if (window.location.search == "?result=registered") {
+                $('#myModal').modal('show');
+                $.gritter.add({
+                    title: 'Session Expired',
+                    text: 'Your Session has been Expired, Please Try Again !!!',
+                    class_name: 'with-icon exclamation-circle warning'
+                });
+            }
+            if (window.location.search == "?result=NotAllowed") {
+                $('#myModalNotAllowed').modal('show');
+                $.gritter.add({
+                    title: 'Page Not Allowed',
+                    text: 'This Page Not Allowed, Please Contact Adminstrator !!!',
+                    class_name: 'with-icon exclamation-circle warning'
+                });
+            }
+
+            if (window.location.href.indexOf("&result=Success") > -1) {
+                $('#ChanegePassword').modal('show');
+                $.gritter.add({
+                    title: 'Your Password Has Been Changed',
+                    text: 'Your Password Has Been Changed Successfully !!!',
+                    class_name: 'with-icon check-circle success'
+                });
+            }
+            if (window.location.search == "?result=Success") {
+                $('#ChanegePassword').modal('show');
+                $.gritter.add({
+                    title: 'New Password Saved',
+                    text: 'New Password Saved Successfully !!!',
+                    class_name: 'with-icon check-circle success'
+                });
+            }
+            if (window.location.search == "?result=Notmatch") {
+
+                $.gritter.add({
+                    title: 'New Password Not Saved',
+                    text: 'Secret Code not Matched !!!',
+                    class_name: 'with-icon exclamation-circle warning'
+                });
+            }
+            if (window.location.search == "?UserValid=invalid") {
+
+                $.gritter.add({
+                    title: 'Message From System',
+                    text: 'UserName or Password Incorrect.',
+                    class_name: 'with-icon exclamation-circle danger'
+                });
+            }
+
+        });
+    </script>
+</head>
+
+
+<body>
+    <script type="text/javascript">
+        
+        function EncryptValue() {
+            debugger;
+            var txtpassword1 = document.getElementById("OldPassword").value.trim();
+            if (txtpassword1 == "") {
+                alert('Please enter Old Password');
+                return false;
+            }
+            else {
+                //PageMethods.GetCurrentTime(document.getElementById("<%=txtPwd.ClientID%>").value, OnSuccess);
+                $.ajax({
+                    async: false,
+                    type: "POST",
+                    url: "../LoginChangePassword/Encrypt",
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    data: "{'plainText' : '" + $("#OldPassword").val() + "'}",
+                    success: OnSuccess,
+                    failure: function (response) {
+                        //alert(response.d);
+                        return false;
+                    }
+                });
+
+                function OnSuccess(response) {
+                    $("#OldPassword").val(response);
+                    return true;
+                }
+            }
+        }
+
+        function EncryptValueNew() {
+            var txtpassword1 = document.getElementById("NewPassword").value.trim();
+            if (txtpassword1 == "") {
+                alert('Please enter New Password');
+                return false;
+            }
+            else {
+                //PageMethods.GetCurrentTime(document.getElementById("<%=txtPwd.ClientID%>").value, OnSuccess);
+                $.ajax({
+                    async: false,
+                    type: "POST",
+                    url: "../LoginChangePassword/Encrypt",
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    data: "{'plainText' : '" + $("#NewPassword").val() + "'}",
+                    success: OnSuccess,
+                    failure: function (response) {
+                        //alert(response.d);
+                        return false;
+                    }
+                });
+
+                function OnSuccess(response) {
+                    debugger;
+                    $("#NewPassword").val(response);
+                    return true;
+                }
+            }
+        }
+
+        function EncryptValueConfirm() {
+            var txtpassword1 = document.getElementById("ConfirmPassword").value.trim();
+            if (txtpassword1 == "") {
+                alert('Please enter Confirm Password');
+                return false;
+            }
+            else {
+                //PageMethods.GetCurrentTime(document.getElementById("<%=txtPwd.ClientID%>").value, OnSuccess);
+                $.ajax({
+                    async: false,
+                    type: "POST",
+                    url: "../LoginChangePassword/Encrypt",
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    data: "{'plainText' : '" + $("#ConfirmPassword").val() + "'}",
+                    success: OnSuccess,
+                    failure: function (response) {
+                        //alert(response.d);
+                        return false;
+                    }
+                });
+
+                function OnSuccess(response) {
+                    debugger;
+                    $("#ConfirmPassword").val(response);
+                    return true;
+                }
+            }
+        }
+    </script>
+    <script>
+
+        $(document).ready(function () {
+
+            var SaveResult = '@ViewBag.SaveResult';
+            if (SaveResult == 1) {
+                $('#myModalSaveUpdate').modal('show');
+
+
+            }
+        });
+    </script>
+    <style>
+        .container-CancelBtnStle {
+  width: 100%;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  padding-top: 20px;
+}
+
+.CancelBtnStle {
+  font-family: Montserrat-Bold;
+  font-size: 15px;
+  line-height: 1.5;
+  color: #fff;
+  text-transform: uppercase;
+
+  width: 100%;
+  height: 50px;
+  border-radius: 25px;
+  background: #4664b8;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0 25px;
+
+  -webkit-transition: all 0.4s;
+  -o-transition: all 0.4s;
+  -moz-transition: all 0.4s;
+  transition: all 0.4s;
+}
+
+.CancelBtnStle:hover {
+  background: #333333;
+}
+
+    </style>
+    <script>
+        $(document).ready(function () {
+            $("#CaptchaText").attr('maxlength', '8');
+            $('#CaptchaText').addClass("form form-control");
+            $('#CaptchaText').bind('copy paste', function (e) {
+                e.preventDefault();
+            });
+        });
+    </script>
+
+    <script>
+        $(document).ready(function()
+        {
+            $('.CaptchaClass').remove();
+        }
+        )
+
+    </script>
+    <div class="limiter">
+        <div class="container-login10012" style="background-color:aqua;">
+
+            <div class="wrap-login10012">
+
+
+
+                @using (Html.BeginForm("Submit", "LoginChangePassword", FormMethod.Post, new { @class = "login100-form validate-form", id = "basicForm", style = "Margin-left:25%;Margin-top:-20%;" }))
+                {
+                    <span class="login100-form-title">
+                        Change Password
+                    </span>
+
+                    <div class="wrap-input100 validate-input" data-validate="Password is required">
+                        @Html.TextBoxFor(model => model.OldPassword, new { @class = "input100", placeholder = "Current Password", onchange = "EncryptValue()", type = "password", required = true })
+                        <span class="focus-input100"></span>
+                        <span class="symbol-input100">
+                            <i class="fa fa-lock" aria-hidden="true"></i>
+                        </span>
+                        <span class="col-sm-3 control-label" style="color:red;margin-right:-10px"> </span>
+                        @Html.ValidationMessageFor(model => model.OldPassword, "", new { @class = "text-danger" })
+                    </div>
+
+                    <div class="wrap-input100 validate-input" data-validate="Password is required">
+                        @*@Html.TextBoxFor(model => model.Password, new { @class = "input100", placeholder = "Password", type = "Password", required = true })*@
+                        @*<input class="input100" id="txtPwd" Onchange="return encrypt();" placeholder="Password" type="password" required />*@
+                        @Html.TextBoxFor(model => model.NewPassword, new { @class = "input100", onchange = "EncryptValueNew()", placeholder = "New Password", type = "Password", required = true })
+
+                        <span class="symbol-input100">
+                            <i class="fa fa-lock" aria-hidden="true"></i>
+                        </span>
+                        <span class="focus-input100" style="color:red;"> </span>
+                        @Html.ValidationMessageFor(model => model.NewPassword, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="wrap-input100 validate-input" data-validate="Password is required">
+                        @*@Html.TextBoxFor(model => model.Password, new { @class = "input100", placeholder = "Password", type = "Password", required = true })*@
+                        @*<input class="input100" id="txtPwd" Onchange="return encrypt();" placeholder="Password" type="password" required />*@
+                        @Html.TextBoxFor(model => model.ConfirmPassword, new { @class = "input100", onchange = "EncryptValueConfirm()", placeholder = "Confirm Password", type = "Password", required = true })
+                        <span class="focus-input100"></span>
+                        <span class="symbol-input100">
+                            <i class="fa fa-lock" aria-hidden="true"></i>
+                        </span>
+                        <span class="col-sm-3 control-label" style="color:red;margin-right:-10px"> </span>
+                        @Html.ValidationMessageFor(model => model.ConfirmPassword, "", new { @class = "text-danger" })
+                    </div>
+
+                    @*<div class="form-group">
+                            <div class="col-md-5">
+                                <label class="control-label"><b style="font-size: 115%;">Captcha</b> :<span class="text-danger">*</span></label>
+                                <div class="col-md-12">
+                                    @Html.Captcha(6)
+                                </div>
+                            </div>
+                        </div>*@
+
+                    <div class="form-group">
+                        <div class="col-md-5">
+
+                            <label class="control-label"><b style="font-size: 115%;">Captcha</b> :<span class="text-danger">*</span></label>
+                            <div class="col-md-12 col-lg-12 col-sm-2">
+                                <img src="~/Login/ShowCaptchaImage" />
+                                <div style="float:left;">
+                                    @Html.ActionLink("Refresh", "Index", new { }, new { style = "color:blue;  text-decoration: underline;" })
+                                    @Html.TextBox("CaptchaText")
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div>
+
+                        <div class="container-login100-form-btn" id="logindiv">
+                            <button class="login100-form-btn" type="submit" id="btnlogin">
+                                Submit
+                            </button>
+
+                        </div>
+
+
+
+                    </div>
+
+                    <div class="container-CancelBtnStle">
+                        @Html.ActionLink("Cancel", "Cancelbtn", "LoginChangePassword", new { }, new { @class = "CancelBtnStle" })
+                    </div>
+
+
+                }
+            </div>
+        </div>
+    </div>
+
+
+
+</body>
+</html>
+
+<center>
+    <div class="modal fade" id="myModalSaveUpdate" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header btn-danger">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h2 class="modal-title">Message from System</h2>
+                </div>
+                <div class="modal-body">
+                    @if (ViewBag.SaveUpdateMessage != null)
+                    {
+                        @Html.Raw(@ViewBag.SaveUpdateMessage)
+                    }
+                </div>
+                <div class="modal-footer">
+                    <a href="http://49.50.87.108:8080/Login" class="btn btn-primary">Home</a><br /><br />
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</center>

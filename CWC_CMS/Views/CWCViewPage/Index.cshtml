@@ -1,0 +1,98 @@
+﻿@using SIDCUL.Models
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayOutView_bak.cshtml";
+}
+
+@if(@ViewBag.IsHomePage){
+    <script>
+        $(function () {
+            var RootURL = $('#WebsiteRootPath').val();
+            $('.PdfLinkClass').each(function () {
+                var NewHrefAttr = $(this).attr('href').replace('WebsiteRootURLXyz', RootURL);
+                $(this).attr('href', NewHrefAttr);
+                console.log($(this).attr('href'))
+            });
+
+            $('#BoxDiv').empty();
+            $('#BoxDivChild').empty();
+            $('#BoxDivSpl').empty();
+
+            @*$('#BoxDivChild').append(@{
+    <text>
+
+        "@Html.ActionLink("Tenders", "ViewTenderList", "CWCCppTender", new { PageAddress = "~/CWC/188.95.36.104_8080/cwc/cwc_tenders.html" }, new { @class = "btnaudit", @id = "NavHome", style = "color:#326661", data_original_title = "Edit Training Category Data", data_placement = "top" })"
+    </text>
+            });*@
+            $('#BoxDivChild').append(@{
+   <text>
+       "@Html.EncodedActionLink("Tenders", "ViewTenderList", "CWCCppTender", new { PageAddress = "~/CWC/188.95.36.104_8080/cwc/cwc_tenders.html" }, new { @class = "btnaudit", @id = "NavHome", style = "color:#326661", data_original_title = "Edit Training Category Data", data_placement = "top" })"
+   </text>
+        });
+
+
+            $('#BoxDivChild').append(@{
+    <text>
+        "@Html.EncodedActionLink("CO and RO", "Index", "CWCViewPage", new { PageAddress = "~/CWC/188.95.36.104_8080/cwc/Our-Offices.html" }, new { @class = "btnaudit", @id = "NavHome", style = "color:#326661", data_original_title = "Edit Training Category Data", data_placement = "top" })"
+    </text>
+        });
+
+
+
+            $('#BoxDivChild').append(@{
+    <text>
+          "@Html.EncodedActionLink("Public Notices", "Index", "PublicNotice", new {  }, new { @class = "btnaudit", @id = "NavHome", style = "color:#326661", data_original_title = "Edit Training Category Data", data_placement = "top" })"
+    </text>
+        });  //CWCCuricullum
+
+            $('#BoxDivChild').append(@{
+  <text>
+      "@Html.EncodedActionLink("Raj Bhasha", "Index", "CWCViewPage", new { PageAddress = "~/CWC/188.95.36.104_8080/cwc/Rajbhasha.html" }, new { @class = "btnaudit", @id = "NavHome", style = "color:#326661", data_original_title = "Edit Training Category Data", data_placement = "top" })"
+  </text>
+            });
+
+
+            $('#BoxDivChild').append(@{
+    <text>
+        "@Html.EncodedActionLink("Vigilance Corner", "Index", "CWCViewPage", new { PageAddress = "~/CWC/188.95.36.104_8080/cwc/AboutVigilance.html" }, new { @class = "btnaudit", @id = "NavOffices", style = "color:#326661", data_original_title = "Edit Training Category Data", data_placement = "top" })"
+    </text>
+            });
+
+            $('#BoxDivChild').append(@{
+    <text>
+         "@Html.EncodedActionLink("Complaint Management System", "Create", "VigilanceApplicationForm", new { VigilanceID = 0  }, new { @class = "btnaudit", style = "color:#FFFFFF", data_original_title = "Edit Training Category Data", data_placement = "top" })"
+    </text>
+            });
+
+
+
+
+
+
+
+        $('#BoxDiv').children('a').each(function () {
+            var ATagText = $(this).text();
+            $(this).text('');
+            $(this).append('<div class="box">' + ATagText + '</div>');
+        });
+
+        $('#BoxDivChild').children('a').each(function () {
+            var ATagText = $(this).text();
+            $(this).text('');
+            $(this).append('<button class="box" style="font-weight:bolder; Height:100px; border-radius:10px;">' + ATagText + '</button>');
+        });
+
+        $('#BoxDivSpl').children('a').each(function () {
+            var ATagText = $(this).text();
+            $(this).text('');
+            $(this).append('<div class="boxSpl">' + ATagText + '</div>');
+        });
+
+
+        });
+    </script>
+}
+
+<input type="hidden" id="WebsiteRootPath" value="@ViewBag.DesktopPath" class="RemoveOnSave" />
+@Html.Raw(@Model.InitialPageHTML)

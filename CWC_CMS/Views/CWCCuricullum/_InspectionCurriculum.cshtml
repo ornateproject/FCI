@@ -1,0 +1,133 @@
+﻿<table class="table table-striped table-primary hover" id="datatablelist" style="width:100%">
+    <thead>
+        <tr>
+            <td class="subHeading bg-primary" width="10%" align="center">
+                <p>Date</p>
+            </td>
+            <td class="subHeading bg-primary" width="80%" align="center">Circulars/Guidelines</td>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>28.08.2019</td>
+            <td><span><a target="_blank" href="Docs/Hindi%20Circular%20Inspection.pdf">&#2352;&#2366;&#2332;&#2349;&#2366;&#2359;&#2366; &#2361;&#2367;&#2306;&#2342;&#2368; &#2325;&#2379; &#2348;&#2338;&#2364;&#2366;&#2357;&#2366; &#2342;&#2375;&#2344;&#2375; &#2325;&#2375; &#2325;&#2367;&#2319; &#2332;&#2366;&#2344;&#2375; &#2357;&#2366;&#2354;&#2375; &#2325;&#2366;&#2352;&#2381;&#2351;</a></span></td>
+        </tr>
+        <tr>
+            <td>28.06.2019</td>
+            <td><a target="_blank" href="Docs/ins_280619.pdf"><span>&#2346;&#2352;&#2367;&#2346;&#2340;&#2381;&#2352; -&#2344;&#2367;&#2352;&#2368;&#2325;&#2381;&#2359;&#2339;</span></a></td>
+        </tr>
+        <tr>
+            <td>26.04.2019</td>
+            <td><span><a target="_blank" href="Docs/inspec_cir_260419.pdf">Issue of Inspection Programme to the consultants working under jurisdiction of RM's</a></span></td>
+        </tr>
+        <tr>
+            <td>01.04.2019</td>
+            <td><span><a target="_blank" href="Docs/insp_010419.pdf">&#2346;&#2352;&#2367;&#2346;&#2340;&#2381;&#2352; -&#2344;&#2367;&#2352;&#2368;&#2325;&#2381;&#2359;&#2339;</a></span></td>
+        </tr>
+        <tr>
+            <td>26.11.2018</td>
+            <td><span><a target="_blank" href="Docs/Implimentation%20of%20WMS_261118.pdf">Implementation of WMS -Role of inspecting Officer</a></span></td>
+        </tr>
+        <tr>
+            <td>05.10.2018</td>
+            <td><span><a target="_blank" href="Docs/inspec_031018.pdf">Circular regarding Inspection reports of the warehouses .</a></span></td>
+        </tr>
+        <tr>
+            <td>05.09.2018</td>
+            <td>&#160;<a target="_blank" href="Docs/inspc_circ_0509181.pdf" style="font-family: Verdana, Arial, Helvetica, sans-serif;">Circular for the system of General Instruction</a></td>
+        </tr>
+        <tr>
+            <td>26.07.2017</td>
+            <td><a target="_blank" href="Docs/Cir_insp_proc_coinsp_250717.pdf">circular - (Inspection Procedure)</a></td>
+        </tr>
+        <tr>
+            <td>29.06.2016</td>
+            <td><a target="_blank" href="Docs/cir_insp_guidelines_010716.pdf">Inspection of Central Warehouses-guidelines for Inspection.</a></td>
+        </tr>
+        <tr>
+            <td>09.05.2016</td>
+            <td><a target="_blank" href="Docs/cir_inst_insp_co_110516.pdf">Instruction/Guidelines regarding general Inspection</a></td>
+        </tr>
+        <tr>
+            <td>26.10.2015</td>
+            <td><a target="_blank" href="Docs/cir_insp_procedure_inspdiv_co_291015.pdf">Instruction regarding general Inspection</a></td>
+        </tr>
+        <tr>
+            <td>13.04.2015</td>
+            <td><a target="_blank" href="Docs/cir_insp_pro_guid_wh_co_210415.pdf">Compliance of Procedures/Guidelines issued for warehousing operations at Central Warehouses.</a></td>
+        </tr>
+        <tr>
+            <td>11.02.2015</td>
+            <td><a target="_blank" href="Docs/inst_insp_co_240215.pdf">Completion of record/registers on day to day basis at the Warehouse.</a></td>
+        </tr>
+        <tr>
+            <td>28.11.2014</td>
+            <td><a target="_blank" href="Docs/cir_insp_proc_co_281114.pdf">Instruction/circulars/Guidelines regarding general Inspection</a></td>
+        </tr>
+        <tr>
+            <td>14.10.2014<br /></td>
+            <td><a target="_blank" href="Docs/cir_insp_proc_co_141014_281114.pdf">Inter-region/squad inspection of the warehouse</a><br /></td>
+        </tr>
+        <tr>
+            <td>07.05.2014</td>
+            <td><a target="_blank" href="Docs/cir_insp_proc_co_070514_281114.pdf">Instruction for IO</a></td>
+        </tr>
+        <tr>
+            <td>06.12.2013</td>
+            <td><a target="_blank" href="Docs/cir_insp_proc_co_061213_281114.pdf">Discrepancies during Inspection</a></td>
+        </tr>
+        <tr>
+            <td>22.11.2013</td>
+            <td><a target="_blank" href="Docs/cir_insp_proc_co_221113_281114.pdf">Inspection of Central Warehouses-guidelines for Inspection.</a></td>
+        </tr>
+        <tr>
+            <td>25.07.2013</td>
+            <td><a target="_blank" href="Docs/cir_insp_proc_co_250713_281114.pdf">Inspection of Central Warehouses</a></td>
+        </tr>
+        <tr>
+            <td>22.12.2010</td>
+            <td><a target="_blank" href="Docs/insp_vig_140313.pdf">Inspection of Central Warehouse - Norms, Procedures and points for guidance</a><a target="_blank" href="Docs/insp_vig_140313.pdf"></a></td>
+        </tr>
+    </tbody>
+</table>
+
+
+
+<script src="~/CssJs/dtjs.js"></script>
+
+<script>
+   
+    var url = '@Url.Action("ViewDocument", "CWCCuricullum")'
+    var IsEmployee = '@ViewBag.IsEmployee';
+    $("td").find("a").each(function () {
+        @*@{
+
+                    var @EncodedURL = CWC_CMS.Models.CommonDAL.EncodeString($(this).attr("href"));
+                }*@
+        $(this).attr("href", window.btoa($(this).attr("href")))
+
+
+        $(this).on('click', function (event) {
+            if (IsEmployee == "Yes") {
+                event.preventDefault();
+                $('#DocumentDiv').load(url, { EncryptedString: $(this).attr("href")})
+                //window.location.href = "/CWCCuricullum/ViewDocument?EncryptedString=" + $(this).attr("href")
+                        return true;
+                    }
+                    else {
+                        alert('You are not authenticated to View this document');
+                        return false;
+                    }
+                });
+    });
+
+
+
+    @*function SecurityCheck(RedirectingLink) {
+
+        if ('@ViewBag.IsEmployee' == "Yes") {
+
+        }
+    }*@
+</script>
+

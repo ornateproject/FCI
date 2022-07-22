@@ -1,0 +1,125 @@
+﻿@model SIDCUL.Models.GenerateOTP
+
+@{
+    ViewBag.Title = "CheckIfOtpEnteredIsValid";
+    Layout = "~/Views/Shared/_LayoutView_bak3.cshtml";
+}
+<script>
+    $(function () {
+        $('.panel-heading').attr('style', 'background-color: #79A618')
+
+    })
+</script>
+@using (Html.BeginForm("CheckIfOtpEnteredIsValid", "VigilanceApplicationForm", FormMethod.Post, new { @class = "form-horizontal", id = "basicForm", enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+    <div class="form-horizontal">
+        @Html.ValidationSummary(true)
+        <!-- panel -->
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <table style="width:100%; background-color:transparent">
+                    <tr>
+                        <td>
+                            @if (Model != null)
+                            {
+                            <h4 class="panel-title">FCI Complaint Portal</h4>
+                            }
+                            else
+                            {
+                        <h4 class="panel-title">FCI Complaint Portal</h4>
+
+                            }
+                        </td>
+
+                        <td style="text-align:right">
+                            @Html.ActionLink("Back  ", "index", "VigilanceApplicationForm", new
+                   { @*OmID = "0"*@ }, new { @class = "btn btn-default btn-quirk" })
+                        </td>
+                    </tr>
+                </table>
+
+            </div>
+
+            <div class="panel-body">
+                <h4 class="panel-title" style="text-align:center">FCI Complaint Portal</h4>
+                <div style="border: dotted 1px">
+                    <br />
+
+
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">Enter OTP<span class="text-danger">*</span></label>
+                        <div class="col-sm-6">
+                                @Html.TextBoxFor(model => model.OTP, new { @class = "form-control", placeholder = "Enter Your 6 digit OTP" })
+                            <span class="col-sm-3 control-label" style="color:red;margin-right:-10px"> </span>
+                            @Html.ValidationMessageFor(model => model.OTP, "", new { @class = "text-danger" })
+
+                        </div>
+                    </div>
+                   
+
+
+
+                    
+
+
+
+
+                    <div class="form-group">
+                        <div class="col-md-offset-2 col-md-10 padding10">
+                            
+    
+        <input type="submit" value=" Submit " id="btnSubmit" class="btn btn-success btn-quirk btn-wide mr5" />
+                      
+
+
+
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+    
+}
+
+<script>
+
+    $(document).ready(function () {
+
+        var SaveResult = '@ViewBag.SaveResult';
+        if (SaveResult == 1) {
+            $('#myModalSaveUpdate').modal('show');
+
+
+        }
+    });
+</script>
+
+
+<center>
+    <div class="modal fade" id="myModalSaveUpdate" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header btn-danger">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h2 class="modal-title">Message from System</h2>
+                </div>
+                <div class="modal-body">
+                    @if (ViewBag.SaveUpdateMessage != null)
+                    {
+                        @Html.Raw(@ViewBag.SaveUpdateMessage)
+                    }
+                </div>
+                <div class="modal-footer">
+                    <a href="http://169.38.99.248/" class="btn btn-primary">Home</a><br /><br />
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</center>

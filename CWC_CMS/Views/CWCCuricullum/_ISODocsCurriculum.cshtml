@@ -1,0 +1,121 @@
+﻿
+<table class="table table-striped table-primary hover" id="datatablelist" style="width:100%">
+    <thead>
+        <tr>
+            <td class="bg-primary" width="10%" align="center">
+                <p><strong>Date</strong></p>
+            </td>
+            <td class="bg-primary" width="80%" align="center"><strong>Circulars/Guidelines</strong></td>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>31.03.2009</td>
+            <td><a target="_blank" href="Docs/Annex%20A%20to%20D.pdf">Annexure A to&#160;D</a></td>
+        </tr>
+        <tr>
+            <td><span>31.03.2009</span></td>
+            <td><a target="_blank" href="Docs/AnnexureAtoC.pdf">Annexure A to C</a></td>
+        </tr>
+        <tr>
+            <td><span>11.08.2009</span></td>
+            <td><a target="_blank" href="Docs/comm/model_agr_hiring_comm_div_co_050417.pdf">Model agreement for hiring of godowns dated11.08.2009</a><span>&#160;and&#160;</span><a target="_blank" href="Docs/comm/cir_rev_model_agr_dedc_wh_comm_120417.pdf" style="color: #0000cc; text-decoration-line: underline; font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 10px;">Model agreement for dedicated warehouse dated 07.11.2013</a></td>
+        </tr>
+        <tr>
+            <td><span>10.12.2009</span></td>
+            <td><a target="_blank" href="Docs/Trade%20Promotion%20Assistant%20Annexure.pdf">Annexure -Trade promotion assistance.</a></td>
+        </tr>
+        <tr>
+            <td><span>08.05.2015</span></td>
+            <td><a target="_blank" href="Docs/dop_rebate_comm_050417.pdf">Delegation of power to offer rebate vide dated 08.05.2015</a></td>
+        </tr>
+        <tr>
+            <td><span>02.08.2016</span></td>
+            <td><a target="_blank" href="Docs/comm/model_tender_fg_com_040816.pdf">Model Tender</a><span>&#160;&#160;&#160;</span><a target="_blank" href="Docs/comm/cir_178_comm_020816_100816.pdf">&#160;Appointment of H&amp;T Contractors for Handling &amp; Transportation of foodgrain stocks.(New Clau</a></td>
+        </tr>
+        <tr>
+            <td><span>09.08.2016</span></td>
+            <td><a target="_blank" href="Docs/comm/cir_179_comm_090816_100816.pdf">Clause to be inserted in price bid of H&amp;T tenders.</a></td>
+        </tr>
+        <tr>
+            <td><span>25.10.2016</span></td>
+            <td><a target="_blank" href="Docs/comm/cori_modal_tend_comm_271016.pdf">Correction in MTD circulated vide circular no. 178 dated 02.08.2016</a></td>
+        </tr>
+        <tr>
+            <td><span>06.12.2016</span></td>
+            <td><a target="_blank" href="Docs/comm/cir_mtd_com_071216.pdf">Amendment in MTD circulated vide circular no. 178 dated 02.08.2016</a></td>
+        </tr>
+        <tr>
+            <td><span>07.03.2017</span></td>
+            <td><a target="_blank" href="Docs/comm/cir_183_mtd_comm_090317.pdf">Use of Electronic Toll Collection Technology for the payment of user fees in the e-mode for NH travel.</a></td>
+        </tr>
+        <tr>
+            <td><span>15.02.2017</span></td>
+            <td><a target="_blank" href="Docs/comm/cir_181_mtd_comm_250217.pdf">Correction in MTD circulated vide circular no. 178 dated 02.08.2016.</a></td>
+        </tr>
+        <tr>
+            <td><span>28.02.2017</span></td>
+            <td><a target="_blank" href="Docs/comm/cir_182_mtd_comm_060317.pdf">Clarification on SOR to be followed and Correction in MTD circulated vide circular no. 178 dated 02.08.2016.</a></td>
+        </tr>
+        <tr>
+            <td><span>07.04.2017</span></td>
+            <td><a target="_blank" href="Docs/PEG_nonDOP_stateOWNland_070417.pdf">PEG Agreement NON DCP States.</a></td>
+        </tr>
+        <tr>
+            <td><span>07.04.2017</span></td>
+            <td><a target="_blank" href="Docs/PEG_Agm_DOP_states_070417.pdf">PEG Agreement DCP States.</a></td>
+        </tr>
+        <tr>
+            <td><span>07.04.2017</span></td>
+            <td><a target="_blank" href="Docs/PEG_Ag_DOP_PPP_Godowns_070417.pdf">PEG agreement for PPP godowns</a></td>
+        </tr>
+        <tr>
+            <td><span>01.08.2017</span></td>
+            <td><a target="_blank" href="Docs/Format%20Agreement%20Format%20hiring%20of%20godown.pdf">Agreement for hiring of Godowns.</a></td>
+        </tr>
+        <tr>
+            <td>04.12.2018</td>
+            <td>
+                <p><span style="font-size: small;"><a target="_blank" href="Docs/Final%20Agreement%20for%20Mobile%20tower%20)%20(1)_041218.pdf">AGREEMENT FOR INSTALLATION OF MOBILE/TELECOM TOWER</a></span></p>
+                <p><span style="font-size: small;"><a target="_blank" href="Docs/Guidelines%20for%20Mobile%20tower%20(1)_041218.pdf">Guidelines and procedure for use of warehousing complexes of CWC for installation of Mobile/ Telecom Towers on commercial basis.</a></span></p>
+            </td>
+        </tr>
+    </tbody>
+</table>
+<script src="~/CssJs/dtjs.js"></script>
+
+<script>
+   
+    var url = '@Url.Action("ViewDocument", "CWCCuricullum")'
+    var IsEmployee = '@ViewBag.IsEmployee';
+    $("td").find("a").each(function () {
+        @*@{
+
+                    var @EncodedURL = CWC_CMS.Models.CommonDAL.EncodeString($(this).attr("href"));
+                }*@
+        $(this).attr("href", window.btoa($(this).attr("href")))
+
+
+        $(this).on('click', function (event) {
+            if (IsEmployee == "Yes") {
+                event.preventDefault();
+                $('#DocumentDiv').load(url, { EncryptedString: $(this).attr("href")})
+                //window.location.href = "/CWCCuricullum/ViewDocument?EncryptedString=" + $(this).attr("href")
+                        return true;
+                    }
+                    else {
+                        alert('You are not authenticated to View this document');
+                        return false;
+                    }
+                });
+    });
+
+
+
+    @*function SecurityCheck(RedirectingLink) {
+
+        if ('@ViewBag.IsEmployee' == "Yes") {
+
+        }
+    }*@
+</script>

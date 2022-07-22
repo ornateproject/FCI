@@ -1,0 +1,287 @@
+﻿@model CWC_CMS.Models.CareerPortalLoginModel
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>CWC</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="@Url.Content("~/Scripts/jquery-1.7.1.min.js")"></script>
+    <!--===============================================================================================-->
+    <link rel="icon" type="image/png" href="@Url.Content("~/images/CWC.ico")" />
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="@Url.Content("~/vendor/vendor/bootstrap/css/bootstrap.min.css")" />
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="@Url.Content("~/vendor/fonts/font-awesome-4.7.0/css/font-awesome.min.css")" />
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="@Url.Content("~/vendor/vendor/animate/animate.css")" />
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="@Url.Content("~/vendor/vendor/css-hamburgers/hamburgers.min.css")" />
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="@Url.Content("~/vendor/vendor/select2/select2.min.css")" />
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="@Url.Content("~/vendor/css/util.css")" />
+
+    <link rel="stylesheet" type="text/css" href="@Url.Content("~/vendor/css/main.css")" />
+    <!--===============================================================================================-->
+    <link rel="stylesheet" href="@Url.Content("~/lib/jquery.gritter/jquery.gritter.css")" type="text/css" />
+    <script src="@Url.Content("~/lib/jquery-validate/jquery.validate.js")"></script>
+    <script src="@Url.Content("~/lib/jquery.gritter/jquery.gritter.js")"></script>
+
+    <link rel="stylesheet" href="@Url.Content("~/lib/jquery.gritter/jquery.gritter.css")" type="text/css" />
+    <link rel="stylesheet" href="@Url.Content("~/lib/weather-icons/css/weather-icons.css")" type="text/css" />
+    <link rel="stylesheet" href="@Url.Content("~/lib/jquery-ui/jquery-ui.css")" type="text/css" />
+    <link rel="stylesheet" href="@Url.Content("~/lib/select2/select2.css")" type="text/css" />
+    <link rel="stylesheet" href="@Url.Content("~/lib/dropzone/dropzone.css")" type="text/css" />
+    <link rel="stylesheet" href="@Url.Content("~/lib/jquery-toggles/toggles-full.css")" type="text/css" />
+    <link rel="stylesheet" href="@Url.Content("~/lib/fontawesome/css/font-awesome.css")" type="text/css" />
+    <link rel="stylesheet" href="@Url.Content("~/lib/timepicker/jquery.timepicker.css")" type="text/css" />
+    <link rel="stylesheet" href="@Url.Content("~/lib/bootstrapcolorpicker/css/bootstrap-colorpicker.css")" type="text/css" />
+    <link rel="stylesheet" href="@Url.Content("~/css/quirk.css")" type="text/css" />
+    <link rel="stylesheet" href="@Url.Content("~/lib/animate.css/animate.css")" type="text/css" />
+    <script src="@Url.Content("~/Scripts/jquery-1.7.1.min.js")"></script>
+    <script src="@Url.Content("~/Scripts/jquery.validate.min.js")"></script>
+    <script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js")"></script>
+    <script src="@Url.Content("~/lib/modernizr/modernizr.js")"></script>
+    <script src="@Url.Content("~/lib/dropzone/dropzone.js")"></script>
+    <script src="@Url.Content("~/lib/jquery/jquery.js")"></script>
+    <script src="@Url.Content("~/lib/jquery-ui/jquery-ui.js")"></script>
+    <script src="@Url.Content("~/lib/bootstrap/js/bootstrap.js")"></script>
+    <script src="@Url.Content("~/lib/jquery-autosize/autosize.js")"></script>
+    <script src="@Url.Content("~/lib/select2/select2.js")"></script>
+    <script src="@Url.Content("~/lib/jquery-toggles/toggles.js")"></script>
+    <script src="@Url.Content("~/lib/jquery-maskedinput/jquery.maskedinput.js")"></script>
+    <script src="@Url.Content("~/lib/timepicker/jquery.timepicker.js")"></script>
+    <script src="@Url.Content("~/lib/dropzone/dropzone.js")"></script>
+    <script src="@Url.Content("~/lib/bootstrapcolorpicker/js/bootstrap-colorpicker.js")"></script>
+    <script src="@Url.Content("~/js/quirk.js")"></script>
+    <script src="@Url.Content("~/lib/jquery-validate/jquery.validate.js")"></script>
+    <script src="@Url.Content("~/lib/jquery.gritter/jquery.gritter.js")"></script>
+
+    <script>
+
+    $(document).ready(function () {
+
+        var SaveResult = '@ViewBag.SaveResult';
+        if (SaveResult == 1) {
+            $('#myModalSaveUpdate').modal('show');
+
+
+        }
+    });
+    </script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            var lefttime = 1;
+            var interval;
+            interval = setInterval('change()', 60000);
+
+
+            function change() {
+                lefttime--;
+                if (lefttime <= 2) alert("The session will be off, Left time is " + lefttime + " second!")
+            }
+        });
+        $(document).ready(function () {
+            if (window.location.search == "?result=registered") {
+                $('#myModal').modal('show');
+                $.gritter.add({
+                    title: 'Session Expired',
+                    text: 'Your Session has been Expired, Please Try Again !!!',
+                    class_name: 'with-icon exclamation-circle warning'
+                });
+            }
+            if (window.location.search == "?result=NotAllowed") {
+                $('#myModalNotAllowed').modal('show');
+                $.gritter.add({
+                    title: 'Page Not Allowed',
+                    text: 'This Page Not Allowed, Please Contact Adminstrator !!!',
+                    class_name: 'with-icon exclamation-circle warning'
+                });
+            }
+
+            if (window.location.href.indexOf("&result=Success") > -1) {
+                $('#ChanegePassword').modal('show');
+                $.gritter.add({
+                    title: 'Your Password Has Been Changed',
+                    text: 'Your Password Has Been Changed Successfully !!!',
+                    class_name: 'with-icon check-circle success'
+                });
+            }
+            if (window.location.search == "?result=Success") {
+                $('#ChanegePassword').modal('show');
+                $.gritter.add({
+                    title: 'New Password Saved',
+                    text: 'New Password Saved Successfully !!!',
+                    class_name: 'with-icon check-circle success'
+                });
+            }
+            if (window.location.search == "?result=Notmatch") {
+
+                $.gritter.add({
+                    title: 'New Password Not Saved',
+                    text: 'Secret Code not Matched !!!',
+                    class_name: 'with-icon exclamation-circle warning'
+                });
+            }
+            if (window.location.search == "?UserValid=invalid") {
+
+                $.gritter.add({
+                    title: 'Message From System',
+                    text: 'UserName or Password Incorrect.',
+                    class_name: 'with-icon exclamation-circle danger'
+                });
+            }
+
+        });
+    </script>
+
+    <script>
+
+        $(function () {
+            $(".datepicker").datepicker({
+                dateFormat: 'dd-M-yy',
+                yearRange: '1950:2013',
+                changeMonth: true,
+                changeYear: true
+            });
+        });
+    </script>
+</head>
+<body>
+
+
+    <div class="limiter">
+        <div class="container-login100">
+
+            <div class="wrap-login100">
+
+                <div class="login100-pic js-tilt" data-tilt>
+                    <img src="~/images/CWCLogin.jpg" class="img-thumbnail" alt="IMG" />
+                </div>
+
+                @using (Html.BeginForm("Create", "CareerPortalLogin", FormMethod.Post, new { @class = "login100-form validate-form", id = "basicForm" }))
+                {
+                    <span class="login100-form-title">
+                        Student Login
+                    </span>
+
+
+                    <div class="form-group">
+                        <div class="form-group">
+                            <div class="custom-control custom-radio custom-control-inline col-sm-4">
+                                @Html.RadioButtonFor(model => model.LoginUsingRollNoOrRegNo, "Yes", new { @class = "custom-control-input", @id = "rbtnRegtNo", required = true })
+                                @Html.ValidationMessageFor(model => model.LoginUsingRollNoOrRegNo, "", new { @class = "text-danger" })
+                                <label class="custom-control-label" style="padding-left:20px;" for="rbtnHeadOffice"><b>Registration No</b></label>
+                            </div>
+                            <div class="custom-control custom-radio custom-control-inline col-sm-4">
+                                @Html.RadioButtonFor(model => model.LoginUsingRollNoOrRegNo, "No", new { @class = "custom-control-input", @id = "rbtnRollNo" })
+                                @Html.ValidationMessageFor(model => model.LoginUsingRollNoOrRegNo, "", new { @class = "text-danger" })
+                                <label class="custom-control-label" style="padding-left:20px;" for="rbtnRegionalOffice"><b>Roll No</b></label>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="wrap-input100 validate-input" data-validate="Valid email is required: ex@abc.xyz" id="divRegtNo">
+                        @Html.TextBoxFor(model => model.RegistrationNo, new { @class = "input100", placeholder = "Registration Number", required = true })
+                        <span class="focus-input100"></span>
+                        <span class="symbol-input100">
+                            <i class="fa fa-envelope" aria-hidden="true"></i>
+                        </span>
+                    </div>
+
+                    <div class="wrap-input100 validate-input" data-validate="Password is required" id="divRollNo">
+                        @Html.TextBoxFor(model => model.RollNo, new { @class = "input100", placeholder = "Roll No", required = true })
+                        <span class="focus-input100"></span>
+                        <span class="symbol-input100">
+                            <i class="fa fa-envelope" aria-hidden="true"></i>
+                        </span>
+                    </div>
+                    <div class="wrap-input100 validate-input" data-validate="Date Of Birth is required">
+                        @Html.TextBoxFor(model => model.DOB, new { @class = "input100 datepicker", placeholder = "DOB", required = true })
+                        <span class="focus-input100"></span>
+                        <span class="symbol-input100">
+                            <i class="fa fa-envelope" aria-hidden="true"></i>
+                        </span>
+                    </div>
+                    <div class="container-login100-form-btn">
+                        <button class="login100-form-btn" type="submit">
+                            Login
+                        </button>
+                    </div>
+
+
+
+
+                }
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
+
+<center>
+    <div class="modal fade" id="myModalSaveUpdate" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header btn-danger">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h2 class="modal-title">Message from System</h2>
+                </div>
+                <div class="modal-body">
+                    @if (ViewBag.SaveUpdateMessage != null)
+                    {
+                        @Html.Raw(@ViewBag.SaveUpdateMessage)
+                    }
+                </div>
+                <div class="modal-footer">
+                    <a href="http://169.38.99.248/" class="btn btn-primary">Home</a><br /><br />
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</center>
+
+
+<style>
+    #rbtnRegtNo {
+        opacity: 1 !important;
+        z-index:0;
+    }
+
+    #rbtnRollNo {
+        opacity: 1 !important;
+        z-index:0;
+    }
+
+    
+</style>
+<script>
+
+
+    $(function () {
+
+        
+        $('#rbtnRegtNo').click(function () {
+
+            $("#divRollNo").hide();
+            $("#divRegtNo").show();
+        });
+
+        $('#rbtnRollNo').click(function () {
+
+            $("#divRollNo").show();
+            $("#divRegtNo").hide();
+        });
+        $("#rbtnRegtNo").attr('checked', true).trigger('click');
+    })
+</script>

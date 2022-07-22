@@ -1,0 +1,701 @@
+﻿@model CWC_CMS.Models.VigilanceComplaintModel
+
+@{
+    ViewBag.Title = "AddAComplaint";
+    Layout = "~/Views/Shared/_LayoutView_bak2.cshtml";
+}
+
+<script>
+
+    $(document).ready(function () {
+
+        var SaveResult = '@ViewBag.SaveResult';
+        if (SaveResult == 1) {
+            $('#myModalSaveUpdate').modal('show');
+        }
+    });
+</script>
+<script>
+    $(function () {
+        $('.panel-heading').attr('style', 'background-color: #79A618')
+
+    })
+</script>
+<style type="text/css">
+    .drop {
+        background-color: #fcfcfd;
+        border-color: #bdc3d1;
+        border-radius: 2px;
+        height: 38px;
+        outline: none;
+    }
+</style>
+
+<style type="text/css">
+    /*.btn {
+            height: 30px;
+            margin-bottom: 7px;
+            font-family: Verdana, Arial, Calibri,sans serif, Tahoma;
+            font-size: 12px;
+            width: 70px;
+        }*/
+
+    .btnlist input[type="radio"] {
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        -ms-appearance: none;
+        -o-appearance: none;
+        appearance: none;
+        position: relative;
+        /*top: 9.33333px;*/
+        right: 0;
+        bottom: 0;
+        left: 0;
+        height: 25px;
+        width: 25px;
+        transition: all 0.15s ease-out 0s;
+        background: #fff;
+        border: 3px solid #320dff;
+        color: #33a02c;
+        cursor: pointer;
+        display: inline-block;
+        margin-right: 0.8rem;
+        margin-left: 0.8rem;
+        outline: none;
+        position: relative;
+        z-index: 1000;
+    }
+
+        .btnlist input[type="radio"]:hover {
+            background: #33a02c;
+        }
+
+        .btnlist input[type="radio"]:checked {
+            background: #fff;
+        }
+
+            .btnlist input[type="radio"]:checked::before {
+                height: 25px;
+                width: 25px;
+                position: absolute;
+                content: '✔';
+                display: inline-block;
+                font-size: 26.66667px;
+                text-align: center;
+                line-height: 15px;
+            }
+
+            .btnlist input[type="radio"]:checked::after {
+                -webkit-animation: click-wave 0.65s;
+                -moz-animation: click-wave 0.65s;
+                animation: click-wave 0.65s;
+                background: #40e0d0;
+                content: '';
+                display: block;
+                position: relative;
+                z-index: 100;
+            }
+
+    .btnlist input[type="radio"] {
+        border-radius: 50%;
+    }
+
+        .btnlist input[type="radio"].radio::after {
+            border-radius: 50%;
+        }
+
+    .btnlist label {
+        margin-bottom: 0px;
+    }
+</style>
+
+<script type="text/javascript">
+    $(function () {
+
+        $(".datepicker").datepicker({ dateFormat: 'dd-M-yy' }).datepicker('setDate', new Date());
+
+        $('.datepicker').datepicker("destroy");
+        //$(".datepicker").datepicker({
+        //    dateFormat: 'dd-M-yy',
+        //    changeMonth: true,
+        //    changeYear: true
+        //});
+
+
+    });
+</script>
+<link href="~/css/site.css" rel="StyleSheet" />
+@*<link href="~/lib/summernote/summernote.css" rel="stylesheet" />
+    <script src="~/lib/summernote/summernote.js"></script>*@
+<script type="text/javascript">
+
+    $(document).ready(function () {
+        $('#basicForm').validate({
+            highlight: function (element) {
+                $(element).closest('.form-group').removeClass('has-success').addClass('has-error');
+            },
+            success: function (element) {
+                $(element).closest('.form-group').removeClass('has-error');
+            }
+        });
+        $('.select2').select2();
+    });
+
+    $(document).ready(function () {
+        $(".digit").keypress(function (e) {
+            if (e.which != 8 && e.which != 0 && (e.which < 48 || e.which > 57)) {
+                $("#errormsg").html("Digits Only").show().fadeOut("slow");
+                return false;
+            }
+        });
+
+    });
+</script>
+
+
+<script>
+    $(document).ready(function () {
+
+
+
+        $('#ddlComplaintType').hide();
+
+
+        $("input[type='radio']").click(function () {
+            var radioValue = $("input[name='ComplaintType']:checked").val();
+            if (radioValue=='V') {
+                $('#ddlComplaintType').show();
+            }
+            else {
+                $('#ddlComplaintType').hide();
+            }
+        });
+
+
+
+        $('#basicForm').submit(function () {
+
+            var proposedProductNikcount = 0
+            $(".ComplaintAgainstName").each(function () {
+                $(this).attr('name', 'AccussedPersonForComplaintList[' + proposedProductNikcount + '].ComplaintAgainstName');
+                proposedProductNikcount++;
+            });
+
+            proposedProductNikcount = 0;
+            $(".DesignationOfAccused").each(function () {
+                $(this).attr('name', 'AccussedPersonForComplaintList[' + proposedProductNikcount + '].DesignationOfAccused');
+                proposedProductNikcount++;
+            });
+
+            return true;
+
+        });
+    });
+
+    function LimtCharacters(txtMsg, CharLength, indicator) {
+        chars = txtMsg.value.length;
+        document.getElementById(indicator).innerHTML = CharLength - chars;
+        if (chars > CharLength) {
+            txtMsg.value = txtMsg.value.substring(0, CharLength);
+        }
+    }
+</script>
+
+<script type="text/javascript">
+    // Script For Spcial Charcter not to be allowed
+        var specialKeys = new Array();
+        specialKeys.push(8); //Backspace
+        specialKeys.push(9); //Tab
+        specialKeys.push(46); //Delete
+        specialKeys.push(36); //Home
+        specialKeys.push(35); //End
+        specialKeys.push(37); //Left
+        specialKeys.push(39); //Right
+        function IsAlphaNumeric(e) {
+            var keyCode = e.keyCode == 0 ? e.charCode : e.keyCode;
+            var ret = ((keyCode >= 48 && keyCode <= 57) || (keyCode == 32) || (keyCode >= 65 && keyCode <= 90) || (keyCode >= 97 && keyCode <= 122) || (specialKeys.indexOf(e.keyCode) != -1 && e.charCode != e.keyCode));
+            document.getElementById("error").style.display = ret ? "none" : "inline";
+            return ret;
+        }
+</script>
+
+@using (Html.BeginForm("AddAComplaint", "VigilanceApplicationForm", FormMethod.Post, new { @class = "form-horizontal", id = "basicForm", enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        @Html.ValidationSummary(true)
+        <!-- panel -->
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <table style="width:100%; background-color:transparent">
+                    <tr>
+                        <td>
+                            @if (Model != null)
+                            {
+                                <h4 style="color: white;">FCI Complaint Portal</h4>
+                            }
+                            else
+                            {
+                                <h4 style="color: white;">FCI Complaint Portal</h4>
+
+                            }
+                        </td>
+
+                        <td style="text-align:right">
+                            @Html.ActionLink("Back  ", "index", "VigilanceApplicationForm", new
+                       { @*OmID = "0"*@ eid = CWC_CMS.Models.Token.EncryptString(Session["User_recno"].ToString())}, new { @class = "btn btn-default btn-quirk" })
+                        </td>
+                    </tr>
+                </table>
+
+            </div>
+
+            <div class="panel-body">
+
+                <div style="border: dotted 1px">
+                    <br />
+                    <div class="form-group">
+
+                        <label class="col-sm-2 control-label"><b style="font-size: 115%;">Complaint Type</b></label>
+                        <div class="col-sm-3">
+                            <div class="btn-group btnlist">
+                                <label>
+                                    @Html.RadioButtonFor(model => model.ComplaintType, "G", new { @class = "custom-control-input", @name = "General", @id = "rbGeneral", @checked = true })
+                                    General
+                                </label>
+                                <label>
+
+                                    @Html.RadioButtonFor(model => model.ComplaintType, "V", new { @class = "custom-control-input", @name = "General", @id = "rbtvig", required = true })
+
+                                    Vigilance
+                                </label>
+                                <label>
+
+                                    @Html.RadioButtonFor(model => model.ComplaintType, "E", new { @class = "custom-control-input", @name = "EWC", @id = "rbtewc", required = true })
+
+                                    EWC
+                                </label>
+
+                            </div>
+                        </div>
+                        <div class="form-group" id="ddlComplaintType" style="display:none">
+                            <label class="col-sm-2 control-label"><b style="font-size: 115%;">Sub Complaint Type</b> <span class="text-danger">*</span></label>
+                            <div class="col-sm-3">
+                                @Html.DropDownListFor(model => model.SubcomplaintType, new SelectList(@ViewBag.FillSubComplaint, "Value", "Text", selectedValue: false), "--Select Sub Complaint Type--", new { id = "SubComplainttype", @class = "drop select2", style = "width: 100%" })
+
+
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label"><b style="font-size: 115%;">Subject</b></label>
+                        <div class="col-sm-3">
+                            @Html.TextBoxFor(model => model.Organisation, new { @class = "form-control", @onkeypress = "return IsAlphaNumeric(event)", autocomplete = "off", placeholder = "Type here..." })
+                            <span class="col-sm-3 control-label" style="color:red;margin-right:-10px">   </span>
+                            @Html.ValidationMessageFor(model => model.Organisation, "", new { @class = "text-danger" })
+                            <span id="error" style="color: Red; display: none">* Special Characters not allowed</span>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label"><b style="font-size: 115%;">Complaint Description</b> <span class="text-danger">*</span></label>
+                            <div class="col-sm-3">
+                                @Html.TextAreaFor(model => model.DetailsOfAllegation, new { @class = "form-control ", autocomplete = "off", @onkeyup = "LimtCharacters(this,500,'lblcount')", @OnClick = "return disableColor(this)", placeholder = "Type here..." })
+                                <span class="col-sm-3 control-label" style="color:red;margin-right:-10px">   </span>
+                                @Html.ValidationMessageFor(model => model.DetailsOfAllegation, "", new { @class = "text-danger" })
+                                <label id="lblcount" class="col-sm-44 control-label" style="color:red;padding-left:100px">Characters limit 500</label>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label"><b style="font-size: 115%;">Date</b></label>
+                        <div class="col-sm-3">
+                            @Html.TextBoxFor(model => model.DateOfComplaint, "{0:dd-MMM-yyyy}", new { @class = "form-control datepicker", autocomplete = "off", placeholder = "Please Enter Date Of Complaint", readOnly = true })
+                            <span class="col-sm-3 control-label" style="color:red;margin-right:-10px"> </span>
+                            @Html.ValidationMessageFor(model => model.DateOfComplaint, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label"><b style="font-size: 115%;">Upload Document</b><br /><span class="text-danger">(Only .pdf, .jpg, .png)</span> </label>
+                            <div class="col-sm-3">
+                                @Html.TextBoxFor(model => model.DocumentAccompanyingAllegation, new { @class = "form-control", autocomplete = "off", placeholder = "", type = "file", @id = "Remark_File_Path" })
+                                @Html.ValidationMessageFor(model => model.DocumentAccompanyingAllegation, "", new { @class = "text-danger" })
+                                <span style="color:blue">Only the document which are in support of the complaint are to be uploaded.</span>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div id="repeaterNew">
+                        <div class="form-horizontal">
+                            <table id="detailsTableCover" class="table table-bordered table-striped table-responsive">
+                                <tbody>
+                                    <tr class="MainBodyCover">
+                                        <th style="background-color: #79A618"><b style="font-size: 115%;">Compliant Against</b><span style="color:blue"> (Name of the person against whom the complaint  is to be registered)</span></th>
+                                        <th style="background-color: #79A618"><b style="font-size: 115%;">Designation of Complainee</b></th>
+                                        <th style="background-color: #79A618"><b style="font-size: 115%;">Action</b></th>
+                                    </tr>
+                                    @if (Model != null)
+                                    {
+                                        if (Model.AccussedPersonForComplaintList != null)
+                            {
+                                for (int i = 0; i < Model.AccussedPersonForComplaintList.Count; i++)
+                                {
+                                                <tr class="MainBodyCover">
+                                                    <td>
+                                                        @Html.TextBoxFor(modelItem => modelItem.AccussedPersonForComplaintList[i].ComplaintAgainstName, new { @class = "form-control ComplaintAgainstName", autocomplete = "off", placeholder = "Type here...", readOnly = true })
+                                                        @Html.ValidationMessageFor(modelItem => modelItem.AccussedPersonForComplaintList[i].ComplaintAgainstName, "", new { @class = "text-danger" })
+                                                    </td>
+                                                    <td>
+                                                        @Html.TextAreaFor(modelItem => modelItem.AccussedPersonForComplaintList[i].DesignationOfAccused, new { @class = "form-control DesignationOfAccused", autocomplete = "off", placeholder = "Type here...", readOnly = true })
+                                                        @Html.ValidationMessageFor(modelItem => modelItem.AccussedPersonForComplaintList[i].DesignationOfAccused, "", new { @class = "text-danger" })
+                                                    </td>
+                                                    <td style="width:70px;">
+                                                        <a data-itemid="0" href="#" class="deleteItemCover">Remove</a>
+                                                        <a data-itemplusid_partnar="1" href="#" class="Plus_Partnar "><i class="fa fa-plus"></i></a>
+                                                    </td>
+                                                </tr>
+
+                                            }
+                                        }
+                                    }
+                                </tbody>
+                                <tbody id="ShowRowCover">
+
+                                    <tr>
+                                        <td>
+                                            <input type="text" id="ComplaintAgainstNameRepeater" name="ComplaintAgainstNameRepeater" placeholder="Name of Complainee" class="form-control" />
+                                        </td>
+                                        <td><textarea id="DesignationOfAccusedRepeater" name="DesignationOfAccusedRepeater" placeholder="Designation of Complainee" class="form-control"></textarea></td>
+
+                                        <td><a id="addToListCover" class="btn btn-primary">Add</a></td>
+
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <input type="hidden" id="OrderId" />
+                        </div>
+                    </div>
+
+                    <span style="color:red">Note :*In case it is found that complaint was false which has caused harrassment to employees,complainant shall be liable to legal prosecution under general offence.</span>
+                    <div class="form-group">
+                        <div class="col-md-offset-5 col-md-10 padding10">
+                            @{
+                                if (@ViewBag.IsNewForm == "Yes")
+                                {
+                                    <input type="submit" value=" Submit Complaint" id="btnSubmit" onclick="loadAjax();" class="btn btn-success btn-quirk btn-wide mr5" />
+                                }
+                                else
+                            {
+                                    <input type="submit" value=" Update " id="btnSubmit" class="btn btn-success btn-quirk btn-wide mr5" />
+                                }
+                            }
+
+
+
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+
+                                }
+
+
+<div id="fade"></div>
+<div id="modal" style="height:auto;width:auto;">
+    <img id="loader" src="~/images/loading-1.gif" />
+</div>
+
+
+<div class="modal fade" id="myModalSaveUpdate" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header btn-danger">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h2 class="modal-title">Message from System</h2>
+            </div>
+            <div class="modal-body">
+                @*@if (ViewBag.SaveUpdateMessage != null)
+                    {
+                        @Html.Raw(@ViewBag.SaveUpdateMessage)
+                    }*@
+
+                @if (ViewBag.SaveUpdateMessage != null)
+                {
+                    <script type="text/javascript">
+                        window.onload = function () {
+                            debugger;
+                                alert("@ViewBag.SaveUpdateMessage");
+                            };
+                    </script>
+                }
+            </div>
+            <div class="modal-footer">
+                <a href="http://49.50.87.108:8080/homepage" class="btn btn-primary">Home</a><br /><br />
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    //Add Multiple Order.
+    var count = $('.MainBodyCover').length - 1;
+    $("#addToListCover").click(function (e) {
+        e.preventDefault();
+        if ($.trim($("#ComplaintAgainstNameRepeater").val()) == "" || $.trim($("#DesignationOfAccusedRepeater").val()) == "") {
+            alert('Please Fill the Details of Accused Properly');
+            return
+        };
+
+
+        count = $('.MainBodyCover').length - 1;
+        var
+            ComplaintAgainstName = $("#ComplaintAgainstNameRepeater").val(),
+            DesignationOfAccused = $("#DesignationOfAccusedRepeater").val()
+        detailsTableBody = $(".MainBodyCover:last");
+
+
+        var productItem = '<tr class = "MainBodyCover"><td>@Html.TextBoxFor(model => model.AccussedPersonForComplaintList[0].ComplaintAgainstName, new { @class = "form-control ComplaintAgainstName", placeholder = "Type here...", readOnly = true })</td><td>@Html.TextBoxFor(model => model.AccussedPersonForComplaintList[0].DesignationOfAccused, new { @class = "form-control DesignationOfAccused", placeholder = "Type here...", readOnly = true })</td><td><a data-itemId="0" href="#" class="deleteItemCover">Remove</a></td><td><a data-itemPlusId="1" href="#" class="PlusCover"><i class="fa fa-plus"></i></a></td></tr>';
+
+        detailsTableBody.after(productItem);
+        $(".ComplaintAgainstName:last").val(ComplaintAgainstName);
+        $(".DesignationOfAccused:last").val(DesignationOfAccused);
+
+        $(".DesignationOfAccused:last").attr('name', 'AccussedPersonForComplaintList[' + count + '].DesignationOfAccused');
+        $(".ComplaintAgainstName:last").attr('name', 'AccussedPersonForComplaintList[' + count + '].ComplaintAgainstName');
+        count++;
+
+
+
+        clearItemCover();
+        //After insert one row hide the text box row
+        $("#ShowRowCover").hide();
+    });
+
+    // click Plus signe to show the row
+
+    $(document).on('click', 'a.PlusCover', function (e) {
+        e.preventDefault();
+        var $self = $(this);
+        if ($(this).attr('data-itemPlusId') == "1") {
+            $("#ShowRowCover").show();
+            $(".Plus").hide();
+        }
+    });
+    // reset the text
+    $("#reset").click(function (e) {
+        e.preventDefault();
+        clearItemCover();
+    });
+
+    //After Add A New row In The List, Clear Clean The Form For Add More Order.
+    function clearItemCover() {
+        $("#ComplaintAgainstNameRepeater").val('');
+        $("#DesignationOfAccusedRepeater").val('');
+    }
+    // After Add A New row In The List, If You Want, You Can Remove It.
+    $(document).on('click', 'a.deleteItemCover', function (e) {
+        e.preventDefault();
+        var rowCount = 0;
+        console.log(rowCount);
+        if (rowCount == 3) {
+            var $self = $(this);
+            if ($(this).attr('data-itemId') == "0") {
+                $(this).parents('tr').css("background-color", "#ff6347").fadeOut(200, function () {
+                    $(this).remove();
+                    $("#ShowRowCover").show();
+                    $(".PlusCover").hide();
+                });
+            }
+        }
+        else {
+            $(this).parents('tr').css("background-color", "#ff6347").fadeOut(200, function () {
+                $(this).remove();
+                $(".Plus").show();
+            });
+        }
+    });
+
+</script>
+
+<script>
+
+    function ValidateFileSize(fileid) {
+        try {
+            var fileSize = 0;
+            if (navigator.userAgent.match(/msie/i)) {
+                var obaxo = new ActiveXObject("Scripting.FileSystemObject");
+                var filePath = $('#Remark_File_Path')[0].value;
+                var objFile = obaxo.getFile(filePath);
+                var fileSize = objFile.size;
+                fileSize = fileSize / 1048576;
+            }
+            else {
+                fileSize = $('#Remark_File_Path')[0].files[0].size
+                fileSize = fileSize / 1048576;
+            }
+
+            return fileSize;
+        }
+        catch (e) {
+            alert("Error is :" + e);
+        }
+    }
+
+    //$('#Remark_File_Path').on('change', function (evnt) {
+
+
+    //    var flag = false;
+    //    var result = $('#Remark_File_Path').val();
+    //    var file = result;
+    //    if (file != null) {
+    //        var multi = file.split(".");
+    //        if (multi.length > 2) {
+    //            alert("Please upload proper file with single dot in filename");
+    //            $('#Remark_File_Path').val('');
+    //            return;
+    //        }
+    //        var extension = file.substr((file.lastIndexOf('.') + 1));
+    //        switch (extension) {
+    //            //case 'jpg':
+    //            //case 'jpeg':
+    //            case 'pdf':
+    //                flag = true;
+    //                $('#error').empty();
+    //                break;
+    //            case 'jpg':
+    //                flag = true;
+    //                $('#error').empty();
+    //                break;
+    //            case 'png':
+    //                flag = true;
+    //                $('#error').empty();
+    //                break;
+    //            default:
+    //                alert("You can upload only pdf, jpg, png extension file Only")
+    //                $('#Remark_File_Path').val('');
+    //                flag = false;
+    //        }
+
+
+    //        if (flag == true) {
+
+    //            var FileID = $('#Remark_File_Path').attr('id')
+    //            var size = ValidateFileSize(FileID);
+    //            if (size > 5) {
+    //                alert("You Can Upload file Size Up to 5 MB.");
+    //                $('#Remark_File_Path').val('');
+    //            }
+    //            else {
+
+    //                var myformData = new FormData();
+    //                myformData.append('file', $('#Remark_File_Path')[0].files[0]);
+    //                $.ajax({
+    //                    async: false,
+    //                    type: "POST",
+    //                    url: "../VigilanceApplicationForm/CheckFile",
+    //                    contentType: false,
+    //                    processData: false,
+    //                    data: myformData,
+    //                    success: OnSuccess,
+    //                    failure: function (response) {
+    //                        //alert(response.d);
+    //                        return false;
+    //                    }
+    //                });
+    //                function OnSuccess(response) {
+    //                    debugger;
+    //                    if (response == false) {
+    //                        alert("Please select vaild file.");
+    //                        $('#Remark_File_Path').val('');
+    //                    }
+    //                    else {
+    //                        return true;
+    //                    }
+
+    //                }
+
+
+    //            }
+    //        }
+    //    }
+
+
+    //});
+</script>
+
+<style>
+    #fade {
+        display: none;
+        position: absolute;
+        top: 0%;
+        left: 0%;
+        width: 100%;
+        height: 100%;
+        background-color: #ababab;
+        z-index: 1001;
+        -moz-opacity: 0.8;
+        opacity: .70;
+        filter: alpha(opacity=80);
+    }
+
+    #modal {
+        display: none;
+        position: absolute;
+        top: 45%;
+        left: 45%;
+        width: 64px;
+        height: 64px;
+        padding: 30px 15px 0px;
+        border: 3px solid #ababab;
+        box-shadow: 1px 1px 10px #ababab;
+        border-radius: 20px;
+        background-color: white;
+        z-index: 1002;
+        text-align: center;
+        overflow: auto;
+    }
+</style>
+
+<script>
+    function openModal() {
+        document.getElementById('modal').style.display = 'block';
+        document.getElementById('fade').style.display = 'block';
+    }
+
+    function closeModal() {
+        document.getElementById('modal').style.display = 'none';
+        document.getElementById('fade').style.display = 'none';
+    }
+
+    function loadAjax() {
+        debugger;
+       // document.getElementById('results').innerHTML = '';
+        openModal();
+        var xhr = false;
+        if (window.XMLHttpRequest) {
+            xhr = new XMLHttpRequest();
+        }
+        else {
+            xhr = new ActiveXObject("Microsoft.XMLHTTP");
+        }
+        if (xhr) {
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState == 4 && xhr.status == 200) {
+                    closeModal();
+                   // document.getElementById("results").innerHTML = xhr.responseText;
+                }
+            }
+            xhr.open("GET", "load-ajax-data.php", true);
+            xhr.send(null);
+        }
+    }
+</script>

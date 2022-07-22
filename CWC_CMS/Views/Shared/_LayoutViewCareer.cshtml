@@ -1,0 +1,408 @@
+﻿@using SIDCUL.Models
+
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+    <!--- basic page needs
+       ================================================== -->
+    <meta charset="utf-8">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <!-- mobile specific metas
+    ================================================== -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- CSS
+    ================================================== -->
+    <link rel="stylesheet" href="~/staticResourcesCareer/css/base.css">
+    <link rel="stylesheet" href="~/staticResourcesCareer/css/vendor.css">
+    <link rel="stylesheet" href="~/staticResourcesCareer/css/main.css">
+    <link rel="stylesheet" href="~/staticResourcesCareer/css/marquee.css">
+
+    <!-- script
+    ================================================== -->
+    <script src="~/staticResourcesCareer/js/modernizr.js"></script>
+    <script src="~/staticResourcesCareer/js/pace.min.js"></script>
+    <!-- <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script> -->
+    <script type="text/javascript" src="~/staticResourcesCareer/js/marquee.js"></script>
+
+    <!-- favicons
+    ================================================== -->
+    <link rel="shortcut icon" href="~/staticResourcesCareer/favicon.html" type="image/x-icon">
+    <link rel="icon" href="~/staticResourcesCareer/favicon.html" type="image/x-icon">
+
+
+    <script src="~/Scripts/GoogleTranslate.js"></script>
+    <style>
+        div#google_translate_element div.goog-te-gadget-simple {
+            background-color: #000000;
+            border: none;
+        }
+
+            div#google_translate_element div.goog-te-gadget-simple a.goog-te-menu-value span {
+                color: #ffffff;
+            }
+
+            div#google_translate_element div.goog-te-gadget-simple a.goog-te-menu-value span {
+                font-size: 10px;
+            }
+
+                div#google_translate_element div.goog-te-gadget-simple a.goog-te-menu-value span:hover {
+                    color: #000;
+                }
+    </style>
+    <script type="text/javascript">
+        function googleTranslateElementInit() {
+            new google.translate.TranslateElement({ pageLanguage: 'en', includedLanguages: 'en,gu,hi,kn,ml,mr,ta,te,ur', layout: google.translate.TranslateElement.InlineLayout.SIMPLE }, 'google_translate_element');
+        }
+    </script>
+
+</head>
+
+<body>
+    <!-- header
+       ================================================== -->
+    <header class="s-header">
+
+        <div class="header-logo">
+            <a class="site-logo" href="index-2.html">
+                <img src="~/staticResourcesCareer/images/logo.png" alt="Homepage">
+            </a>
+        </div> <!-- end header-logo -->
+
+        <div class="header-logo-menu">
+            <ul class="home-social" style="float:right">
+                <li class="home-social-title"><a href="https://cewacor.nic.in/index.php" target="_blank">Why FCI</a></li>
+                <li class="home-social-title"><a href="cwc_advertisements.html" target="_blank">Career @@ FCI</a></li>
+                <li class="home-social-title"><a href="#contact" target="_blank">Contact Us</a></li>
+                <li class="home-social-title"><a href="/Login/Index">Admin Login</a></li>
+                <li class="home-social-title hindi"><div id="google_translate_element" style="margin-top: -1.5em;"></div></li>
+                <!--   <li><a href="cwc_advertisements">
+                      <i class="fab fa-twitter"></i>
+                      <span class="home-social-text">Career @@ CWC</span>
+                  </a></li>
+
+
+                  <li><a href="#contact">
+                      <i class="fab fa-linkedin"></i>
+                      <span class="home-social-text">Contact Us</span>
+                  </a></li> -->
+            </ul> <!-- end home-social -->
+        </div>
+    </header> <!-- end s-header -->
+    <!--  login page script header -->
+    <script type="stylesheet">
+        html { height: 100% }
+        ::-moz-selection { background: #fe57a1; color: #fff; text-shadow: none; }
+        ::selection { background: #fe57a1; color: #fff; text-shadow: none; }
+        body { background-image: radial-gradient( cover, rgba(92,100,111,1) 0%,rgba(31,35,40,1) 100%), url('../i.minus.com/io97fW9I0NqJq.png') }
+        .login {
+        border:1px solid #666;
+        background: #eceeee;
+        border: 1px solid #42464b;
+        border-radius: 6px;
+        height: 257px;
+        margin: 20px auto 0;
+        width: 298px;
+        margin-left:200px;
+        }
+        .login h1 {
+        background-image: linear-gradient(top, #f1f3f3, #d4dae0);
+        border-bottom: 1px solid #a6abaf;
+        border-radius: 6px 6px 0 0;
+        box-sizing: border-box;
+        color: #727678;
+        display: block;
+        height: 43px;
+        font: 600 14px/1 'Open Sans', sans-serif;
+        padding-top: 14px;
+        margin: 0;
+        text-align: center;
+        text-shadow: 0 -1px 0 rgba(0,0,0,0.2), 0 1px 0 #fff;
+        }
+        input[type="password"], input[type="text"] {
+        background: url('../i.minus.com/ibhqW9Buanohx2.png') center left no-repeat, linear-gradient(top, #d6d7d7, #dee0e0);
+        border: 1px solid #a1a3a3;
+        border-radius: 4px;
+        box-shadow: 0 1px #fff;
+        box-sizing: border-box;
+        color: #696969;
+        height: 39px;
+        margin: 31px 0 0 29px;
+        padding-left: 37px;
+        transition: box-shadow 0.3s;
+        width: 240px;
+        }
+        input[type="password"]:focus, input[type="text"]:focus {
+        box-shadow: 0 0 4px 1px rgba(55, 166, 155, 0.3);
+        outline: 0;
+        }
+        .show-password {
+        display: block;
+        height: 16px;
+        margin: 26px 0 0 28px;
+        width: 87px;
+        }
+        input[type="checkbox"] {
+        cursor: pointer;
+        height: 16px;
+        opacity: 0;
+        position: relative;
+        width: 64px;
+        }
+        input[type="checkbox"]:checked {
+        left: 29px;
+        width: 58px;
+        }
+        .toggle {
+        background: url(../i.minus.com/ibitS19pe8PVX6.png) no-repeat;
+        display: block;
+        height: 16px;
+        margin-top: -20px;
+        width: 87px;
+        z-index: -1;
+        }
+        input[type="checkbox"]:checked + .toggle { background-position: 0 -16px }
+        .forgot {
+        color: #7f7f7f;
+        display: inline-block;
+        float: right;
+        font: 12px/1 sans-serif;
+        left: -19px;
+        position: relative;
+        text-decoration: none;
+        top: 5px;
+        transition: color .4s;
+        }
+        .forgot:hover { color: #3b3b3b }
+        input[type="submit"] {
+        width:240px;
+        height:35px;
+        display:block;
+        font-family:Arial, "Helvetica", sans-serif;
+        font-size:16px;
+        font-weight:bold;
+        color:#fff;
+        text-decoration:none;
+        text-transform:uppercase;
+        text-align:center;
+        text-shadow:1px 1px 0px #37a69b;
+        padding-top:6px;
+        margin: 29px 0 0 29px;
+        position:relative;
+        cursor:pointer;
+        border: none;
+        background-color: #37a69b;
+        background-image: linear-gradient(top,#3db0a6,#3111);
+        border-top-left-radius: 5px;
+        border-top-right-radius: 5px;
+        border-bottom-right-radius: 5px;
+        border-bottom-left-radius:5px;
+        box-shadow: inset 0px 1px 0px #2ab7ec, 0px 5px 0px 0px #497a78, 0px 10px 5px #999;
+        }
+
+        .shadow {
+        background: #000;
+        border-radius: 12px 12px 4px 4px;
+        box-shadow: 0 0 20px 10px #000;
+        height: 12px;
+        margin: 30px auto;
+        opacity: 0.2;
+        width: 270px;
+        }
+
+
+        input[type="submit"]:active {
+        top:3px;
+        box-shadow: inset 0px 1px 0px #2ab7ec, 0px 2px 0px 0px #31524d, 0px 5px 3px #999;
+        }
+    </script>
+
+    <!--  login page script -->
+    <!-- Java Script
+    ================================================== -->
+    <script src="~/Scripts/jquery-3.4.1.min.js"></script>
+    @*<script src="~/staticResourcesCareer/js/jquery-3.2.1.min.js"></script>*@
+    <script src="~/staticResourcesCareer/js/plugins.js"></script>
+    <script src="~/staticResourcesCareer/js/main.js"></script>
+
+
+    <div class="container-fluid">
+
+        @RenderBody()
+    </div>
+</body>
+<!-- end s-header -->
+
+<!-- footer
+================================================== -->
+<!-- contact
+================================================== -->
+<section id="contact" class="s-contact">
+
+
+
+    <div class="row">
+
+        <div class="col-five tab-full contact-secondary" data-aos="fade-up">
+            <h3 class="subhead subhead--light">Contact Us</h3>
+            <p class="contact-address">
+                Central Warehousing Corporation,<br>
+                4/1 Siri Institutional Area,<br>
+                Hauz Khas, New Delhi-110 016 <br>
+                Tel: 011-26566107 <br>
+                Fax: 26967256<br>
+
+            </p>
+        </div> <!-- end contact-secondary -->
+
+        <div class="col-three tab-full contact-secondary" data-aos="fade-up">
+            <h3 class="subhead subhead--light">Follow Us</h3>
+
+            <ul class="contact-social">
+                <li>
+                    <a href="https://www.facebook.com/Central-Warehousing-Corporation-1141868665925924/"><i class="fab fa-facebook"></i></a>
+                </li>
+                <li>
+                    <a href="https://twitter.com/cwc_warehouse"><i class="fab fa-twitter"></i></a>
+                </li>
+
+            </ul> <!-- end contact-social -->
+
+
+        </div> <!-- end contact-secondary -->
+
+
+    </div> <!-- end row -->
+
+    <div class="row">
+        <div class="col-md-8">
+            <div class="col-full cl-copyright">
+                <span>
+
+                    FCI Copyright &copy;
+                    <script>
+                        document.write(new Date().getFullYear());
+                    </script>
+                    All rights reserved
+                </span>
+            </div>
+        </div>
+        <div class="col-md-8" style="padding:0; margin-left:150px;">
+            <div class="col-full cl-copyright">
+                <span id="siteseal">
+                <script async type="text/javascript" src="https://seal.godaddy.com/getSeal?sealID=Tk1Kd7jfWtXblv5FcYneuOLfAXjzKGW5d3YQQ96ZgXuVVElel2NljCzHPAbf"></script></span>
+            </div>
+        </div>
+
+
+
+
+    </div>
+    <div class="cl-go-top">
+        <a class="smoothscroll" title="Back to Top" href="#top"><i class="icon-arrow-up" aria-hidden="true"></i></a>
+    </div>
+
+</section> <!-- end s-contact -->
+<!-- photoswipe background
+================================================== -->
+<div aria-hidden="true" class="pswp" role="dialog" tabindex="-1">
+
+    <div class="pswp__bg"></div>
+    <div class="pswp__scroll-wrap">
+
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <div class="pswp__ui pswp__ui--hidden">
+            <div class="pswp__top-bar">
+                <div class="pswp__counter"></div><button class="pswp__button pswp__button--close" title="Close (Esc)"></button> <button class="pswp__button pswp__button--share" title="Share"></button> <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button> <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div><button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)"></button> <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)"></button>
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+        </div>
+
+    </div>
+
+</div> <!-- end photoSwipe background -->
+<!-- preloader
+================================================== -->
+<div id="preloader">
+    <div id="loader">
+    </div>
+</div>
+
+
+<!-- Java Script
+================================================== -->
+@*<script src="~/staticResourcesCareer/js/jquery-3.2.1.min.js"></script>*@
+<script src="~/Scripts/jquery-3.4.1.min.js"></script>
+<script src="~/staticResourcesCareer/js/plugins.js"></script>
+<script src="~/staticResourcesCareer/js/main.js"></script>
+
+
+</body>
+
+<!-- end s-footer -->
+</body>
+
+<script>
+    (function () {
+
+        jQuery.fn.liScroll = function (settings) {
+            settings = jQuery.extend({
+                travelocity: 0.05
+            }, settings);
+            return this.each(function () {
+                var $strip = jQuery(this);
+                $strip.addClass("newsticker")
+                var stripHeight = 1;
+                $strip.find("li").each(function (i) {
+                    stripHeight += jQuery(this, i).outerHeight(true); // thanks to Michael Haszprunar and Fabien Volpi
+                });
+                var $mask = $strip.wrap("<div class='mask'></div>");
+                var $tickercontainer = $strip.parent().wrap("<div class='tickercontainer'></div>");
+                var containerHeight = $strip.parent().parent().height();	//a.k.a. 'mask' width
+                $strip.height(stripHeight);
+                var totalTravel = stripHeight;
+                var defTiming = totalTravel / settings.travelocity;	// thanks to Scott Waye
+                function scrollnews(spazio, tempo) {
+                    $strip.animate({ top: '-=' + spazio }, tempo, "linear", function () { $strip.css("top", containerHeight); scrollnews(totalTravel, defTiming); });
+                }
+                scrollnews(totalTravel, defTiming);
+                $strip.hover(function () {
+                    jQuery(this).stop();
+                },
+                function () {
+                    var offset = jQuery(this).offset();
+                    var residualSpace = offset.top + stripHeight;
+                    var residualTime = residualSpace / settings.travelocity;
+                    scrollnews(residualSpace, residualTime);
+                });
+            });
+        };
+
+        $(function () {
+            $("ul#ticker01").liScroll();
+        });
+
+    })();
+
+</script>
+<!-- Mirrored from cwccareers.in/index;jsessionid=D985228DC2D6E75917167489F00F90A9 by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 30 Oct 2019 04:58:43 GMT -->
+</html>

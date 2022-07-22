@@ -1,0 +1,666 @@
+﻿@model CWC_CMS.Models.VigilanceViewModel
+
+@{
+    ViewBag.Title = "ViewConsolidatedApplication";
+    Layout = "~/Views/Shared/_LayoutView_bak2.cshtml";
+}
+
+
+<style type="text/css">
+    .drop {
+        background-color: #fcfcfd;
+        border-color: #bdc3d1;
+        border-radius: 2px;
+        height: 38px;
+        outline: none;
+    }
+</style>
+
+<script type="text/javascript">
+    $(function () {
+        $(".datepicker").datepicker({
+            dateFormat: 'dd-M-yy',
+            changeMonth: true,
+            changeYear: true
+        });
+
+    });
+</script>
+<link href="~/css/site.css" rel="StyleSheet" />
+@*<link href="~/lib/summernote/summernote.css" rel="stylesheet" />
+    <script src="~/lib/summernote/summernote.js"></script>*@
+
+<script>
+    $(function () {
+        $('.panel-heading').attr('style', 'background-color: #79A618')
+
+    })
+</script>
+<script type="text/javascript">
+
+    $(document).ready(function () {
+
+        $('#basicForm').validate({
+            highlight: function (element) {
+                $(element).closest('.form-group').removeClass('has-success').addClass('has-error');
+            },
+            success: function (element) {
+                $(element).closest('.form-group').removeClass('has-error');
+            }
+        });
+        $('.select2').select2();
+    });
+
+    $(document).ready(function () {
+        $(".digit").keypress(function (e) {
+            if (e.which != 8 && e.which != 0 && (e.which < 48 || e.which > 57)) {
+                $("#errormsg").html("Digits Only").show().fadeOut("slow");
+                return false;
+            }
+        });
+
+        // Summernote
+        //$('#summernote,#summernote1, #summernote2,#summernote3,#summernote4,#summernote5,#summernote6,#summernote7,#summernote8,#summernote9').summernote({
+        //    height: 120,
+        //    toolbar: [
+        //      ['style', ['bold', 'italic', 'underline', 'clear']],
+        //      ['fontsize', ['fontsize']],
+        //      ['color', ['color']],
+        //      ['para', ['ul', 'ol', 'paragraph']]
+        //    ]
+        //});
+    });
+</script>
+
+
+
+@using (Html.BeginForm("UpdateStatus", "VigilanceApplicationForm", FormMethod.Post, new { @class = "form-horizontal", id = "basicForm", enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        @Html.ValidationSummary(true)
+        <!-- panel -->
+
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-10 col-md-offset-1">
+                    @Html.ValidationSummary(true)
+                    <!-- panel -->
+
+                    <div class="panel panel-primary">
+                        <div class="panel-heading">
+                            <div class="row">
+                                <div class="col-sm-5">
+
+                                    <img src="https://fci.gov.in/images/logo.png" height="50" />
+                                </div>
+                                <div class="col-sm-6">
+                                    <h3 class="" style="color:#fff">Complaint Portal</h3>
+                                </div>
+                                <div class="col-sm-1">
+                                    @Html.ActionLink("Back  ", "index", "VigilanceApplicationForm", new
+                               { @*OmID = "0"*@ eid=CWC_CMS.Models.Token.EncryptString(Session["User_recno"].ToString())
+                               }, new { @class = "btn btn-default btn-quirk" })
+                                </div>
+                            </div>
+
+
+                        </div>
+                        <div class="panel-body">
+                            <div class="panel panel-primary" style="border: dotted 1px">
+                                <div class="panel-heading">
+                                    @*<div class="row">
+                                        <div class="col-md-12">
+                                            <h4 style="color:#ffffff">Login Details</h4>
+                                        </div>
+                                    </div>*@
+                                </div>
+                                <div class="panel-body">
+                                    <div class="row">
+                                        <div>
+                                            <br />
+
+
+                                            @*<div class="form-group">
+
+                                                <div class="col-md-5 col-md-offset-1">
+                                                    <label class="control-label"><b style="font-size: 115%;">User Name</b><span class="text-danger">*</span></label>
+                                                    <div class="input-group">
+                                                        <span class="input-group-addon">
+                                                            <i class="glyphicon glyphicon-user"></i>
+                                                        </span>
+                                                        @Html.TextBoxFor(model => model._VigilanceApplicationFormModel.UserName, new { @class = "form-control", placeholder = "Enter Alphanumeric Only", readOnly = true })
+                                                    </div>
+                                                    <span class="col-sm-3 control-label" style="color:red;margin-right:-10px"> </span>
+                                                    @Html.ValidationMessageFor(model => model._VigilanceApplicationFormModel.UserName, "", new { @class = "text-danger" })
+
+                                                </div>
+
+                                                <div class="col-md-5">
+                                                    <label class="control-label"><b style="font-size: 115%;">Password </b><span class="text-danger">*</span></label>
+                                                    <div class="input-group">
+                                                        <span class="input-group-addon">
+                                                            <i class="glyphicon glyphicon-eye-close"></i>
+                                                        </span>
+                                                        @Html.TextBoxFor(model => model._VigilanceApplicationFormModel.Password, new { @class = "form-control", placeholder = "Should contain 1 digit,1 Special Character,1 small, 1 capital letter and minimum 8 character", @type = "password", readOnly = true })
+                                                    </div>
+                                                    <span class="col-sm-3 control-label" style="color:red;margin-right:-10px"> </span>
+                                                    @Html.ValidationMessageFor(model => model._VigilanceApplicationFormModel.Password, "", new { @class = "text-danger" })
+
+                                                </div>
+
+                                            </div>*@
+
+
+                                            @*<div class="form-group">
+
+                                                <div class="col-md-5 col-md-offset-1">
+                                                    <label class="control-label"><b style="font-size: 115%;">Confirm Password </b><span class="text-danger">*</span></label>
+                                                    <div class="input-group">
+                                                        <span class="input-group-addon">
+                                                            <i class=" glyphicon glyphicon-eye-close">
+                                                            </i>
+                                                        </span>
+                                                        @Html.TextBoxFor(model => model._VigilanceApplicationFormModel.ConfirmPassword, new { @class = "form-control", placeholder = "Should contain 1 digit,1 Special Character,1 small, 1 capital letter and minimum 8 character", @type = "password", readOnly = true })
+                                                    </div>
+                                                    <span class="col-sm-3 control-label" style="color:red;margin-right:-10px"> </span>
+                                                    @Html.ValidationMessageFor(model => model._VigilanceApplicationFormModel.ConfirmPassword, "", new { @class = "text-danger" })
+
+                                                </div>
+
+                                                <div class="col-md-5">
+                                                    <label class="control-label"><b style="font-size: 115%;">Security Question</b><span class="text-danger">*</span></label>
+                                                    <div class="input-group">
+                                                        <span class="input-group-addon">
+                                                            <i class="glyphicon glyphicon-text-width"></i>
+                                                        </span>
+                                                        @Html.DropDownListFor(model => model._VigilanceApplicationFormModel.SecurityQuestion, new SelectList(@ViewBag.FillSecurityQuestion, "Value", "Text", selectedValue: false), "Please Select", new { id = "SecurityQuestionID", @class = "drop select2", style = "width: 100%", disabled = true })
+                                                    </div>
+                                                    @Html.HiddenFor(model => model._VigilanceApplicationFormModel.SecurityQuestion, new { required = false })
+                                                    @Html.ValidationMessageFor(model => model._VigilanceApplicationFormModel.SecurityQuestion, "", new { @class = "text-danger" })
+
+                                                </div>
+
+                                            </div>*@
+
+
+                                            @*<div class="form-group">
+
+                                                <div class="col-md-5 col-md-offset-1">
+                                                    <label class="control-label"><b style="font-size: 115%;">Answer</b><span class="text-danger">*</span></label>
+                                                    <div class="input-group">
+                                                        <span class="input-group-addon">
+                                                            <i class="glyphicon glyphicon-eye-close"></i>
+                                                        </span>
+                                                        @Html.TextBoxFor(model => model._VigilanceApplicationFormModel.Answer, new { @class = "form-control", placeholder = "Please enter Answer", @type = "password", readOnly = true })
+                                                    </div>
+                                                    @Html.ValidationMessageFor(model => model._VigilanceApplicationFormModel.Answer, "", new { @class = "text-danger" })
+
+                                                </div>
+                                            </div>*@
+
+
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <br />
+                                <div class="panel-heading">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <h4 style="color:#ffffff">Personal Details</h4>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="panel-body">
+                                    <div class="row">
+                                        <div class="form-group">
+
+                                            <div class="col-md-5 col-md-offset-1">
+                                                <label class="control-label"><b style="font-size: 115%;">Salutation</b></label>
+                                                @Html.DropDownListFor(model => model._VigilanceApplicationFormModel.Salutation, new SelectList(@ViewBag.FillSalutation, "Value", "Text", selectedValue: false), "Please Select", new { id = "SalutationID", @class = "drop select2", style = "width: 100%", disabled = true })
+                                                @Html.HiddenFor(model => model._VigilanceApplicationFormModel.Salutation, new { required = false })
+                                                @Html.ValidationMessageFor(model => model._VigilanceApplicationFormModel.Salutation, "", new { @class = "text-danger" })
+
+                                            </div>
+
+
+                                            <div class="col-md-5">
+                                                <label class="control-label"><b style="font-size: 115%;">Name</b><span class="text-danger">*</span></label>
+                                                <div class="input-group">
+                                                    <span class="input-group-addon">
+                                                        <i class="glyphicon glyphicon-user"></i>
+                                                    </span>
+                                                    @Html.TextBoxFor(model => model._VigilanceApplicationFormModel.Name, new { @class = "form-control", placeholder = "Please enter Name", readOnly = true })
+                                                </div>
+                                                @Html.ValidationMessageFor(model => model._VigilanceApplicationFormModel.Name, "", new { @class = "text-danger" })
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+
+                                            <div class="col-md-5 col-md-offset-1">
+                                                <label class="control-label"><b style="font-size: 115%;">Age</b><span class="text-danger">*</span></label>
+                                                @Html.TextBoxFor(model => model._VigilanceApplicationFormModel.Age, new { @class = "form-control", placeholder = "Please enter Age", readOnly = true })
+                                                @Html.ValidationMessageFor(model => model._VigilanceApplicationFormModel.Age, "", new { @class = "text-danger" })
+                                            </div>
+                                            <div class="col-md-5">
+                                                <label class="control-label"><b style="font-size: 115%;">Government Id :</b></label>
+                                                <div class="form-group">
+                                                    <div class="custom-control custom-radio custom-control-inline col-sm-6 padding5" style="padding-left:20px">
+                                                        @Html.RadioButtonFor(model => model._VigilanceApplicationFormModel.IsGovernmentIDPanCardOrAadharCard, "IsPanCard", new { @class = "custom-control-input", @id = "IsGovernmentIDPanCard", disabled = true })
+                                                        <label class="custom-control-label" for="EMDExceptionAllowed">Pan Card</label>
+                                                    </div>
+                                                    <div class="custom-control custom-radio custom-control-inline col-sm-6 padding5">
+                                                        @Html.RadioButtonFor(model => model._VigilanceApplicationFormModel.IsGovernmentIDPanCardOrAadharCard, "IsAadharCard", new { @class = "custom-control-input", @id = "IsGovernmentIDAadharCard", disabled = true })
+                                                        <label class="custom-control-label" for="EMDExceptionNotAllowed">Aadhar Card</label>
+                                                        @Html.ValidationMessageFor(model => model._VigilanceApplicationFormModel.IsGovernmentIDPanCardOrAadharCard, "", new { @class = "text-danger" })
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group" id="PanCardDiv">
+                                            <div class="col-md-5 col-md-offset-1">
+                                                <label class="control-label"><b style="font-size: 115%;">Enter Pan Card No</b></label>
+                                                <div class="col-md-12" style="padding-left: 0px;">
+                                                    @Html.TextBoxFor(model => model._VigilanceApplicationFormModel.PanCard, new { @class = "form-control", placeholder = "XXXXX1234X", readOnly = true })
+                                                    @Html.ValidationMessageFor(model => model._VigilanceApplicationFormModel.PanCard, "", new { @class = "text-danger" })
+
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group" id="AadharCardDiv">
+                                            <div class="col-md-5 col-md-offset-1">
+                                                <label class="control-label"><b style="font-size: 115%;">Enter Aadhar Card No</b></label>
+                                                <div class="col-md-12" style="padding-left: 0px;">
+                                                    @Html.TextBoxFor(model => model._VigilanceApplicationFormModel.AadharCard, new { @class = "form-control", placeholder = "12 Digit Number", readOnly = true })
+                                                    @Html.ValidationMessageFor(model => model._VigilanceApplicationFormModel.AadharCard, "", new { @class = "text-danger" })
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="col-md-5 col-md-offset-1">
+                                                <label class="control-label"><b style="font-size: 115%;">Address</b><span class="text-danger">*</span></label>
+                                                <div class="input-group">
+                                                    <span class="input-group-addon">
+                                                        <i class="glyphicon glyphicon-home"></i>
+                                                    </span>
+                                                    @Html.TextAreaFor(model => model._VigilanceApplicationFormModel.Address, new { @class = "form-control", placeholder = "Only these ('-','.','/' & ',')Special characters are allowed to use", readOnly = true })
+                                                </div>
+                                                @Html.ValidationMessageFor(model => model._VigilanceApplicationFormModel.Address, "", new { @class = "text-danger" })
+
+                                            </div>
+
+                                            <div class="col-md-5">
+                                                <label class="control-label"><b style="font-size: 115%;">State</b><span class="text-danger">*</span></label>
+                                                @Html.DropDownListFor(model => model._VigilanceApplicationFormModel.State, new SelectList(@ViewBag.FillState, "Value", "Text", selectedValue: false), "SELECT", new { id = "StateDropdown", @class = "drop select2", style = "width: 100%", disabled = true })
+                                                @Html.ValidationMessageFor(model => model._VigilanceApplicationFormModel.State, "", new { @class = "text-danger" })
+
+                                            </div>
+                                        </div>
+
+
+
+
+                                        <div class="form-group">
+                                            <div class="col-md-5 col-md-offset-1">
+                                                <label class="control-label"><b style="font-size: 115%;">City</b><span class="text-danger">*</span></label>
+                                                @Html.DropDownListFor(model => model._VigilanceApplicationFormModel.City, new SelectList(@ViewBag.FillCity, "Value", "Text", selectedValue: false), "SELECT", new { id = "CityDropdown", @class = "drop select2", style = "width: 100%", disabled = true })
+                                                @Html.ValidationMessageFor(model => model._VigilanceApplicationFormModel.City, "", new { @class = "text-danger" })
+
+                                            </div>
+
+                                            <div class="col-md-5">
+                                                <label class="control-label"><b style="font-size: 115%;">Pin</b><span class="text-danger">*</span></label>
+                                                @Html.DropDownListFor(model => model._VigilanceApplicationFormModel.Pincode, new SelectList(@ViewBag.FillPincode, "Value", "Text", selectedValue: false), "SELECT", new { id = "PincodeDropdown", @class = "drop select2", style = "width: 100%", disabled = true })
+                                                @Html.ValidationMessageFor(model => model._VigilanceApplicationFormModel.Pincode, "", new { @class = "text-danger" })
+
+                                            </div>
+                                        </div>
+
+
+
+                                        <div class="form-group">
+                                            <div class="col-md-5 col-md-offset-1">
+                                                <label class="control-label"><b style="font-size: 115%;">E-mail:</b><span class="text-danger">*</span></label>
+                                                <div class="input-group">
+                                                    <span class="input-group-addon">
+                                                        <i class="glyphicon glyphicon-envelope"></i>
+                                                    </span>
+                                                    @Html.TextBoxFor(model => model._VigilanceApplicationFormModel.Email, new { @class = "form-control", placeholder = "Please Enter E-Mail", readOnly = true })
+                                                </div>
+                                                @Html.ValidationMessageFor(model => model._VigilanceApplicationFormModel.Email, "", new { @class = "text-danger" })
+
+                                            </div>
+
+                                            <div class="col-md-5">
+                                                <label class="control-label"><b style="font-size: 115%;">Mobile Number:</b><span class="text-danger">*</span></label>
+                                                <div class="input-group">
+                                                    <span class="input-group-addon">
+                                                        <i class="glyphicon glyphicon-phone"></i>
+                                                    </span>
+                                                    @Html.TextBoxFor(model => model._VigilanceApplicationFormModel.MobileNo, new { @class = "form-control", placeholder = "10 Digit Number", id = "MobileNo", readOnly = true })
+
+                                                </div>
+                                                @Html.ValidationMessageFor(model => model._VigilanceApplicationFormModel.MobileNo, "", new { @class = "text-danger" })
+
+
+
+                                            </div>
+                                        </div>
+
+
+
+
+                                        <div class="form-group">
+                                            <div class="col-md-5 col-md-offset-1">
+                                                <label class="control-label"><b style="font-size: 115%;">Landline Number</b>:</label>
+                                                <div class="form-group">
+                                                    <div class="col-sm-3">
+                                                        <div class="input-group">
+                                                            <span class="input-group-addon">
+                                                                <i class="glyphicon glyphicon-phone-alt"></i>
+                                                            </span>
+                                                            <input type="text" class="form-control" readonly="readonly" placeholder="+91" />
+
+                                                        </div>
+
+
+
+                                                    </div>
+
+                                                    <div class="col-sm-4">
+                                                        @Html.TextBoxFor(model => model._VigilanceApplicationFormModel.LandlineStdCode, new { @class = "form-control", placeholder = "3 Digit", readOnly = true })
+
+                                                        @Html.ValidationMessageFor(model => model._VigilanceApplicationFormModel.LandlineStdCode, "", new { @class = "text-danger" })
+
+
+
+                                                    </div>
+
+                                                    <div class="col-sm-5">
+
+                                                        @Html.TextBoxFor(model => model._VigilanceApplicationFormModel.LandlineNo, new { @class = "form-control", placeholder = "8 Digit", readOnly = true })
+
+                                                        @Html.ValidationMessageFor(model => model._VigilanceApplicationFormModel.LandlineNo, "", new { @class = "text-danger" })
+
+
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                                <br />
+                                <div class="panel-heading">
+                                    <table style="width:100%; background-color:transparent">
+                                        <tr>
+                                            <td>
+                                                <h4>Vigilance Complaint Section</h4>
+                                            </td>
+
+                                            @*<td style="text-align:right">
+                                                                             @Html.ActionLink("Back  ", "index", "VigilanceApplicationForm", new
+                                                { }, new { @class = "btn btn-default btn-quirk" })
+                                                                         </td>*@
+                                        </tr>
+                                    </table>
+
+                                </div>
+                                <div class="panel-body">
+                                    <h4 class="panel-title" style="text-align:center">FCI Complaint Portal</h4>
+                                    <div style="border: dotted 1px">
+                                        <br />
+
+
+
+                                        <div class="form-group">
+                                            <label class="col-sm-2 control-label"><b style="font-size: 115%;">Subject</b><span class="text-danger">*</span></label>
+                                            <div class="col-sm-3">
+                                                @Html.TextBoxFor(model => model._VigilanceComplaintModel.Organisation, new { @class = "form-control", placeholder = "Type here...", readOnly = true })
+                                                <span class="col-sm-3 control-label" style="color:red;margin-right:-10px">   </span>
+                                                @Html.ValidationMessageFor(model => model._VigilanceComplaintModel.Organisation, "", new { @class = "text-danger" })
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-sm-2 control-label"><b style="font-size: 115%;">Details</b><span class="text-danger">*</span></label>
+                                                <div class="col-sm-3">
+                                                    @Html.TextAreaFor(model => model._VigilanceComplaintModel.DetailsOfAllegation, new { @class = "form-control ", placeholder = "Type here...", readOnly = true })
+                                                    <span class="col-sm-3 control-label" style="color:red;margin-right:-10px">   </span>
+                                                    @Html.ValidationMessageFor(model => model._VigilanceComplaintModel.DetailsOfAllegation, "", new { @class = "text-danger" })
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-sm-2 control-label"><b style="font-size: 115%;">Date</b> </label>
+                                            <div class="col-sm-3">
+                                                @Html.TextBoxFor(model => model._VigilanceComplaintModel.DateOfComplaint, "{0:dd-MMM-yyyy}", new { @class = "form-control", placeholder = "Please Enter Date Of Complaint", readOnly = true })
+                                                <span class="col-sm-3 control-label" style="color:red;margin-right:-10px"> </span>
+                                                @Html.ValidationMessageFor(model => model._VigilanceComplaintModel.DateOfComplaint, "", new { @class = "text-danger" })
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-sm-2 control-label"><b style="font-size: 115%;">Uploaded Document</b> </label>
+                                                <div class="col-sm-3">
+
+                                                    @if (Model._VigilanceComplaintModel.DocumentAccompanyingAllegationPath != "NA")
+                                                    {
+                                                        @Html.ActionLink("View Document", "Document_View", "VigilanceApplicationForm", new { FilePath = Model._VigilanceComplaintModel.DocumentAccompanyingAllegationPath, complaintid = ViewBag.VigilanceComplaintid }, new { @class = "text-primary ", target = "_blank", style = "width:100px;" })
+                                                    }
+                                                    else
+                                                    {
+                                                        <p class="text-danger">No Document</p>
+                                                    }
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div id="repeaterNew">
+                                            <div class="form-horizontal">
+                                                <table id="detailsTableCover" class="table table-bordered table-striped table-responsive">
+                                                    <tbody>
+                                                        <tr class="MainBodyCover">
+                                                            <th style="background-color: #79A618"><b style="font-size: 115%;">Name of Complainee</b></th>
+                                                            <th style="background-color: #79A618"><b style="font-size: 115%;">Designation of Complainee</b></th>
+                                                        </tr>
+                                                        @if (Model._VigilanceComplaintModel != null)
+                                                        {
+                                                            if (Model._VigilanceComplaintModel.AccussedPersonForComplaintList != null)
+                                                            {
+                                                                for (int i = 0; i < Model._VigilanceComplaintModel.AccussedPersonForComplaintList.Count; i++)
+                                                                {
+                                                                    <tr class="MainBodyCover">
+                                                                        <td>
+                                                                            @Html.TextBoxFor(modelItem => modelItem._VigilanceComplaintModel.AccussedPersonForComplaintList[i].ComplaintAgainstName, new { @class = "form-control", placeholder = "Type here...", readOnly = true })
+                                                                            @Html.ValidationMessageFor(modelItem => modelItem._VigilanceComplaintModel.AccussedPersonForComplaintList[i].ComplaintAgainstName, "", new { @class = "text-danger" })
+                                                                        </td>
+                                                                        <td>
+                                                                            @Html.TextAreaFor(modelItem => modelItem._VigilanceComplaintModel.AccussedPersonForComplaintList[i].DesignationOfAccused, new { @class = "form-control", placeholder = "Type here...", readOnly = true })
+                                                                            @Html.ValidationMessageFor(modelItem => modelItem._VigilanceComplaintModel.AccussedPersonForComplaintList[i].DesignationOfAccused, "", new { @class = "text-danger" })
+                                                                        </td>
+                                                                    </tr>
+
+                                                                }
+                                                            }
+                                                        }
+                                                    </tbody>
+                                                </table>
+                                                <input type="hidden" id="OrderId" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                @if (Session["Role"].ToString() == "0")
+                                {
+                                    <div class="panel-heading">
+                                        <table style="width:100%; background-color:transparent">
+                                            <tr>
+                                                <td>
+                                                    <h4>Change Complaint Status </h4>
+                                                </td>
+                                            </tr>
+                                        </table>
+
+                                    </div>
+                                    <div class="panel-body">
+                                        <h4 class="panel-title" style="text-align:center">FCI Complaint Status</h4>
+                                        <div style="border: dotted 1px">
+                                            <br />
+                                            <div class="form-group">
+                                                <label class="col-sm-4 control-label"><b style="font-size: 115%;">Status</b><span class="text-danger">*</span></label>
+                                                <div class="col-sm-5">
+                                                    @Html.DropDownListFor(model => model._VigilanceApplicationFormModel.ComplaintStatus, new SelectList(@ViewBag.FillSubComplaint, "Value", "Text", selectedValue: false), "SELECT", new { id = "ddlStatus", @class = "drop select2", style = "width: 100%" })
+                                                    @Html.ValidationMessageFor(model => model._VigilanceApplicationFormModel.ComplaintStatus, "", new { @class = "text-danger" })
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+
+                                                <label class="col-sm-2 control-label"><b style="font-size: 115%;">Remarks</b><span class="text-danger">*</span></label>
+                                                <div class="col-sm-6">
+                                                    @Html.TextAreaFor(model => model._VigilanceApplicationFormModel.Remarks, new { @class = "form-control ", placeholder = "Type here..." })
+                                                    <span class="col-sm-3 control-label" style="color:red;margin-right:-10px">   </span>
+                                                    @Html.ValidationMessageFor(model => model._VigilanceApplicationFormModel.Remarks, "", new { @class = "text-danger" })
+
+                                                </div>
+                                            </div>
+
+
+                                            <div class="form-group">
+                                                <div class="col-sm-4">
+                                                </div>
+                                                <div class="col-sm-2">
+                                                    <input type="submit" value=" Update " id="btnSubmit" class="btn btn-success btn-quirk btn-wide mr5" />
+                                                    @Html.HiddenFor(model => model._VigilanceApplicationFormModel.VigilanceComplaintID)
+                                                </div>
+                                                <div class="col-sm-2">
+
+                                                    @Html.ActionLink("Back  ", "index", "VigilanceApplicationForm", new
+                                                   { @*OmID = "0"*@ }, new { @class = "btn btn-danger btn-quirk btn-wide mr5" })
+                                                </div>
+
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                }
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+
+
+
+        </div>
+    </div> }
+
+
+<script type="text/javascript">
+            $(function () {
+
+
+
+                $('#StateDropdown').on('change', function () {
+
+                    if ($(this).find('option:selected').text() == 'SELECT') {
+                        $('#CityDropdown').empty();
+                        $('#CityDropdown').append($('<option/>', { value: -1, text: 'SELECT' }));
+                        $('#CityDropdown').select2();
+                    }
+                    else {
+                        $.ajax({
+                            url: '/VigilanceApplicationForm/FillCityByStateID',
+                            method: 'Post',
+                            dataType: 'json',
+                            data: { StateID: $(this).val() },
+                            success: function (data) {
+                                $('#CityDropdown').empty();
+                                $('#CityDropdown').append($('<option/>', { value: -1, text: 'SELECT' }));
+                                $('#CityDropdown').select2();
+                                $(data).each(function (index, item) {
+
+                                    $('#CityDropdown').append('<option value="' + item.Value + '">' + item.Text + '</option>');
+                                });
+
+                                $('#CityDropdown').select2();
+                                $('#CityDropdown').change();
+                            }
+                        });
+                    }
+                });
+
+
+
+                $('#CityDropdown').on('change', function () {
+                    debugger;
+                    if ($(this).find('option:selected').text() == 'SELECT') {
+                        $('#PincodeDropdown').empty();
+                        $('#PincodeDropdown').append($('<option/>', { value: -1, text: 'SELECT' }));
+                        $('#PincodeDropdown').select2();
+                    }
+                    else {
+                        $.ajax({
+                            url: '/VigilanceApplicationForm/FillPincodeByCityID',
+                            method: 'Post',
+                            dataType: 'json',
+                            data: { CityID: $(this).val() },
+                            success: function (data) {
+                                $('#PincodeDropdown').empty();
+                                $('#PincodeDropdown').append($('<option/>', { value: -1, text: 'SELECT' }));
+                                $('#CityDropdown').select2();
+                                $(data).each(function (index, item) {
+
+                                    $('#PincodeDropdown').append('<option value="' + item.Value + '">' + item.Text + '</option>');
+                                });
+
+                                $('#PincodeDropdown').select2();
+                            }
+                        });
+                    }
+                });
+
+
+            });
+</script>
+
+<script type="text/javascript">
+
+            $(function () {
+                console.log($("input[type='radio'][name='IsGovernmentIDPanCardOrAadharCard']:checked").val());
+
+                if ($("input[type='radio'][name='IsGovernmentIDPanCardOrAadharCard']:checked").val() == "IsPanCard") {
+                    $('#PanCardDiv').show();
+                    $('#AadharCardDiv').hide();
+                }
+                else if ($("input[type='radio'][name='IsGovernmentIDPanCardOrAadharCard']:checked").val() == "IsAadharCard") {
+
+                    $('#PanCardDiv').hide();
+                    $('#AadharCardDiv').show();
+                }
+                else {
+
+                    $('#PanCardDiv').hide();
+                    $('#AadharCardDiv').hide();
+                }
+
+
+                $('#IsGovernmentIDPanCard').change(function () {
+                    $('#PanCardDiv').show();
+                    $('#AadharCardDiv').hide();
+
+                });
+
+                $('#IsGovernmentIDAadharCard').change(function () {
+                    $('#PanCardDiv').hide();
+                    $('#AadharCardDiv').show();
+                });
+            });
+</script>
+

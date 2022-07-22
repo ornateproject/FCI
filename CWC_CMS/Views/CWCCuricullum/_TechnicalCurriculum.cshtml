@@ -1,0 +1,136 @@
+﻿<table class="table table-striped table-primary hover" id="datatablelist" style="width:100%">
+    <thead>
+        <tr>
+            <td class="subHeading bg-primary" width="10%" align="center">
+                <p>Date</p>
+            </td>
+            <td class="subHeading bg-primary" width="90%" align="center">Circulars/Guidelines</td>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>
+                <p>30.10.2019</p>
+            </td>
+            <td><a target="_blank" href="Docs/uniform_tech_301019.pdf">Uniform specification of paddy rice and coarse grains for kharif marketing session 2019-20</a></td>
+        </tr>
+        <tr>
+            <td>30.04.2019</td>
+            <td><a target="_blank" href="Docs/PCS%20DRAFT%20MOU_300419.pdf">PCs Draft MOU</a></td>
+        </tr>
+        <tr>
+            <td>30.04.2019</td>
+            <td><a target="_blank" href="Docs/PCS%20INCENTIVE%20POLICY_300419.pdf">PCS Incentive Policy</a></td>
+        </tr>
+        <tr>
+            <td>26.11.2018</td>
+            <td><a target="_blank" href="Docs/cir%20DOP%20PCS%20(1)_271118.pdf">DOP for Pest Control Services.</a></td>
+        </tr>
+        <tr>
+            <td>04.01.1999</td>
+            <td><a target="_blank" href="Docs/Chem_04011999%20(1)_091018.pdf">Guidelines for calculation of chemical /dunnage /equipments requirements</a></td>
+        </tr>
+        <tr>
+            <td>18.01.2006</td>
+            <td><a target="_blank" href="Docs/tech/tech_cir_180106.pdf">Correcitive Steps to Improve the Existing Storage Practices. </a></td>
+        </tr>
+        <tr>
+            <td>&#160;16.03.2012</td>
+            <td><a target="_blank" href="Docs/tech/tech_cir_160312.pdf">Proper Accounting of Pesticides</a>.<br /></td>
+        </tr>
+        <tr>
+            <td>07.06.2012</td>
+            <td><a target="_blank" href="Docs/tech/tech_cir_070612.pdf">Proper maintenance of fire fighting equipments</a>.</td>
+        </tr>
+        <tr>
+            <td>14.09.2012</td>
+            <td><a target="_blank" href="Docs/tech/tech_cir_140912.pdf">Inspection, Sampling and Analysis Procedure for Receipt of Storage of Paddy/Rice-Instructions thereof</a>.</td>
+        </tr>
+        <tr>
+            <td>06.12.2012</td>
+            <td><a target="_blank" href="Docs/tech/tech_cir_061212.pdf">Failure of Fumigation.</a></td>
+        </tr>
+        <tr>
+            <td>01.05.2013</td>
+            <td><a target="_blank" href="Docs/Insp_01052013_091018.pdf">Conduct of Technical Inspections</a></td>
+        </tr>
+        <tr>
+            <td>07.03.2014</td>
+            <td><a target="_blank" href="Docs/tech/spec_wheat_barly_tech_120314.pdf">Uniform Specification for Wheat and Barley for the Rabi Marketing Season (RMS) 2014-15.</a></td>
+        </tr>
+        <tr>
+            <td>21.05.2014</td>
+            <td><a target="_blank" href="Docs/tech/tech_cir_260514.pdf">Pre-monsoon fumigation -instruction</a></td>
+        </tr>
+        <tr>
+            <td>08.09.2014</td>
+            <td><a target="_blank" href="Docs/tech/tech_cir_080914.pdf">Uniform Specification of Paddy, Rice and coarse grains for the Kharif Marketing Season 2014-2015</a></td>
+        </tr>
+        <tr>
+            <td>08.10.2014</td>
+            <td>
+                <p><a target="_blank" href="Docs/storage_L%26G_tech_161014.pdf">&#2349;&#2306;&#2337;&#2366;&#2352;&#2339; &#2361;&#2366;&#2344;&#2367;&#2351;&#2379; &#2325;&#2379; &#2325;&#2350; &#2325;&#2352;&#2344;&#2375; &#2325;&#2368; &#2310;&#2357;&#2358;&#2381;&#2351;&#2325;&#2340;&#2366; &#2325;&#2375; &#2360;&#2306;&#2348;&#2343;&#2306; &#2350;&#2375;&#2306;</a></p>
+            </td>
+        </tr>
+        <tr>
+            <td>10.06.2015</td>
+            <td><a target="_blank" href="Docs/Tech38_10062015_091018.pdf">Investigation of abnormal storage losses having vigilance angle</a></td>
+        </tr>
+        <tr>
+            <td>09.05.2016</td>
+            <td><a target="_blank" href="Docs/tech/cir_pre_mnsn_st_policy_tech_120516.pdf">Pre-monsoon fumigation -instruction</a></td>
+        </tr>
+        <tr>
+            <td>03.08.2018</td>
+            <td><a target="_blank" href="Docs/06082018%20(1)_jtverification_091018.pdf">Joint verification of the moisture content at the time of receipt and issue of the FCI/State civil&#160; supplies of stocks of Food grains</a></td>
+        </tr>
+        <tr>
+            <td>12.09.2018</td>
+            <td><a target="_blank" href="Docs/uniform%20specifications.pdf">Uniform specifications</a></td>
+        </tr>
+        <tr>
+            <td>23.01.2019</td>
+            <td><a target="_blank" href="Docs/tech_cir_250119.pdf">Inspection , Sampling and analysis procedure for receipt of stocks of Paddy /Rice for Kharif Marketing season 2018-19 of FCI/Civil supplies corporation at the warehouse</a></td>
+        </tr>
+    </tbody>
+</table>
+
+
+
+<script src="~/CssJs/dtjs.js"></script>
+
+<script>
+   
+    var url = '@Url.Action("ViewDocument", "CWCCuricullum")'
+    var IsEmployee = '@ViewBag.IsEmployee';
+    $("td").find("a").each(function () {
+        @*@{
+
+                    var @EncodedURL = CWC_CMS.Models.CommonDAL.EncodeString($(this).attr("href"));
+                }*@
+        $(this).attr("href", window.btoa($(this).attr("href")))
+
+
+        $(this).on('click', function (event) {
+            if (IsEmployee == "Yes") {
+                event.preventDefault();
+                $('#DocumentDiv').load(url, { EncryptedString: $(this).attr("href")})
+                //window.location.href = "/CWCCuricullum/ViewDocument?EncryptedString=" + $(this).attr("href")
+                        return true;
+                    }
+                    else {
+                        alert('You are not authenticated to View this document');
+                        return false;
+                    }
+                });
+    });
+
+
+
+    @*function SecurityCheck(RedirectingLink) {
+
+        if ('@ViewBag.IsEmployee' == "Yes") {
+
+        }
+    }*@
+</script>
